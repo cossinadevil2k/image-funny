@@ -1,0 +1,1 @@
+<p>Admin Template &copy; 2013. All Rights Reserved. Designed by: <a href="">HungPV</a></p>
