@@ -1,5 +1,4 @@
 <div class="mainleftinner">
-
     <div class="leftmenu">
         <ul>
             <li class="current"><a href="<?php echo base_url(); ?>" class="dashboard"><span>Dashboard</span></a></li>
@@ -17,7 +16,6 @@
                 </ul>
             </li>
         </ul>
-
     </div><!--leftmenu-->
     <div id="togglemenuleft"><a></a></div>
 </div>
