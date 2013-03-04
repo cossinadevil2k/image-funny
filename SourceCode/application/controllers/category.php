@@ -1,7 +1,7 @@
 <?php
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @author HungPV <phamvanhung0818@gmail.com>
+ * @version 1.0.0
  */
 
 class Category extends CI_Controller {
@@ -44,10 +44,11 @@ class Category extends CI_Controller {
         if ($this->input->post('txtname')) {
             $id = $this->input->post('id');
             $name = $this->input->post('txtname');
-            $desc = $this->input->post('txtdescription');            
+            $desc = $this->input->post('txtdescription');    
+            
             $this->Category_model->edit($id,$name,$desc);
                         
-            //redirect('category');
+            redirect('category');
         }
         include('paging.php');
         $config['base_url'] = base_url() . "category/edit/".$id;
