@@ -9,15 +9,21 @@ if (!defined('BASEPATH'))
  * 
  */
 require_once('./PHPImageWorkshop/ImageWorkshop.php');
+require_once('./Instagraph/Instagraph.php');
 
 use PHPImageWorkshop\ImageWorkshop;
 
 class ImageLib {
 
+    var $dirPath = './elfinder/files/images';
+    var $createFolders = true;
+    var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
+    var $imageQuality = 100;
+
     /**
      * Add frame for a image as simple
-     * @param string $image
-     * @param string $frame
+     * @param string $image // Đường dẫn đến ảnh
+     * @param string $frame //Đường dẫn đến ảnh
      * @param int $x
      * @param int $y
      * @param int $width
@@ -39,14 +45,18 @@ class ImageLib {
 
         $document->addLayer(2, $frameLayer);
 
-        header('Content-type: image/jpeg');
-        imagejpeg($document->getResult(), null, 100);
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.png';
+        $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
+
+        return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
     /**
      * Add image to many frame
-     * @param string $image
-     * @param string $frame
+     * @param string $image // Đường dẫn đến ảnh
+     * @param string $frame // Đường dẫn đến ảnh
      * @param array $array array Frame object
      */
     public static function AddFrameArray($image, $frame, $array = array()) {
@@ -63,19 +73,192 @@ class ImageLib {
             $width = $frameItem->width;
             $height = $frameItem->height;
             $degrees = $frameItem->degrees;
-            
+
             $temp = clone $imageToAdd;
             $temp->resizeInPixel($width, $height);
             $temp->rotate($degrees);
             $document->addLayer(1, $temp, $x - $width / 2, $y - $height / 2, 'LT');
-        }        
+        }
 
         $document->addLayer(2, $frameLayer);
 
-        header('Content-type: image/jpeg');
-        imagejpeg($document->getResult(), null, 100);
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.png';
+        $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
+
+        return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
+    /**
+     * 
+     * @param string $inputPath
+     * @return string
+     */
+    public static function FilterNegate($inputPath) {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_NEGATE);
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.' . $ext;
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+
+    /**
+     * Hàm tăng độ sáng
+     * @param string $inputPath
+     * @param int $brightness
+     * @return type
+     */
+    public static function FilterBrightness($inputPath,$brightness) {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_BRIGHTNESS,$brightness);
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.' . $ext;
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * Hàm tạo hiệu ứng đen trắng
+     * @param string $inputPath
+     * @return type
+     */
+    public static function FilterGrayscale($inputPath) {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_GRAYSCALE);
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.' . $ext;
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * Hàm tăng độ tương phản
+     * @param type $inputPath
+     * @param type $contrast
+     * @return type
+     */
+    public static function FilterContrast($inputPath,$contrast) {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_CONTRAST,$contrast);
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.' . $ext;
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * 
+     * @param string $inputPath
+     * @param int $red
+     * @param int $green
+     * @param int $blue
+     * @return type
+     */
+    public static function FilterColorize($inputPath,$red,$green,$blue) {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_COLORIZE,$red,$green,$blue);
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.' . $ext;
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
 }
 
 ?>

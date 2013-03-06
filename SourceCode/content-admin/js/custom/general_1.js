@@ -2,7 +2,7 @@ jQuery.noConflict();
 
 jQuery(document).ready(function(){
 	jQuery('#imageUpload').popupWindow({ 
-			windowURL:'/codeigniter/elfinder/standalone-elfinder.php?mode=image', 
+			windowURL:'/ImageFunny/elfinder/standalone-elfinder.php?mode=image', 
 			windowName:'Filebrowser',
 			height:490, 
 			width:950,
