@@ -14,8 +14,8 @@ class Demo extends CI_Controller {
         $image = './images/a.jpg';
         $frame = './images/0001.png';
 
-        $result = ImageLib::AddFrame($image, $frame, 272, 272, 333, 325, 0);
-
+        $result[] = ImageLib::AddFrame($image, $frame, 272, 272, 333, 325, 0);
+        $data['source'] = base_url().$image;
         $data['result'] = $result;
         $this->load->view('demo_index', $data);
     }
