@@ -20,6 +20,7 @@ class ImageLib {
     var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
     var $imageQuality = 100;
 
+    
     /**
      * Add frame for a image as simple
      * @param string $image // Đường dẫn đến ảnh
@@ -95,7 +96,7 @@ class ImageLib {
      * @param string $inputPath
      * @return string
      */
-    public static function FilterNegate($inputPath) {
+    public static function FilterNegate($inputPath,$filename='') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -115,9 +116,12 @@ class ImageLib {
         }
 
         imagefilter($image, IMG_FILTER_NEGATE);
-        $data = new DateTime();
         $imageLib = new ImageLib();
-        $filename = $data->getTimestamp() . '.' . $ext;
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
         return base_url() . $imageLib->dirPath . '/' . $filename;
@@ -129,7 +133,7 @@ class ImageLib {
      * @param int $brightness
      * @return type
      */
-    public static function FilterBrightness($inputPath,$brightness) {
+    public static function FilterBrightness($inputPath,$brightness,$filename='') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -149,9 +153,12 @@ class ImageLib {
         }
 
         imagefilter($image, IMG_FILTER_BRIGHTNESS,$brightness);
-        $data = new DateTime();
         $imageLib = new ImageLib();
-        $filename = $data->getTimestamp() . '.' . $ext;
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
         return base_url() . $imageLib->dirPath . '/' . $filename;
@@ -162,7 +169,7 @@ class ImageLib {
      * @param string $inputPath
      * @return type
      */
-    public static function FilterGrayscale($inputPath) {
+    public static function FilterGrayscale($inputPath,$filename='') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -182,9 +189,12 @@ class ImageLib {
         }
 
         imagefilter($image, IMG_FILTER_GRAYSCALE);
-        $data = new DateTime();
         $imageLib = new ImageLib();
-        $filename = $data->getTimestamp() . '.' . $ext;
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
         return base_url() . $imageLib->dirPath . '/' . $filename;
@@ -196,7 +206,7 @@ class ImageLib {
      * @param type $contrast
      * @return type
      */
-    public static function FilterContrast($inputPath,$contrast) {
+    public static function FilterContrast($inputPath,$contrast,$filename='') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -216,9 +226,12 @@ class ImageLib {
         }
 
         imagefilter($image, IMG_FILTER_CONTRAST,$contrast);
-        $data = new DateTime();
         $imageLib = new ImageLib();
-        $filename = $data->getTimestamp() . '.' . $ext;
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
         return base_url() . $imageLib->dirPath . '/' . $filename;
@@ -232,7 +245,7 @@ class ImageLib {
      * @param int $blue
      * @return type
      */
-    public static function FilterColorize($inputPath,$red,$green,$blue) {
+    public static function FilterColorize($inputPath,$red,$green,$blue,$filename='') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -252,9 +265,234 @@ class ImageLib {
         }
 
         imagefilter($image, IMG_FILTER_COLORIZE,$red,$green,$blue);
-        $data = new DateTime();
         $imageLib = new ImageLib();
-        $filename = $data->getTimestamp() . '.' . $ext;
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * 
+     * @param type $inputPath
+     * @param string $filename
+     * @return type
+     */
+    public static function FilterEdgedetect($inputPath,$filename='') {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_EDGEDETECT);
+        $imageLib = new ImageLib();
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * 
+     * @param type $inputPath
+     * @param string $filename
+     * @return type
+     */
+    public static function FilterEmboss($inputPath,$filename='') {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_EMBOSS);
+        $imageLib = new ImageLib();
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * 
+     * @param type $inputPath
+     * @param string $filename
+     * @return type
+     */
+    public static function FilterGaussianBlur($inputPath,$filename='') {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
+        $imageLib = new ImageLib();
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * 
+     * @param type $inputPath
+     * @param string $filename
+     * @return type
+     */
+    public static function FilterSelectiveBlur($inputPath,$filename='') {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_SELECTIVE_BLUR);
+        $imageLib = new ImageLib();
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * 
+     * @param type $inputPath
+     * @param string $filename
+     * @return type
+     */
+    public static function FilterMeanRemoval($inputPath,$filename='') {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_MEAN_REMOVAL);
+        $imageLib = new ImageLib();
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
+        imagejpeg($image, $imageLib->dirPath . '/' . $filename);
+        imagedestroy($image);
+        return base_url() . $imageLib->dirPath . '/' . $filename;
+    }
+    
+    /**
+     * 
+     * @param type $inputPath
+     * @param string $filename
+     * @return type
+     */
+    public static function FilterSmooth($inputPath,$smooth,$filename='') {
+        $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
+        switch ($ext) {
+            case 'png':
+                $image = imagecreatefrompng($inputPath);
+                break;
+            case 'jpg':
+                $image = imagecreatefromjpeg($inputPath);
+                break;
+            case 'gif':
+                $image = imagecreatefromgif($inputPath);
+                break;
+            case 'bmp':
+                $image = imagecreatefromwbmp($inputPath);
+                break;
+            default :
+                break;
+        }
+
+        imagefilter($image, IMG_FILTER_SMOOTH,$smooth);
+        $imageLib = new ImageLib();
+        if($filename=='')
+        {
+            $data = new DateTime();            
+            $filename = $data->getTimestamp() . '.' . $ext;
+        }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
         return base_url() . $imageLib->dirPath . '/' . $filename;

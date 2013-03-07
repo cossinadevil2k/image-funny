@@ -1,6 +1,16 @@
 <html>
     <body> 
-        <img src="<?php echo $source;?>">
-        <img id="image" src="<?php echo $result;?>">
+        <img width="300" src="<?php echo $source;?>">
+        
+        <?php 
+        
+        for($i=0;$i<count($result);$i++) 
+        {
+        ?>
+        <img id="image" width="300" src="<?php echo $result[$i];?>">
+        <?php 
+        }        
+        ?>
+        
     </body>
 </html>
