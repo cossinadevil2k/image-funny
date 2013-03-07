@@ -1,0 +1,56 @@
+.Line{
+    background-image: url('/images/home/line.png');
+}
+.HomeContent{
+    position: absolute;
+    width: 100%;
+    height: 100%;    
+    margin-left: 50px;    
+}
+.Category{
+    height: 24%;
+    width: 777px;
+    background-image: url('/images/home/category_bg.png');
+    padding-left: 25px;
+    margin-top: 30px;
+}
+.CategoryTitle{
+    width: 80px;
+}
+.CategoryTitle img{
+    width: 100%;
+    position: relative;
+    top: -10px;
+}
+.CategoryTitle label{
+    position: relative;
+    top: -70px;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
+    float: left;
+}
+.Pattern{
+    position: relative;
+    top: -51px;
+    left: -10px;
+}
+.PatternImage{
+    width: 93px;
+    height: 93px;
+    border: 3px solid whitesmoke;
+    border-radius: 3px;
+}
+.Pattern table{
+    margin-left: -1px;
+}
+.Pattern div{
+    width: 98%;
+    height: 100%;
+}
+.Pattern div:hover{
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+
