@@ -24,6 +24,9 @@
                             <img src="<?php echo base_url() ?>images/home/category_title.png"/>
                             <label>Khung nghệ thuật</label>
                         </div>
+                        <div class="More">
+                            <img src="<?php echo base_url()?>images/home/button_more.png"/>
+                        </div>
                         <div class="Pattern">
                             <table id="gallery" cellspacing="20" cellpadding="0">
                                 <tbody>
@@ -68,6 +71,9 @@
                         <div class="CategoryTitle">
                             <img src="<?php echo base_url() ?>images/home/category_title.png"/>
                             <label>Khung cắt viền</label>
+                        </div>
+                        <div class="More">
+                            <img src="<?php echo base_url()?>images/home/button_more.png"/>
                         </div>
                         <div class="Pattern">
                             <table id="gallery" cellspacing="20" cellpadding="0">
@@ -114,6 +120,9 @@
                             <img src="<?php echo base_url() ?>images/home/category_title.png"/>
                             <label>Facebook Cover</label>
                         </div>
+                        <div class="More">
+                            <img src="<?php echo base_url()?>images/home/button_more.png"/>
+                        </div>
                         <div class="Pattern">
                             <table id="gallery" cellspacing="20" cellpadding="0">
                                 <tbody>
@@ -158,6 +167,9 @@
                         <div class="CategoryTitle">
                             <img src="<?php echo base_url() ?>images/home/category_title.png"/>
                             <label>Khung điền chữ</label>
+                        </div>
+                        <div class="More">
+                            <img src="<?php echo base_url()?>images/home/button_more.png"/>
                         </div>
                         <div class="Pattern">
                             <table id="gallery" cellspacing="20" cellpadding="0">
