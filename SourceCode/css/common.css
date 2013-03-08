@@ -14,10 +14,20 @@ body{
     background-image: url('/images/common/header.png');
     width: 100%;
     height: 150px;
-    float: left;
 }
-.Header div{
+.HeaderMenu{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+.HeaderMenu div{
     float: left;
+    width: 115px;
+}
+enable{
+    position: absolute; 
+    top: 70px;
+    z-index: 1000;
 }
 .Logo{
     position: relative;

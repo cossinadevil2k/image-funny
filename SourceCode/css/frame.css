@@ -4,11 +4,10 @@
     height: 405px;
     top: 35px;
 }
-.FrameHeader{
-    width: 10%;
-    position: absolute; 
-    top: 70px;
-    z-index: 1000;
+.HomeHeader{
+    top: 86px;
+    left: 281px;
+    width: 115px;
 }
 .Left{
     float: left;
@@ -26,16 +25,24 @@
     height: 100%;
     width: 125px;
 }
-.Left ul li div{
-    margin-top: 25px;
+.Category{
+    margin-top: 10px;
     width: 130px;
     opacity: 0.4;
 }
-.Left ul li div:hover{
+.Category:hover{
     cursor: pointer;
     opacity: 1;
 }
-
+.Category.Enable{
+    opacity: 1;
+}
+.Category label{
+    position: relative;
+    top: -50px;
+    left: -5px;
+    color: white;
+}
 .Right ul li div{
     margin-top: 25px;
     margin-left: -35px;
@@ -62,4 +69,22 @@
 .mCSB_dragger_bar{
     height: 6px !important;
     background-color: #a7a39b !important;
+}
+#Next, #Previous{
+    position: absolute;
+    width: 30px;
+    height: 55px;    
+    bottom: -103px;
+    opacity: 0.7;
+}
+#Next{
+    right: 48px;
+}
+#Previous{
+    left: 40px;
+}
+
+#Next:hover, #Previous:hover{
+    cursor: pointer;
+    opacity: 2;
 }
