@@ -14,6 +14,9 @@
     height: 100%;
     width: 175px;
 }
+.Left ul li{
+    margin-top: 30px;
+}
 .Center{
     float:left;
     height: 100%;
@@ -25,12 +28,15 @@
     height: 100%;
     width: 125px;
 }
+.Right ul li{
+    margin-top: 25px;
+}
 .Category{
-    margin-top: 10px;
     width: 130px;
     opacity: 0.4;
+    height: 64px;
 }
-.Category:hover{
+.Category:hover, .Category label:hover{
     cursor: pointer;
     opacity: 1;
 }
@@ -44,7 +50,6 @@
     color: white;
 }
 .Right ul li div{
-    margin-top: 25px;
     margin-left: -35px;
     width: 65px;
 }
