@@ -1,21 +1,35 @@
+@font-face{
+    font-family: uvnvan;
+    src:  url('/fonts/uvnvan_r_0.ttf') format('truetype');
+}
+@font-face{
+    font-family: uvnvan_bold;
+    src:  url('/fonts/uvnvan_0.ttf') format('truetype');
+}
 body{
     text-align: center;
+    font-family: uvnvan_bold;
 }
 .Header{
     background-image: url('/images/common/header.png');
     width: 100%;
     height: 150px;
+    float: left;
+}
+.Header div{
+    float: left;
 }
 .Logo{
     position: relative;
     float: left;
-    width: 38%;
+    width: 40%;
     height: 80px;
-    margin-top: 24px;
+    margin-top: 10px;
     margin-left: 20px;
+    border: none;
 }
 .Form{
-    width: 900px;
+    width: 1024px;
     height: 1240px;
     margin: 0 auto 0 auto;
     position: relative;
@@ -39,4 +53,5 @@ body{
     height: 2px;
     width: 100%;
     margin-top: 4px;
+    background-image: url('/images/common/line.png');
 }

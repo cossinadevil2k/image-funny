@@ -20,7 +20,7 @@
                             <label>Khung nghệ thuật</label>
                         </div>
                         <div class="Pattern">
-                            <table id="gallery" cellspacing="10" cellpadding="0">
+                            <table id="gallery" cellspacing="20" cellpadding="0">
                                 <tbody>
                                     <tr class="rowa">
                                         <td class="PatternImage">
@@ -62,10 +62,10 @@
                     <div class="Category">
                         <div class="CategoryTitle">
                             <img src="<?php echo base_url() ?>images/home/category_title.png"/>
-                            <label style="font-size: 18px">Khung cắt viền</label>
+                            <label>Khung cắt viền</label>
                         </div>
                         <div class="Pattern">
-                            <table id="gallery" cellspacing="10" cellpadding="0">
+                            <table id="gallery" cellspacing="20" cellpadding="0">
                                 <tbody>
                                     <tr class="rowa">
                                         <td class="PatternImage">
@@ -110,7 +110,7 @@
                             <label>Facebook Cover</label>
                         </div>
                         <div class="Pattern">
-                            <table id="gallery" cellspacing="10" cellpadding="0">
+                            <table id="gallery" cellspacing="20" cellpadding="0">
                                 <tbody>
                                     <tr class="rowa">
                                         <td class="PatternImage">
@@ -155,7 +155,7 @@
                             <label>Khung điền chữ</label>
                         </div>
                         <div class="Pattern">
-                            <table id="gallery" cellspacing="10" cellpadding="0">
+                            <table id="gallery" cellspacing="20" cellpadding="0">
                                 <tbody>
                                     <tr class="rowa">
                                         <td class="PatternImage">

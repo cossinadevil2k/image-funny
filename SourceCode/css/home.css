@@ -1,6 +1,3 @@
-.Line{
-    background-image: url('/images/home/line.png');
-}
 .HomeContent{
     position: absolute;
     width: 100%;
@@ -8,14 +5,15 @@
     margin-left: 50px;    
 }
 .Category{
-    height: 24%;
-    width: 777px;
+    height: 25%;
+    width: 888px;
     background-image: url('/images/home/category_bg.png');
     padding-left: 25px;
     margin-top: 30px;
 }
 .CategoryTitle{
     width: 80px;
+    position: absolute;
 }
 .CategoryTitle img{
     width: 100%;
@@ -24,32 +22,33 @@
 }
 .CategoryTitle label{
     position: relative;
-    top: -70px;
+    top: -73px;
     color: white;
-    font-weight: bold;
-    font-size: 17px;
+    font-size: 15px;
     float: left;
 }
 .Pattern{
-    position: relative;
-    top: -51px;
-    left: -10px;
+    left: -12px;
+    margin-left: 18px;
+    margin-top: 40px;
+    position: absolute;
 }
 .PatternImage{
-    width: 93px;
-    height: 93px;
+    width: 100px;
+    height: 100px;
     border: 3px solid whitesmoke;
     border-radius: 3px;
 }
 .Pattern table{
     margin-left: -1px;
+    float: left;
 }
 .Pattern div{
     width: 98%;
     height: 100%;
 }
 .Pattern div:hover{
-    border: 1px solid red;
+    border: 1px solid #fd3d0e;
     cursor: pointer;
 }
 
