@@ -1,10 +1,10 @@
 
 <ul class="maintabmenu multipletabmenu">        
-    <li><a href="<?php echo base_url(); ?>frames">Tất cả khung ảnh</a></li>
-    <li class="current"><a href="<?php echo base_url(); ?>frames/add">Cập nhật khung ảnh</a></li>    
+    <li><a href="<?php echo base_url(); ?>admin/frames">Tất cả khung ảnh</a></li>
+    <li class="current"><a href="<?php echo base_url(); ?>admin/frames/add">Cập nhật khung ảnh</a></li>    
 </ul>
 <div class="content">    
-    <form method="post" action="<?php echo base_url(); ?>frames/edit" class="stdform" id="formID">
+    <form method="post" action="<?php echo base_url(); ?>admin/frames/edit" class="stdform" id="formID">
         <div class="edit-main">             
             <div id="wizard" class="wizard post-lang">                               
                 <div class="stepContainer">       

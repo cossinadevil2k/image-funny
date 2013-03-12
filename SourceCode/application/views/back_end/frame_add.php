@@ -1,9 +1,9 @@
 <ul class="maintabmenu multipletabmenu">        
-    <li><a href="<?php echo base_url(); ?>frames">Tất cả khung ảnh</a></li>
-    <li class="current"><a href="<?php echo base_url(); ?>frames/add">Thêm mới khung ảnh</a></li>    
+    <li><a href="<?php echo base_url(); ?>admin/frames">Tất cả khung ảnh</a></li>
+    <li class="current"><a href="<?php echo base_url(); ?>admin/frames/add">Thêm mới khung ảnh</a></li>    
 </ul>
 <div class="content">    
-    <form method="post" action="<?php echo base_url(); ?>frames/add" class="stdform" id="formID">
+    <form method="post" action="<?php echo base_url(); ?>admin/frames/add" class="stdform" id="formID">
         <div class="edit-main">             
             <div id="wizard" class="wizard post-lang">                               
                 <div class="stepContainer">                                        
@@ -28,45 +28,48 @@
                     </br>        
                 </div>
             </div>
-            <div class="seo-packages widgetbox">
+            <div class="seo-packages widgetbox" id="parameter_frame">
                 <div class="contenttitle">
                     <h2 class="form">
-                        <span>Thông số khung ảnh</span>
-                    </h2>
-                </div>                
+                        <span>Thông số khung ảnh 
+                            <button id="btnAdd" type="button" style="float: right; padding-bottom: 6px; margin-top: -5px;">Thêm thông số</button>
+                        </span>                                               
+                    </h2>                    
+                </div>      
+                
                 <div class="seo-packages widgetcontent">
                     <p>                        
                         <label>X</label>
                         <span class="field small-form">
-                            <input class="smallinput" type="text" value="">
+                            <input name="txtX[]" class="smallinput validate[required]" type="text" value="">
                         </span>                                            
                     </p>  
                     <br>
                     <p>                        
                         <label>Y</label>
                         <span class="field small-form">
-                            <input class="smallinput" type="text" value="">
+                            <input name="txtY[]" class="smallinput validate[required]" type="text" value="">
                         </span>                                            
                     </p>
                     <br>
                     <p>                        
                         <label>Width</label>
                         <span class="field small-form">
-                            <input class="smallinput" type="text" value="">
+                            <input name="txtWidth[]" class="smallinput validate[required]" type="text" value="">
                         </span>                                            
                     </p>   
                     <br>
                     <p>                        
                         <label>Height</label>
                         <span class="field small-form">
-                            <input class="smallinput" type="text" value="">
+                            <input name="txtHeight[]" class="smallinput validate[required]" type="text" value="">
                         </span>                                            
                     </p>   
                     <br>
                     <p>                        
                         <label>Degrees</label>
                         <span class="field small-form">
-                            <input class="smallinput" type="text" value="">
+                            <input name="txtDegree[]" class="smallinput validate[required]" type="text" value="">
                         </span>                                            
                     </p>   
                 </div>

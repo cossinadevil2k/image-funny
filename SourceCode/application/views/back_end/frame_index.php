@@ -1,6 +1,6 @@
 <ul class="maintabmenu multipletabmenu">        
-    <li  class="current"><a href="<?php echo base_url(); ?>frames">Tất cả khung ảnh</a></li>
-    <li><a href="<?php echo base_url(); ?>frames/add">Thêm mới khung ảnh</a></li>    
+    <li  class="current"><a href="<?php echo base_url(); ?>admin/frames">Tất cả khung ảnh</a></li>
+    <li><a href="<?php echo base_url(); ?>admin/frames/add">Thêm mới khung ảnh</a></li>    
 </ul>        
      
 <div class="content">
@@ -9,8 +9,8 @@
         <h2 class="table"><span>Danh sách khung ảnh</span></h2>
     </div><!--contenttitle-->
     <div class="tableoptions">
-        <form name="frmfilter" method="post" action="<?php echo base_url();?>frames/index/" >                        	
-            <button class="deletebutton radius3" title="table2" value="<?php echo base_url();?>frames/delete">Delete Selected</button> &nbsp;               
+        <form name="frmfilter" method="post" action="<?php echo base_url();?>admin/frames/index/" >                        	
+            <button class="deletebutton radius3" title="table2" value="<?php echo base_url();?>admin/frames/delete">Delete Selected</button> &nbsp;               
                        
             <input type="text" value="<?php if($key_word!='~')echo $key_word;?>" name="txtKeyWord" class="input-keyword">&nbsp;
            
@@ -68,8 +68,8 @@
                     ?>                    
                 </td>
                 <td class="center">
-                    <a class="edit" href="<?php echo base_url();?>frames/edit/<?php echo $frame->id;?>">Sửa</a> &nbsp; 
-                    <a class="delete" id="<?php echo $frame->id;?>" href="<?php echo base_url();?>frames/delete">Xóa</a>
+                    <a class="edit" href="<?php echo base_url();?>admin/frames/edit/<?php echo $frame->id;?>">Sửa</a> &nbsp; 
+                    <a class="delete" id="<?php echo $frame->id;?>" href="<?php echo base_url();?>admin/frames/delete">Xóa</a>
                 </td>
             </tr>
             <?php

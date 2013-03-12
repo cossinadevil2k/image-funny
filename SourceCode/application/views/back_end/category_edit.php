@@ -1,11 +1,11 @@
 <ul class="maintabmenu multipletabmenu">            
     <li class="current">
-        <a href="<?php echo base_url(); ?>category">Danh mục khung ảnh</a>
+        <a href="<?php echo base_url(); ?>admin/category">Danh mục khung ảnh</a>
     </li>        
 </ul>
 <div class="content">                	
     <div class="edit-left">
-        <form action="<?php echo base_url(); ?>category/edit" method="post" 
+        <form action="<?php echo base_url(); ?>admin/category/edit" method="post" 
               accept-charset="utf-8" id="formID" class="stdform">   
             <input type="hidden" name="id" value="<?php echo $category->id;?>"/>
                 
@@ -34,7 +34,7 @@
         </div>
         <div class="tableoptions">
             <button class="deletebutton radius3" name="delete_term" 
-                    value="<?php echo base_url(); ?>category/delete" 
+                    value="<?php echo base_url(); ?>admin/category/delete" 
                     title="table2">Delete Selected</button> &nbsp;
         </div>
         <table id="table2" class="stdtable stdtablecb" border="0" cellpadding="0" cellspacing="0">
@@ -72,7 +72,7 @@
                             ?>
                         </td>
                         <td><?php echo $item->description; ?></td>
-                        <td class="center"><a class="edit" title="Sửa" href="<?php echo base_url(); ?>category/edit/<?php echo $item->id; ?>">Sửa</a> &nbsp; <a class="delete" id="<?php echo $item->id; ?>" name="delete" title="Xóa danh mục" href="<?php echo base_url(); ?>category/delete">Xóa</a></td>
+                        <td class="center"><a class="edit" title="Sửa" href="<?php echo base_url(); ?>admin/category/edit/<?php echo $item->id; ?>">Sửa</a> &nbsp; <a class="delete" id="<?php echo $item->id; ?>" name="delete" title="Xóa danh mục" href="<?php echo base_url(); ?>admin/category/delete">Xóa</a></td>
                     </tr>   
                 <?php } ?>
             </tbody>
