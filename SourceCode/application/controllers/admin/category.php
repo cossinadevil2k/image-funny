@@ -19,7 +19,7 @@ class Category extends CI_Controller {
             $desc = $this->input->post('txtdescription');
             
             $this->Category_model->add($name,$desc);
-            redirect('category');
+            redirect('admin/category');
         }
         include('paging.php');
         $config['base_url'] = base_url() . "category/index/";
@@ -48,7 +48,7 @@ class Category extends CI_Controller {
             
             $this->Category_model->edit($id,$name,$desc);
                         
-            redirect('category');
+            redirect('admin/category');
         }
         include('paging.php');
         $config['base_url'] = base_url() . "category/edit/".$id;
