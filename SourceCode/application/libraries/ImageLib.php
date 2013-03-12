@@ -90,7 +90,7 @@ class ImageLib {
             $y = $frameItem->y;
             $width = $frameItem->width;
             $height = $frameItem->height;
-            $degrees = $frameItem->degrees;
+            $degrees = $frameItem->degree;
 
             $temp = clone $imageToAdd;
             $temp->resizeInPixel($width, $height);

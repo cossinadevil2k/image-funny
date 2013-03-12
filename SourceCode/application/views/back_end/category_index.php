@@ -5,7 +5,7 @@
 </ul>
 <div class="content">                	
     <div class="edit-left">
-        <form action="<?php echo base_url(); ?>category" method="post" 
+        <form action="<?php echo base_url(); ?>admin/category" method="post" 
               accept-charset="utf-8" id="formID" class="stdform">                    		
             <p><label>Tên danh mục:</label></p>
             <p>

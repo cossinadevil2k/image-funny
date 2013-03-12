@@ -22,7 +22,7 @@ class Category extends CI_Controller {
             redirect('admin/category');
         }
         include('paging.php');
-        $config['base_url'] = base_url() . "category/index/";
+        $config['base_url'] = base_url() . "admin/category/index/";
         $config['total_rows'] = count($this->Category_model->get());
         $config['cur_page'] = $row;
         $config['num_links'] = 3;
@@ -51,7 +51,7 @@ class Category extends CI_Controller {
             redirect('admin/category');
         }
         include('paging.php');
-        $config['base_url'] = base_url() . "category/edit/".$id;
+        $config['base_url'] = base_url() . "admin/category/edit/".$id;
         $config['total_rows'] = count($this->Category_model->get());
         $config['cur_page'] = $row;
         $config['num_links'] = 3;

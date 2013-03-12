@@ -27,7 +27,7 @@ class Frames extends CI_Controller {
         //paging
         include('paging.php');
         $config['per_page'] = 10;
-        $config['base_url'] = base_url() . "/frames/index/" . $data['key_word'] . '/';
+        $config['base_url'] = base_url() . "admin/frames/index/" . $data['key_word'] . '/';
 
         if ($data['key_word'] != '~') {
             $lstFrame = $this->Frame_model->get(0, $data['key_word']);
