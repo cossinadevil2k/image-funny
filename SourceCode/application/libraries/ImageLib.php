@@ -14,6 +14,15 @@ require_once('./Instagraph/Instagraph.php');
 use PHPImageWorkshop\ImageWorkshop;
 
 class ImageLib {
+    
+    private $CI;
+
+    public function __construct()
+    {
+        $this->CI = get_instance();
+        $this->CI->load->library('session');
+        $this->CI->load->database();
+    }   
 
     var $dirPath = './elfinder/files/images';
     var $createFolders = true;
@@ -50,7 +59,15 @@ class ImageLib {
         $imageLib = new ImageLib();
         $filename = $data->getTimestamp() . '.png';
         $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
-
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
@@ -88,6 +105,15 @@ class ImageLib {
         $filename = $data->getTimestamp() . '.png';
         $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
 
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
@@ -124,6 +150,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
@@ -161,6 +196,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -197,6 +241,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -234,6 +287,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -273,6 +335,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -310,6 +381,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -347,6 +427,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -384,6 +473,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -421,6 +519,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -458,6 +565,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
     
@@ -495,6 +611,15 @@ class ImageLib {
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
+        
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before'=>base_url().$image,
+            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+        );
+        $imageLib->CI->db->where('session_id',$session_id);        
+        $imageLib->CI->db->update("tbl_sessions",$arr);
+        
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 }

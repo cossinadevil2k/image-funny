@@ -58,9 +58,15 @@ class Frames extends CI_Controller {
             $desc = $this->input->post('txtDescription');
             $link = $this->input->post('hdffeatured_image');
             $cat_id = $this->input->post('ddlCat');
-
-            $this->Frame_model->add($name, $desc, $link, $cat_id);
-            redirect('frames');
+            
+            $x = $this->input->post("txtX");
+            $y = $this->input->post("txtY");
+            $width = $this->input->post("txtWidth");
+            $height = $this->input->post("txtHeight");
+            $degree = $this->input->post("txtDegree");
+            
+            $this->Frame_model->add($name, $desc, $link, $cat_id,$x,$y,$width,$height,$degree);
+            redirect('admin/frames');            
         }
         $data['lstCategory'] = $this->Category_model->get();
         $data['view'] = 'back_end/frame_add';
@@ -88,7 +94,7 @@ class Frames extends CI_Controller {
             $cat_id = $this->input->post('ddlCat');
 
             $this->Frame_model->edit($id,$name, $desc, $link, $cat_id);
-            redirect('frames');
+            redirect('admin/frames');
         }
         
         $frame = $this->Frame_model->get($id);

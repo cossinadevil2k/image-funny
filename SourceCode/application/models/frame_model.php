@@ -17,15 +17,29 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function add($name, $description, $link, $category_id) {
+    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array()) {
         $frame = array(
             'name' => $name,
             'description' => $description,
             'link' => $link,
             'category_id' => $category_id
         );
-
         $this->db->insert('tbl_frame', $frame);
+        if ($this->db->affected_rows() > 0) {
+            $id = $this->db->insert_id();
+            $count = count($x);
+            for ($i = 0; $i < $count; $i++) {
+                $frame_detail = array(
+                    'frame_id' => $id,
+                    'x' => $x[$i],
+                    'y' => $y[$i],
+                    'width' => $width[$i],
+                    'height' => $height[$i],
+                    'degree' => $degree[$i]
+                );
+                $this->db->insert('tbl_framedetail', $frame_detail);
+            }
+        }
     }
 
     /**
@@ -44,12 +58,11 @@ class Frame_model extends CI_Model {
             if ($limit > 0) {
                 $this->db->limit($limit, $offset);
             }
-            
-            if($name!='')
-            {
-                $this->db->like('name',$name);
+
+            if ($name != '') {
+                $this->db->like('name', $name);
             }
-            
+
             $query = $this->db->get();
             return $query->result();
         } elseif ($id > 0) {
@@ -60,15 +73,34 @@ class Frame_model extends CI_Model {
     }
 
     /**
+     * 
+     * @param type $category_id
+     * @param type $limit
+     * @param type $offset
+     * @return type
+     */
+    function get_by_category($category_id, $limit = -1, $offset = 10) {
+        $this->db->select('id,name,description,link,category_id');
+        $this->db->from('tbl_frame');
+
+        $this->db->where('category_id', $category_id);
+        if ($limit > 0) {
+            $this->db->limit($limit, $offset);
+        }
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    /**
      * Delete a frame
      * @param int $id
      */
-    function delete($id)
-    {
-        $this->db->where('id',$id);
+    function delete($id) {
+        $this->db->where('id', $id);
         $this->db->delete('tbl_frame');
     }
-    
+
     /**
      * 
      * @param int $id
@@ -77,18 +109,17 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function edit($id,$name,$description,$link,$category_id)
-    {
+    function edit($id, $name, $description, $link, $category_id) {
         $arr = array(
-            'name'=>$name,
-            'description'=>$description,
-            'link'=>$link,
-            'category_id'=>$category_id
+            'name' => $name,
+            'description' => $description,
+            'link' => $link,
+            'category_id' => $category_id
         );
-        $this->db->where('id',$id);
-        $this->db->update('tbl_frame',$arr);
-        
+        $this->db->where('id', $id);
+        $this->db->update('tbl_frame', $arr);
     }
+
 }
 
 ?>

@@ -11,7 +11,7 @@ class Demo extends CI_Controller {
      * add 1 frame đơn giản
      */
     function oneFrame() {
-        $image = './images/a.jpg';
+        $image = './images/abc.jpg';
         $frame = './images/0001.png';
 
         $result[] = ImageLib::AddFrame($image, $frame, 272, 272, 333, 325, 0);
@@ -42,6 +42,11 @@ class Demo extends CI_Controller {
         $this->load->view('demo_index', $data);
     }
 
+    function session()
+    {
+        
+        
+    }
 }
 
 ?>
