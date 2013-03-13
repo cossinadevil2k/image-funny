@@ -115,6 +115,7 @@ class ImageLib {
 
             return base_url() . $imageLib->dirPath . '/' . $filename;
         } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
             return "";
         }
     }
