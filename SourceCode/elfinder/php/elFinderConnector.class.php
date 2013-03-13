@@ -129,5 +129,45 @@ class elFinderConnector {
 		}
 		
 	}
+        
+        public function elfinderConnector(){
+		$this->load->helper('path');
+		$opts = array(
+			//'debug' => true,
+			'roots' => array(
+				array(
+					'driver'	=> 'LocalFileSystem',
+					'path'		=> set_realpath('images'),
+					'URL'		=> $this->config->item('base_url').'images/',
+					'alias'		=> $this->lang->line('elfinder_images'),
+					'attributes'=> array(
+						array( // hide dot folders
+							'pattern' => '/^\/\./',
+							'write' => false,
+							'locked' => true,
+							'hidden' => true,
+						)
+					)
+				),
+
+				array(
+					'driver'	=> 'LocalFileSystem',
+					'path'		=> set_realpath('files'),
+					'URL'		=> $this->config->item('base_url').'files/',
+					'alias'		=> $this->lang->line('elfinder_files'),
+					'attributes'=> array(
+						array( // hide dot folders
+							'pattern' => '/^\/\./',
+							'write' => false,
+							'locked' => true,
+							'hidden' => true,
+						)
+					)
+				)
+
+			)
+		);
+		$this->load->library('elfinder_lib', $opts);
+	}
 	
 }// END class 

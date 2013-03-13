@@ -14,22 +14,20 @@ require_once('./Instagraph/Instagraph.php');
 use PHPImageWorkshop\ImageWorkshop;
 
 class ImageLib {
-    
+
     private $CI;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->CI = get_instance();
         $this->CI->load->library('session');
         $this->CI->load->database();
-    }   
+    }
 
     var $dirPath = './elfinder/files/images';
     var $createFolders = true;
     var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
     var $imageQuality = 100;
 
-    
     /**
      * Add frame for a image as simple
      * @param string $image // Đường dẫn đến ảnh
@@ -59,15 +57,15 @@ class ImageLib {
         $imageLib = new ImageLib();
         $filename = $data->getTimestamp() . '.png';
         $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
@@ -78,43 +76,47 @@ class ImageLib {
      * @param array $array array Frame object
      */
     public static function AddFrameArray($image, $frame, $array = array()) {
-        $frameLayer = ImageWorkshop::initFromPath($frame);
-        $w = $frameLayer->getWidth();
-        $h = $frameLayer->getHeight();
+        try {
+            $frameLayer = ImageWorkshop::initFromPath($frame);
+            $w = $frameLayer->getWidth();
+            $h = $frameLayer->getHeight();
 
-        $document = ImageWorkshop::initVirginLayer($w, $h);
+            $document = ImageWorkshop::initVirginLayer($w, $h);
 
-        $imageToAdd = ImageWorkshop::initFromPath($image);
-        foreach ($array as $frameItem) {
-            $x = $frameItem->x;
-            $y = $frameItem->y;
-            $width = $frameItem->width;
-            $height = $frameItem->height;
-            $degrees = $frameItem->degree;
+            $imageToAdd = ImageWorkshop::initFromPath($image);
+            foreach ($array as $frameItem) {
+                $x = $frameItem->x;
+                $y = $frameItem->y;
+                $width = $frameItem->width;
+                $height = $frameItem->height;
+                $degrees = $frameItem->degree;
 
-            $temp = clone $imageToAdd;
-            $temp->resizeInPixel($width, $height);
-            $temp->rotate($degrees);
-            $document->addLayer(1, $temp, $x - $width / 2, $y - $height / 2, 'LT');
+                $temp = clone $imageToAdd;
+                $temp->resizeInPixel($width, $height);
+                $temp->rotate($degrees);
+                $document->addLayer(1, $temp, $x - $width / 2, $y - $height / 2, 'LT');
+            }
+
+            $document->addLayer(2, $frameLayer);
+
+            $data = new DateTime();
+            $imageLib = new ImageLib();
+            $filename = $data->getTimestamp() . '.png';
+            $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
+
+            $session_id = $imageLib->CI->session->userdata('session_id');
+            $arr = array(
+                'image_before' => base_url() . $image,
+                'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
+            );
+            $imageLib->CI->db->where('session_id', $session_id);
+            $imageLib->CI->db->update("tbl_sessions", $arr);
+
+
+            return base_url() . $imageLib->dirPath . '/' . $filename;
+        } catch (Exception $e) {
+            return "";
         }
-
-        $document->addLayer(2, $frameLayer);
-
-        $data = new DateTime();
-        $imageLib = new ImageLib();
-        $filename = $data->getTimestamp() . '.png';
-        $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
-
-        $session_id = $imageLib->CI->session->userdata('session_id');
-        $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
-        );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
-        
-        return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
     /**
@@ -122,7 +124,7 @@ class ImageLib {
      * @param string $inputPath
      * @return string
      */
-    public static function FilterNegate($inputPath,$filename='') {
+    public static function FilterNegate($inputPath, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -143,22 +145,21 @@ class ImageLib {
 
         imagefilter($image, IMG_FILTER_NEGATE);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
@@ -168,7 +169,7 @@ class ImageLib {
      * @param int $brightness
      * @return type
      */
-    public static function FilterBrightness($inputPath,$brightness,$filename='') {
+    public static function FilterBrightness($inputPath, $brightness, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -187,33 +188,32 @@ class ImageLib {
                 break;
         }
 
-        imagefilter($image, IMG_FILTER_BRIGHTNESS,$brightness);
+        imagefilter($image, IMG_FILTER_BRIGHTNESS, $brightness);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * Hàm tạo hiệu ứng đen trắng
      * @param string $inputPath
      * @return type
      */
-    public static function FilterGrayscale($inputPath,$filename='') {
+    public static function FilterGrayscale($inputPath, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -234,32 +234,31 @@ class ImageLib {
 
         imagefilter($image, IMG_FILTER_GRAYSCALE);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * Hàm tăng độ tương phản
      * @param type $inputPath
      * @param type $contrast
      * @return type
      */
-    public static function FilterContrast($inputPath,$contrast,$filename='') {
+    public static function FilterContrast($inputPath, $contrast, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -278,27 +277,26 @@ class ImageLib {
                 break;
         }
 
-        imagefilter($image, IMG_FILTER_CONTRAST,$contrast);
+        imagefilter($image, IMG_FILTER_CONTRAST, $contrast);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * 
      * @param string $inputPath
@@ -307,7 +305,7 @@ class ImageLib {
      * @param int $blue
      * @return type
      */
-    public static function FilterColorize($inputPath,$red,$green,$blue,$filename='') {
+    public static function FilterColorize($inputPath, $red, $green, $blue, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -326,34 +324,33 @@ class ImageLib {
                 break;
         }
 
-        imagefilter($image, IMG_FILTER_COLORIZE,$red,$green,$blue);
+        imagefilter($image, IMG_FILTER_COLORIZE, $red, $green, $blue);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * 
      * @param type $inputPath
      * @param string $filename
      * @return type
      */
-    public static function FilterEdgedetect($inputPath,$filename='') {
+    public static function FilterEdgedetect($inputPath, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -374,32 +371,31 @@ class ImageLib {
 
         imagefilter($image, IMG_FILTER_EDGEDETECT);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * 
      * @param type $inputPath
      * @param string $filename
      * @return type
      */
-    public static function FilterEmboss($inputPath,$filename='') {
+    public static function FilterEmboss($inputPath, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -420,32 +416,31 @@ class ImageLib {
 
         imagefilter($image, IMG_FILTER_EMBOSS);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * 
      * @param type $inputPath
      * @param string $filename
      * @return type
      */
-    public static function FilterGaussianBlur($inputPath,$filename='') {
+    public static function FilterGaussianBlur($inputPath, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -466,32 +461,31 @@ class ImageLib {
 
         imagefilter($image, IMG_FILTER_GAUSSIAN_BLUR);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * 
      * @param type $inputPath
      * @param string $filename
      * @return type
      */
-    public static function FilterSelectiveBlur($inputPath,$filename='') {
+    public static function FilterSelectiveBlur($inputPath, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -512,32 +506,31 @@ class ImageLib {
 
         imagefilter($image, IMG_FILTER_SELECTIVE_BLUR);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * 
      * @param type $inputPath
      * @param string $filename
      * @return type
      */
-    public static function FilterMeanRemoval($inputPath,$filename='') {
+    public static function FilterMeanRemoval($inputPath, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -558,32 +551,31 @@ class ImageLib {
 
         imagefilter($image, IMG_FILTER_MEAN_REMOVAL);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
-    
+
     /**
      * 
      * @param type $inputPath
      * @param string $filename
      * @return type
      */
-    public static function FilterSmooth($inputPath,$smooth,$filename='') {
+    public static function FilterSmooth($inputPath, $smooth, $filename = '') {
         $ext = pathinfo($inputPath, PATHINFO_EXTENSION);
         switch ($ext) {
             case 'png':
@@ -602,26 +594,26 @@ class ImageLib {
                 break;
         }
 
-        imagefilter($image, IMG_FILTER_SMOOTH,$smooth);
+        imagefilter($image, IMG_FILTER_SMOOTH, $smooth);
         $imageLib = new ImageLib();
-        if($filename=='')
-        {
-            $data = new DateTime();            
+        if ($filename == '') {
+            $data = new DateTime();
             $filename = $data->getTimestamp() . '.' . $ext;
         }
         imagejpeg($image, $imageLib->dirPath . '/' . $filename);
         imagedestroy($image);
-        
+
         $session_id = $imageLib->CI->session->userdata('session_id');
         $arr = array(
-            'image_before'=>base_url().$image,
-            'image_after'=>  base_url().$imageLib->dirPath . '/' . $filename
+            'image_before' => base_url() . $image,
+            'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
         );
-        $imageLib->CI->db->where('session_id',$session_id);        
-        $imageLib->CI->db->update("tbl_sessions",$arr);
-        
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
         return base_url() . $imageLib->dirPath . '/' . $filename;
     }
+
 }
 
 ?>
