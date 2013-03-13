@@ -11,7 +11,7 @@ class Demo extends CI_Controller {
      * add 1 frame đơn giản
      */
     function oneFrame() {
-        $image = './images/abc.jpg';
+        $image = './images/a.png';
         $frame = './images/0001.png';
 
         $result[] = ImageLib::AddFrame($image, $frame, 272, 272, 333, 325, 0);
