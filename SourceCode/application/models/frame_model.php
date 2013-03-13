@@ -51,7 +51,7 @@ class Frame_model extends CI_Model {
      * @return type
      */
     function get($id = 0, $name = '', $limit = -1, $offset = 10) {
-        $this->db->select('id,name,description,link,category_id');
+        $this->db->select('id, name, description, link, category_id, pattern');
         $this->db->from('tbl_frame');
 
         if ($id == 0) {
@@ -79,8 +79,28 @@ class Frame_model extends CI_Model {
      * @param type $offset
      * @return type
      */
-    function get_by_category($category_id, $limit = -1, $offset = 10) {
-        $this->db->select('id,name,description,link,category_id');
+    function get_by_category($category_id, $limit = -1, $offset = 0) {
+        $this->db->select('id, name, description, link, category_id, pattern');
+        $this->db->from('tbl_frame');
+
+        $this->db->where('category_id', $category_id);
+        if ($limit > 0) {
+            $this->db->limit($limit, $offset);
+        }
+        
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
+    /**
+     * Get pattern by category
+     * @param type $category_id
+     * @param type $limit
+     * @param type $offset
+     * @return type
+     */
+    function get_pattern_by_category($category_id, $limit = 0, $offset = 0){
+        $this->db->select('id, name, description, link, category_id, pattern');
         $this->db->from('tbl_frame');
 
         $this->db->where('category_id', $category_id);

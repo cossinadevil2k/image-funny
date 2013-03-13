@@ -64,6 +64,7 @@
 .PatternImage{
     width: 105px;
     float: left;
+    margin-right: 20px;
 }
 .PatternImage:hover{
     cursor: pointer;

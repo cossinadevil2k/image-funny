@@ -17,7 +17,7 @@ class Category_model extends CI_Model {
      * @param int $offset
      * @return array categories
      */
-    public function get($id = 0, $limit = -1, $offset = 10) {
+    public function get($id = 0, $limit = -1, $offset = 0, $isReturnArray = FALSE) {
         $this->db->select('id,name,description');
         $this->db->from('tbl_category');
 
@@ -27,14 +27,16 @@ class Category_model extends CI_Model {
 
         if ($id == 0) {
             $query = $this->db->get();
-            return $query->result();
         } elseif ($id > 0) {
             $this->db->where('id', $id);
-            $query = $this->db->get();
-            return $query->result();
+            $query = $this->db->get();            
         }
+        if ($isReturnArray){
+            return $query->result_array();
+        }
+        return $query->result();
     }
-
+    
     /**
      * Add a category
      * @param string $name

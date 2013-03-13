@@ -6,17 +6,19 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>uploadify/uploadify.css" />
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.7.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.mCustomScrollbar.js"></script>
-        <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>uploadify/jquery.uploadify.js"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>        
     </head>
     <body>
         <div class="Form"> 
             <div class="Header">
-                <a href="home" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>
+                <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>
                 <div class="HeaderMenu">
-                    <div class=""><a href="home"><img src="<?php echo base_url() ?>images/home/home_disable.png" width="100%"/></a></div>
-                    <div class=""><a href="#"><img src="<?php echo base_url() ?>images/frame/frame_disable.png" width="95%"/></a></div>
+                    <div class=""><a href="/trang-chu"><img src="<?php echo base_url() ?>images/home/home_disable.png" width="100%"/></a></div>
+                    <div class=""><a href="/tao-khung"><img src="<?php echo base_url() ?>images/frame/frame_disable.png" width="95%"/></a></div>
                     <div class=""><a href="#"><img src="<?php echo base_url() ?>images/effect/effect_disable.png" width="100%"/></a></div>
                 </div>                
             </div>
@@ -25,34 +27,21 @@
                 <div class="FrameContent">
                     <div class="Left">
                         <ul style="list-style-type: none">
-                            <li>
-                                <div class="Category Enable">
-                                    <img src="<?php echo base_url()?>images/frame/category1.png" width="100%"/>
-                                    <label>Khung teen</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="Category">
-                                    <img src="<?php echo base_url()?>images/frame/category2.png" width="100%"/>
-                                    <label>Khung funny</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="Category">
-                                    <img src="<?php echo base_url()?>images/frame/category3.png" width="100%"/>
-                                    <label>Khung động</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="Category">
-                                    <img src="<?php echo base_url()?>images/frame/category4.png" width="100%"/>
-                                    <label>Khung chữ</label>
-                                </div>
-                            </li>                            
+                            <?php $i = 0;?>
+                            <?php foreach ($category_arr as $category):?>
+                                <?php $i++;?>
+                                <li>
+                                    <div class="Category <?php if ($category_enable == $category['id']) echo "Enable"?>">
+                                        <img src="<?php echo base_url()?>images/frame/category<?php echo $i?>.png" width="100%"/>
+                                        <label><?php echo $category['name']?></label>
+                                    </div>
+                                </li>
+                            <?php endforeach;?>
                         </ul>
                     </div>
                     <div class="Center">
-                        
+                        <img src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px"/>
+                        <input type="file" name="file_upload" id="file_upload" />
                     </div>
                     <div class="Right">
                         <ul style="list-style-type: none">
@@ -70,17 +59,11 @@
                             </li>  
                         </ul>
                     </div>
-                    <div id="Pattern">
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                        <div class="PatternImage"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                    </div>
+<!--                    <div id="Pattern">
+                        <?php foreach ($frame_list as $frame):?>
+                        <div class="PatternImage"><img src="<?php echo base_url().$frame->pattern;?>" height="100%"/></div>
+                        <?php endforeach;?>                       
+                    </div>-->
                     <div id="Next">
                         <img src="<?php echo base_url()?>images/frame/next.png"/>
                     </div>

@@ -39,8 +39,10 @@
 */
 
 $route['default_controller'] = "home";
+$route['trang-chu'] = "home";
+$route['tao-khung'] = 'frame';
+$route['tao-khung/(:any)'] = 'frame/index/$1';
 $route['404_override'] = '';
-
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
