@@ -23,7 +23,7 @@ class ImageLib {
         $this->CI->load->database();
     }
 
-    var $dirPath = './elfinder/files/images';
+    var $dirPath = 'resources/users';
     var $createFolders = true;
     var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
     var $imageQuality = 100;

@@ -23,7 +23,21 @@ $(document).ready(function(){
         'swf'      : '/uploadify/uploadify.swf',
         'uploader' : '/uploadify/uploadify.php',
         'onUploadSuccess' : function(file, data, response) {
-            alert('The file ' + file + ' was successfully uploaded with a response of ' + response + ':' + data);
+            $.ajax({
+                type: "post",
+                url : base_url + 'frame/create_frame',
+                dataType: "json",
+                data: {
+                    'frame_id': $("#selected_frame").attr('frame_id'),
+                    'image_path': './uploads/'+ file.name
+                },
+                success: function(data){
+                    
+                },
+                complete: function(){
+
+                }
+            });
         }
         // Put your options here
     });

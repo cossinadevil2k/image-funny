@@ -10,6 +10,8 @@ class Frame extends CI_Controller{
         parent::__construct();
         $this->load->model('category_model');
         $this->load->model('frame_model');
+        $this->load->model('frame_detail_model');
+        $this->load->library('ImageLib');
     } 
     
     public function index($category_id = 0, $frame_id = 0){
@@ -39,8 +41,15 @@ class Frame extends CI_Controller{
         $this->load->view('frame', $arr);
     }
     
-    public function create_frame($frame_id = 1){
-        
+    public function create_frame(){
+        $frame_id = $this->input->post('frame_id');
+        $image_path = $this->input->post('image_path');
+
+        $selected_frame = $this->frame_model->get($frame_id);       
+        $arr_frame_detail = $this->frame_detail_model->get($frame_id);
+        $result = ImageLib::AddFrameArray($image_path,  './'.$selected_frame[0]->link, $arr_frame_detail);
+        echo $result;
+        die();
     }
 }
 
