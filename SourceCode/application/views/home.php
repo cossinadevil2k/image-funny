@@ -36,7 +36,7 @@
                                         <tr class="rowa">
                                             <?php foreach ($category['frames'] as $frame):?>
                                             <td class="PatternImage">
-                                                <a href="<?php echo base_url('tao-khung/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
+                                                <a href="<?php echo base_url('tao-khung/'.$category['id'].'/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
                                             </td>
                                             <?php endforeach;?>
                                         </tr>

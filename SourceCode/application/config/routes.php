@@ -41,7 +41,8 @@
 $route['default_controller'] = "home";
 $route['trang-chu'] = "home";
 $route['tao-khung'] = 'frame';
-$route['tao-khung/(:any)'] = 'frame/index/$1';
+$route['tao-khung/(:num)'] = 'frame/index/$1';
+$route['tao-khung/(:num)/(:num)'] = 'frame/index/$1/$2';
 $route['404_override'] = '';
 
 /* End of file routes.php */

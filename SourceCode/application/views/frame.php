@@ -9,6 +9,9 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>uploadify/uploadify.css" />
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.7.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.mCustomScrollbar.js"></script>
+        <script>
+            var base_url = '<?php echo base_url();?>';
+        </script>
         <script type="text/javascript" src="<?php echo base_url()?>uploadify/jquery.uploadify.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>        
     </head>
@@ -31,7 +34,7 @@
                             <?php foreach ($category_arr as $category):?>
                                 <?php $i++;?>
                                 <li>
-                                    <div class="Category <?php if ($category_enable == $category['id']) echo "Enable"?>">
+                                    <div class="Category <?php if ((isset($category_enable)) && ($category_enable == $category['id'])) echo "Enable"?>" id="<?php echo $category['id'];?>">
                                         <img src="<?php echo base_url()?>images/frame/category<?php echo $i?>.png" width="100%"/>
                                         <label><?php echo $category['name']?></label>
                                     </div>
@@ -40,8 +43,10 @@
                         </ul>
                     </div>
                     <div class="Center">
-                        <img src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px"/>
-                        <input type="file" name="file_upload" id="file_upload" />
+                        <?php if (isset($selected_frame)):?>
+                            <img src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px"/>
+                            <input type="file" name="file_upload" id="file_upload" />
+                        <?php endif;?>
                     </div>
                     <div class="Right">
                         <ul style="list-style-type: none">
@@ -59,11 +64,13 @@
                             </li>  
                         </ul>
                     </div>
-<!--                    <div id="Pattern">
+                    <div id="Pattern">
                         <?php foreach ($frame_list as $frame):?>
-                        <div class="PatternImage"><img src="<?php echo base_url().$frame->pattern;?>" height="100%"/></div>
+                        <div class="PatternImage <?php if ($frame->id == $selected_frame->id) {
+                            echo "Selected";
+                        }?>"><img src="<?php echo base_url().$frame->pattern;?>" width="100%"></div>
                         <?php endforeach;?>                       
-                    </div>-->
+                    </div>
                     <div id="Next">
                         <img src="<?php echo base_url()?>images/frame/next.png"/>
                     </div>

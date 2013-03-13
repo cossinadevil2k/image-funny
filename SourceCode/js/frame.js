@@ -4,6 +4,11 @@ $(document).ready(function(){
         autoHideScrollbar: false
     });
     
+    $(".Category").click(function(){
+        var id = this.id;
+        window.location = base_url + 'tao-khung/' + id;
+    });
+    
     $("#Next").live('click', function(){
         $("#Pattern").mCustomScrollbar("scrollTo","last");
     });
@@ -14,6 +19,7 @@ $(document).ready(function(){
     
     $('#file_upload').uploadify({
         'fileSizeLimit' : '100MB',
+        'buttonText': 'Tải ảnh lên',
         'swf'      : '/uploadify/uploadify.swf',
         'uploader' : '/uploadify/uploadify.php',
         'onUploadSuccess' : function(file, data, response) {

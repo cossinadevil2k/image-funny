@@ -12,20 +12,31 @@ class Frame extends CI_Controller{
         $this->load->model('frame_model');
     } 
     
-    public function index($frame_id = 1){
-        if (($frame_id != 0) && (is_numeric($frame_id))){
-            $category_arr = $this->category_model->get(null, null, null, TRUE);
-            $selected_frame = $this->frame_model->get($frame_id);
-            $frame_list = $this->frame_model->get_by_category($selected_frame[0]->category_id, 10, 0);
-
-            $arr['category_arr'] = $category_arr;
-            $arr['selected_frame'] = $selected_frame[0];
-            $arr['frame_list'] = $frame_list;
-            $arr['category_enable'] = $selected_frame[0]->category_id;
-            $this->load->view('frame', $arr);
+    public function index($category_id = 0, $frame_id = 0){
+        $category_arr = $this->category_model->get(null, null, null, TRUE);
+        if ($category_id !=0){            
+            $frame_list = $this->frame_model->get_by_category($category_id, 10, 0);    
+            $arr['category_enable'] = $category_id;
         }else{
-            redirect('/tao-khung');
+            $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
+            $arr['category_enable'] = $category_arr[0]['id'];
         }
+        
+        if ($frame_id != 0){
+            $selected_frame = $this->frame_model->get($frame_id);
+            $arr['selected_frame'] = $selected_frame[0];
+            $arr['category_enable'] = $selected_frame[0]->category_id;
+        }else{
+            if (!empty($frame_list)){
+                $selected_frame = $frame_list[0];
+                $arr['selected_frame'] = $selected_frame;                 
+            }            
+        } 
+        
+        $arr['category_arr'] = $category_arr;        
+        $arr['frame_list'] = $frame_list;
+        
+        $this->load->view('frame', $arr);
     }
     
     public function create_frame($frame_id = 1){
