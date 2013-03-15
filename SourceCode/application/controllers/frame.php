@@ -48,7 +48,11 @@ class Frame extends CI_Controller{
         $selected_frame = $this->frame_model->get($frame_id);       
         $arr_frame_detail = $this->frame_detail_model->get($frame_id);
         $result = ImageLib::AddFrameArray($image_path,  './'.$selected_frame[0]->link, $arr_frame_detail);
-        echo $result;
+        if ($result === ""){
+            echo json_encode(array('status' => 'error'));
+        }else{
+            echo json_encode(array('status' => 'success', 'image_path' => $result));
+        }
         die();
     }
 }
