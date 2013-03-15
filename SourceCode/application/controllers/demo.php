@@ -11,10 +11,10 @@ class Demo extends CI_Controller {
      * add 1 frame đơn giản
      */
     function oneFrame() {
-        $image = './images/a.png';
+        $image = './images/a.jpg';
         $frame = './images/0001.png';
 
-        $result[] = ImageLib::AddFrame($image, $frame, 272, 272, 333, 325, 0);
+        $result[] = ImageLib::AddFrame($image, $frame, 272, 272, 333, 325, 0,145,433,879,847);
         $data['source'] = base_url().$image;
         $data['result'] = $result;
         $this->load->view('demo_index', $data);

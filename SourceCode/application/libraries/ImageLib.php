@@ -27,18 +27,19 @@ class ImageLib {
     var $createFolders = true;
     var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
     var $imageQuality = 100;
+    var $logoPath = './images/common/waterMarkTaoAnh.png';
 
     /**
      * Add frame for a image as simple
      * @param string $image // Đường dẫn đến ảnh
-     * @param string $frame //Đường dẫn đến ảnh
+     * @param string $frame //Đường dẫn đến frame
      * @param int $x
      * @param int $y
      * @param int $width
      * @param int $height
      * @param int $degrees
      */
-    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees) {
+    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees, $crop_x, $crop_y, $crop_width, $crop_height, $resize_by = '') {
         $frameLayer = ImageWorkshop::initFromPath($frame);
         $w = $frameLayer->getWidth();
         $h = $frameLayer->getHeight();
@@ -46,7 +47,23 @@ class ImageLib {
         $document = ImageWorkshop::initVirginLayer($w, $h);
 
         $imageToAdd = ImageWorkshop::initFromPath($image);
-        $imageToAdd->resizeInPixel($width, $height);
+        //Crop        
+        $position = "LT";
+        $imageToAdd->cropInPixel($crop_width, $crop_height, $crop_x, $crop_y, $position);
+
+        //Resize
+        switch ($resize_by) {
+            case 'width':
+                $imageToAdd->resizeInPixel($width, $w * $h / $width);
+                break;
+            case 'height':
+                $imageToAdd->resizeInPixel($width, $w * $h / $height);
+                break;
+            default :
+                $imageToAdd->resizeInPixel($width, $height);
+                break;
+        }
+
         $imageToAdd->rotate($degrees);
 
         $document->addLayer(1, $imageToAdd, $x - $width / 2, $y - $height / 2, 'LT');
@@ -56,6 +73,11 @@ class ImageLib {
         $data = new DateTime();
         $imageLib = new ImageLib();
         $filename = $data->getTimestamp() . '.png';
+
+        $logoLayer = ImageWorkshop::initFromPath($imageLib->logoPath);
+        //$logoLayer->resizeInPixel(105,30);
+        //$logoLayer->rotate(-45);
+        $document->addLayer(3,$logoLayer, 0,0,'RB');
         $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
 
         $session_id = $imageLib->CI->session->userdata('session_id');
@@ -72,10 +94,10 @@ class ImageLib {
     /**
      * Add image to many frame
      * @param string $image // Đường dẫn đến ảnh
-     * @param string $frame // Đường dẫn đến ảnh
-     * @param array $array array Frame object
+     * @param string $frame // Đường dẫn đến frame
+     * @param array $array array Frame object     * 
      */
-    public static function AddFrameArray($image, $frame, $array = array()) {
+    public static function AddFrameArray($image, $frame, $array = array(), $crop_x, $crop_y, $crop_width, $crop_height, $resize_by = '') {
         try {
             $frameLayer = ImageWorkshop::initFromPath($frame);
             $w = $frameLayer->getWidth();
@@ -84,6 +106,11 @@ class ImageLib {
             $document = ImageWorkshop::initVirginLayer($w, $h);
 
             $imageToAdd = ImageWorkshop::initFromPath($image);
+            //Crop        
+            $position = "LT";
+            $imageToAdd->cropInPixel($crop_width, $crop_height, $crop_x, $crop_y, $position);
+
+            //Resize
             foreach ($array as $frameItem) {
                 $x = $frameItem->x;
                 $y = $frameItem->y;
@@ -92,7 +119,17 @@ class ImageLib {
                 $degrees = $frameItem->degree;
 
                 $temp = clone $imageToAdd;
-                $temp->resizeInPixel($width, $height);
+                switch ($resize_by) {
+                    case 'width':
+                        $imageToAdd->resizeInPixel($width, $w * $h / $width);
+                        break;
+                    case 'height':
+                        $imageToAdd->resizeInPixel($width, $w * $h / $height);
+                        break;
+                    default :
+                        $imageToAdd->resizeInPixel($width, $height);
+                        break;
+                }
                 $temp->rotate($degrees);
                 $document->addLayer(1, $temp, $x - $width / 2, $y - $height / 2, 'LT');
             }
@@ -115,7 +152,7 @@ class ImageLib {
 
             return base_url() . $imageLib->dirPath . '/' . $filename;
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            echo 'Caught exception: ', $e->getMessage(), "\n";
             return "";
         }
     }
