@@ -29,7 +29,16 @@ jQuery(document).ready(function(){
 	
     //Brow server image upload	
     jQuery('#imageUpload').popupWindow({ 
-        windowURL:'/elfinder/standalone-elfinder.php?mode=image', 
+        windowURL:'/elfinder/standalone-elfinder.php?mode=image&type=common', 
+        windowName:'Filebrowser',
+        height:490, 
+        width:950,
+        centerScreen:1
+    });
+    
+    //Brow server image upload	
+    jQuery('#imageUpload_patern').popupWindow({ 
+        windowURL:'/elfinder/standalone-elfinder.php?mode=image&type=patern', 
         windowName:'Filebrowser',
         height:490, 
         width:950,

@@ -68,6 +68,14 @@
                     <button id="imageUpload" class="submit radius2" >Chọn khung ảnh</button>
                 </div>
             </div>
+            <div class="widgetbox">
+                <div class="title"><h2 class="general"><span>Khung ảnh mẫu</span></h2></div>
+                <div class="widgetcontent" style="display: block;">
+                    <input type="hidden" id="featured_image_patern" name="hdffeatured_image_patern" value="<?php echo $frame->pattern;?>" >
+                    <img src="<?php echo $frame->pattern;?>" id="featured_image_src_patern" width="100%" height="auto" style="margin-bottom:10px;" />
+                    <button id="imageUpload_patern" class="submit radius2" >Chọn khung ảnh mẫu</button>
+                </div>
+            </div>
         </div>
     </form>              
 </div><!--content-->

@@ -17,14 +17,15 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(),$frame_width,$frame_height) {
+    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(),$frame_width,$frame_height,$pattern) {
         $frame = array(
             'name' => $name,
             'description' => $description,
             'link' => $link,
             'category_id' => $category_id,
             'width'=>$frame_width,
-            'height'=>$frame_height
+            'height'=>$frame_height,
+            'pattern'=>$pattern
         );
         $this->db->insert('tbl_frame', $frame);
         if ($this->db->affected_rows() > 0) {
@@ -131,14 +132,15 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function edit($id, $name, $description, $link, $category_id,$frame_width,$frame_height) {
+    function edit($id, $name, $description, $link, $category_id,$frame_width,$frame_height,$pattern) {
         $arr = array(
             'name' => $name,
             'description' => $description,
             'link' => $link,
             'category_id' => $category_id,
             'width'=>$frame_width,
-            'height'=>$frame_height
+            'height'=>$frame_height,
+            'pattern'=>$pattern
         );
         $this->db->where('id', $id);
         $this->db->update('tbl_frame', $arr);
