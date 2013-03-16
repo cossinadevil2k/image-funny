@@ -17,12 +17,14 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array()) {
+    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(),$frame_width,$frame_height) {
         $frame = array(
             'name' => $name,
             'description' => $description,
             'link' => $link,
-            'category_id' => $category_id
+            'category_id' => $category_id,
+            'width'=>$frame_width,
+            'height'=>$frame_height
         );
         $this->db->insert('tbl_frame', $frame);
         if ($this->db->affected_rows() > 0) {
@@ -51,7 +53,7 @@ class Frame_model extends CI_Model {
      * @return type
      */
     function get($id = 0, $name = '', $limit = -1, $offset = 10) {
-        $this->db->select('id, name, description, link, category_id, pattern');
+        $this->db->select('id, name, description, link, category_id, pattern,width,height');
         $this->db->from('tbl_frame');
 
         if ($id == 0) {
@@ -80,7 +82,7 @@ class Frame_model extends CI_Model {
      * @return type
      */
     function get_by_category($category_id, $limit = -1, $offset = 0) {
-        $this->db->select('id, name, description, link, category_id, pattern');
+        $this->db->select('id, name, description, link, category_id, pattern,width,height');
         $this->db->from('tbl_frame');
 
         $this->db->where('category_id', $category_id);
@@ -100,7 +102,7 @@ class Frame_model extends CI_Model {
      * @return type
      */
     function get_pattern_by_category($category_id, $limit = 0, $offset = 0){
-        $this->db->select('id, name, description, link, category_id, pattern');
+        $this->db->select('id, name, description, link, category_id, pattern,width,height');
         $this->db->from('tbl_frame');
 
         $this->db->where('category_id', $category_id);
@@ -129,12 +131,14 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function edit($id, $name, $description, $link, $category_id) {
+    function edit($id, $name, $description, $link, $category_id,$frame_width,$frame_height) {
         $arr = array(
             'name' => $name,
             'description' => $description,
             'link' => $link,
-            'category_id' => $category_id
+            'category_id' => $category_id,
+            'width'=>$frame_width,
+            'height'=>$frame_height
         );
         $this->db->where('id', $id);
         $this->db->update('tbl_frame', $arr);

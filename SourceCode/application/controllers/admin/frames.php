@@ -1,5 +1,5 @@
 <?php
-
+require_once('./PHPImageWorkshop/ImageWorkshop.php');
 /**
  * @author HungPV <phamvanhung0818@gmail.com>
  * @version 1.0.0
@@ -58,6 +58,9 @@ class Frames extends CI_Controller {
             $desc = $this->input->post('txtDescription');
             $link = $this->input->post('hdffeatured_image');
             $cat_id = $this->input->post('ddlCat');
+            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath(".".$link);
+            $frame_width = $image->getWidth();
+            $frame_height = $image->getHeight();            
             
             $x = $this->input->post("txtX");
             $y = $this->input->post("txtY");
@@ -65,7 +68,7 @@ class Frames extends CI_Controller {
             $height = $this->input->post("txtHeight");
             $degree = $this->input->post("txtDegree");
             
-            $this->Frame_model->add($name, $desc, $link, $cat_id,$x,$y,$width,$height,$degree);
+            $this->Frame_model->add($name, $desc, $link, $cat_id,$x,$y,$width,$height,$degree,$frame_width,$frame_height);
             redirect('admin/frames');            
         }
         $data['lstCategory'] = $this->Category_model->get();
@@ -92,8 +95,11 @@ class Frames extends CI_Controller {
             $desc = $this->input->post('txtDescription');
             $link = $this->input->post('hdffeatured_image');
             $cat_id = $this->input->post('ddlCat');
+            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath(".".$link);
+            $frame_width = $image->getWidth();
+            $frame_height = $image->getHeight();
 
-            $this->Frame_model->edit($id,$name, $desc, $link, $cat_id);
+            $this->Frame_model->edit($id,$name, $desc, $link, $cat_id,$frame_width,$frame_height);
             redirect('admin/frames');
         }
         

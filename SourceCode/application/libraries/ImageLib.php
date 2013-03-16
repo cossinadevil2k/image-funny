@@ -23,7 +23,7 @@ class ImageLib {
         $this->CI->load->database();
     }
 
-    var $dirPath = 'resources/users';
+    var $dirPath = './elfinder/files/resources/users';
     var $createFolders = true;
     var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
     var $imageQuality = 100;
@@ -39,7 +39,7 @@ class ImageLib {
      * @param int $height
      * @param int $degrees
      */
-    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees, $crop_x, $crop_y, $crop_width, $crop_height, $resize_by = '') {
+    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees, $crop_x, $crop_y, $crop_width, $crop_height,$resize_by = '') {
         $frameLayer = ImageWorkshop::initFromPath($frame);
         $w = $frameLayer->getWidth();
         $h = $frameLayer->getHeight();
