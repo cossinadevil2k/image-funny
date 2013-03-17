@@ -51,10 +51,14 @@ class Frame extends CI_Controller{
     public function create_frame(){
         $frame_id = $this->input->post('frame_id');
         $image_path = $this->input->post('image_path');
+        $crop_x = $this->input->post('x');
+        $crop_y = $this->input->post('y');
+        $crop_width = $this->input->post('width');
+        $crop_height = $this->input->post('height');
 
         $selected_frame = $this->frame_model->get($frame_id);       
         $arr_frame_detail = $this->frame_detail_model->get($frame_id);
-        $result = ImageLib::AddFrameArray($image_path,  './'.$selected_frame[0]->link, $arr_frame_detail);
+        $result = ImageLib::AddFrameArray($image_path,  './'.$selected_frame[0]->link, $arr_frame_detail, $crop_x, $crop_y, $crop_width, $crop_height);
         if ($result === ""){
             echo json_encode(array('status' => 'error'));
         }else{
@@ -71,6 +75,21 @@ class Frame extends CI_Controller{
         }else{
             echo json_encode(array('status' => 'error'));
         }
+    }
+
+    public function download(){
+        $image_path = $this->input->get('image');
+        header('Content-Description: File Transfer');
+        header("Content-type: application/octet-stream");
+        header('Content-Disposition: attachment; filename="'.basename($image_path).'"');
+        header('Content-Transfer-Encoding: binary');
+        header('Connection: Keep-Alive');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header('Pragma: public');
+        flush();    
+        readfile($image_path);
+        die();
     }
 }
 

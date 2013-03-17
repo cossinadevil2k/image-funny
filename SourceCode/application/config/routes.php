@@ -43,6 +43,7 @@ $route['trang-chu'] = "home";
 $route['tao-khung'] = 'frame';
 $route['tao-khung/(:num)'] = 'frame/index/$1';
 $route['tao-khung/(:num)/(:num)'] = 'frame/index/$1/$2';
+$route['tao-khung/(:any)'] = 'frame/$1';
 $route['tao-facebook-cover'] = 'facebook';
 $route['tao-facebook-cover/(:num)'] = 'facebook/index/$1';
 $route['404_override'] = '';

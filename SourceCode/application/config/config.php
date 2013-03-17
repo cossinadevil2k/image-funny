@@ -360,5 +360,8 @@ $config['proxy_ips'] = '';
 //Number of Patterns Over One Category
 $config['pattern_number'] = 14;
 
+//Name of Download Image
+$config['image_name'] = "taoanh_net";
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

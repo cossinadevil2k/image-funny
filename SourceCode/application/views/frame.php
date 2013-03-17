@@ -6,7 +6,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>uploadify/uploadify.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>uploadifive/uploadifive.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>jcrop/css/jquery.Jcrop.css" />
@@ -14,13 +14,13 @@
         <script>
             var base_url = '<?php echo base_url();?>';
             var selected_id = '<?php if (isset($selected_frame)) echo $selected_frame->id?>';
-        </script>
+        </script>        
         <script type="text/javascript" src="<?php echo base_url()?>jcrop/js/jquery.Jcrop.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.mCustomScrollbar.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url()?>uploadify/jquery.uploadify.js"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>uploadifive/jquery.uploadifive.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>        
     </head>
     <body>
@@ -51,15 +51,16 @@
                         </ul>
                     </div>
                     <div class="Center">
-                        <?php if (isset($selected_frame)):?>
-                        <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px"/>
+                        <?php if (isset($selected_frame)):?>                        
+                            <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px" />
                             <input type="file" name="file_upload" id="file_upload" />
+                            
                         <?php endif;?>
                     </div>
                     <div class="Right">
                         <ul style="list-style-type: none">
                             <li>
-                                <div><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
+                                <div id="download"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
                             </li>
                             <li>
                                 <div><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
@@ -77,7 +78,7 @@
                         <div frame_id ="<?php echo $frame->id?>" id="PatternImage<?php echo $frame->id?>" class="PatternImage<?php if ($frame->id == $selected_frame->id) {
                             echo " Selected";
                         }?>">
-                            <img src="<?php echo base_url().$frame->pattern;?>" width="100%">
+                            <img src="<?php echo base_url().$frame->pattern;?>" width="100%" image_w="<?php echo $frame->width?>" image_h="<?php echo $frame->height?>">
                             <?php foreach ($frame_detail_list as $frame_details):?>
                                 <?php foreach ($frame_details as $frame_detail):?>
                                     <?php if ($frame_detail->frame_id == $frame->id):?>
@@ -100,12 +101,13 @@
                         <input type="hidden" id="y"/>
                         <input type="hidden" id="w"/>
                         <input type="hidden" id="h"/>
-                        <a id="selectBtn" class="fancybox-buttons" href="#" style="position: absolute; top:10px; z-index: 1000">Chọn</a>
+                        <div id="selectBtn" class="fancybox-buttons" href="#" style="position: absolute; top:10px; z-index: 1000">Chọn</div>
                     </div>
                 </div>
-            </div>            
+            </div>      
+            <input id="fileupload" type="file" name="files[]" data-url="/tao-khung/upload" multiple>
             <div class="Footer">
-
+                
             </div>
         </div>        
     </body>

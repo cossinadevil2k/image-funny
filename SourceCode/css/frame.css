@@ -100,9 +100,21 @@
     opacity: 2;
 }
 .addButton{
-    /*background-image: url('/images/common/addButton.png');*/
     width: 30px;
     height: 30px;
     z-index: 1000;
     position: absolute;
+}
+
+.addButton:hover{
+    cursor: pointer;
+}
+#selectBtn:hover{
+    cursor: pointer;
+}
+.uploadifive-queue{
+    display: none !important;
+}
+#download:hover{
+    cursor: pointer;
 }

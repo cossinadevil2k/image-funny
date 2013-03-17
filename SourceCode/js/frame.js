@@ -1,6 +1,11 @@
+
 $(document).ready(function(){
-    var selected_width = $("#selected_frame").width();
-    var selected_height = $("#selected_frame").height();
+    var jcrop_api;
+    var width = $("#selected_frame").width();
+    var height = $("#selected_frame").height();
+    var imageFile;
+    insertAddButtonImage($(".PatternImage.Selected"));    
+    
     $("#Pattern").mCustomScrollbar({
         horizontalScroll:true,
         autoHideScrollbar: false
@@ -27,62 +32,85 @@ $(document).ready(function(){
         $("#selected_frame").attr('src', $('#PatternImage'+frame_id+' img').attr('src'));
         $("#selected_frame").attr('frame_id', selected_id);
         $(".addButton").remove();
-        $('#PatternImage'+frame_id+ ' input[type="hidden"]').each(function(){            
-            var x = $(this).attr('x');
-            var y = $(this).attr('y');
-            var width = 1772;
-            var height = 1181;
-            var style = 'top: ' + (y*selected_height/height - 30) + 'px; left: ' + (x*selected_width/width + 145) + 'px;';
-//            alert(style);
-            $(".Center").append('<a class="addButton" href="#" style="position: absolute;' + style+'"><img src="http:\/\/local.image.vn\/images\/common\/addButton.png" width="60px"\/></a>');           
-        });
+        insertAddButtonImage(this);
     });
     
     $("#selectBtn").live('click', function(){
-        alert($("#x").val());
+        $.fancybox.close();
+        $.blockUI();
+        $.ajax({
+                type: "post",
+                url : base_url + 'tao-khung/create_frame',
+                dataType: "json",
+                data: {
+                    'frame_id': selected_id,
+                    'image_path': './uploads/'+ imageFile.name,
+                    'x': $('#x').val(),
+                    'y': $('#y').val(),
+                    'width' : $('#w').val(),
+                    'height': $('#h').val()
+                },
+                success: function(data){
+                    $.unblockUI();
+                    $("#selected_frame").attr('src', data.image_path);
+                },
+                complete: function(data){
+                                       
+                }
+            });
+        
     });
-
-    $('#file_upload').uploadify({
-        'fileSizeLimit' : '300MB',
+    
+    $('#file_upload').uploadifive({
+        'fileSizeLimit' : '10MB',
         'buttonText': 'Tải ảnh lên',
-        'swf'      : '/uploadify/uploadify.swf',
-        'uploader' : '/uploadify/uploadify.php',
+        'multi': false,
+        'removeCompleted': true,
+        'fileType'  : 'image',
+        'uploadScript'  : '/uploadifive/uploadifive.php',
         'onUploadStart':function(){
             $.blockUI();
             $("#load_more").show();
         },
-        'onUploadSuccess' : function(file, data, response) {
-            $("#target").attr('src', base_url+'/uploads/'+ file.name);
+        'onUploadComplete' : function(file, data) {
+            imageFile = file;
+            $("#target").attr('src', base_url+'uploads/'+ file.name);
+            $(".jcrop-holder").find('img').attr('src', base_url+'uploads/'+ file.name);
             $.fancybox({
                 'closeBtn' : true,
                 'padding' : 0,
-                'autoDimensions': false,
-                'width': 'auto',
-                'autoScroll': false,
+                'autoDimensions': true,
+                'scrolling': 'auto',
                 'href' : '#cropDiv'
             });
             $("#target").Jcrop({
-                aspectRatio: 16 / 9,
+                aspectRatio: 6/10,
+                setSelect: [10, 10, 60, 100],
                 onSelect: getImageInformation
+            }, function(){
+                jcrop_api = this;
             });
-//            $.ajax({
-//                type: "post",
-//                url : base_url + 'frame/create_frame',
-//                dataType: "json",
-//                data: {
-//                    'frame_id': selected_id,
-//                    'image_path': './uploads/'+ file.name
-//                },
-//                success: function(data){                    
-//                    $("#selected_frame").attr('src', data.image_path);
-//                    
-//                },
-//                complete: function(data){
-//                    $.unblockUI();
-//                }
-//            });
         }
-        // Put your options here
+    });
+    
+    function insertAddButtonImage(object){
+        selected_width = $(object).find('img').attr('image_w');
+        selected_height = $(object).find('img').attr('image_h');
+        $('#PatternImage'+selected_id+ ' input[type="hidden"]').each(function(){            
+            var x = $(this).attr('x');
+            var y = $(this).attr('y');  
+            var style = 'top: ' + (y*height/selected_height - 30) + 'px; left: ' + (x*width/selected_width + 145) + 'px;';
+            $(".Center").append('<a class="addButton" style="position: absolute;' + style+'"><img src="'+base_url+'images/common/addButton.png" width="60px"/></a>');           
+        });
+    }
+    
+    $("#download").live('click', function(){
+        temp = $("#selected_frame").attr('src')
+        path = temp.split(base_url);
+        $.each(path, function(key, value){
+            alert(value);
+        });
+        window.location = base_url + 'tao-khung/download?image='+path[1]+'' ;
     });
 });
 
