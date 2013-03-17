@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    var selected_width = $("#selected_frame").width();
+    var selected_height = $("#selected_frame").height();
     $("#Pattern").mCustomScrollbar({
         horizontalScroll:true,
         autoHideScrollbar: false
@@ -24,6 +26,16 @@ $(document).ready(function(){
         selected_id = frame_id;
         $("#selected_frame").attr('src', $('#PatternImage'+frame_id+' img').attr('src'));
         $("#selected_frame").attr('frame_id', selected_id);
+        $(".addButton").remove();
+        $('#PatternImage'+frame_id+ ' input[type="hidden"]').each(function(){            
+            var x = $(this).attr('x');
+            var y = $(this).attr('y');
+            var width = 1772;
+            var height = 1181;
+            var style = 'top: ' + (y*selected_height/height - 30) + 'px; left: ' + (x*selected_width/width + 145) + 'px;';
+//            alert(style);
+            $(".Center").append('<a class="addButton" href="#" style="position: absolute;' + style+'"><img src="http:\/\/local.image.vn\/images\/common\/addButton.png" width="60px"\/></a>');           
+        });
     });
     
     $("#selectBtn").live('click', function(){
@@ -44,7 +56,9 @@ $(document).ready(function(){
             $.fancybox({
                 'closeBtn' : true,
                 'padding' : 0,
-                'autoScroll': true,
+                'autoDimensions': false,
+                'width': 'auto',
+                'autoScroll': false,
                 'href' : '#cropDiv'
             });
             $("#target").Jcrop({

@@ -55,7 +55,9 @@
                         <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px"/>
                             <input type="file" name="file_upload" id="file_upload" />
                         <?php endif;?>
+<!--                            <div id="addButtonDiv"></div>-->
                     </div>
+                    <!--<div id="addButtonDiv" style="width: 720px; height: 405px; position: absolute; z-index: 100"></div>-->
                     <div class="Right">
                         <ul style="list-style-type: none">
                             <li>

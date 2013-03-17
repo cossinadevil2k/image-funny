@@ -5,7 +5,7 @@
  *
  * @author Tan
  */
-class Frame extends CI_Controller{
+class Facebook extends CI_Controller{
     public function __construct() {
         parent::__construct();
         $this->load->model('category_model');
@@ -45,32 +45,7 @@ class Frame extends CI_Controller{
         $arr['frame_list'] = $frame_list;
         $arr['frame_detail_list'] = $frame_detail;
         
-        $this->load->view('frame', $arr);
-    }
-    
-    public function create_frame(){
-        $frame_id = $this->input->post('frame_id');
-        $image_path = $this->input->post('image_path');
-
-        $selected_frame = $this->frame_model->get($frame_id);       
-        $arr_frame_detail = $this->frame_detail_model->get($frame_id);
-        $result = ImageLib::AddFrameArray($image_path,  './'.$selected_frame[0]->link, $arr_frame_detail);
-        if ($result === ""){
-            echo json_encode(array('status' => 'error'));
-        }else{
-            echo json_encode(array('status' => 'success', 'image_path' => $result));
-        }
-        die();
-    }
-    
-    public function get_frame_detail(){
-        $frame_id = $this->input->post('frame_id');
-        $arr_frame_detail = $this->frame_detail_model->get($frame_id);
-        if ($arr_frame_detail){
-            echo json_encode(array('status' => 'success', 'frame_detail' => $arr_frame_detail));
-        }else{
-            echo json_encode(array('status' => 'error'));
-        }
+        $this->load->view('facebook', $arr);
     }
 }
 

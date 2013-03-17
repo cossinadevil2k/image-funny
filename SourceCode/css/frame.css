@@ -99,3 +99,10 @@
 .Selected{
     opacity: 2;
 }
+.addButton{
+    /*background-image: url('/images/common/addButton.png');*/
+    width: 30px;
+    height: 30px;
+    z-index: 1000;
+    position: absolute;
+}
