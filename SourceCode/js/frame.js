@@ -4,8 +4,8 @@ $(document).ready(function(){
     var width = $("#selected_frame").width();
     var height = $("#selected_frame").height();
     var imageFile;
-    insertAddButtonImage($(".PatternImage.Selected"));    
-    
+//    insertAddButtonImage($(".PatternImage.Selected"));  
+
     $("#Pattern").mCustomScrollbar({
         horizontalScroll:true,
         autoHideScrollbar: false
@@ -83,9 +83,10 @@ $(document).ready(function(){
                 'scrolling': 'auto',
                 'href' : '#cropDiv'
             });
+            aspect = $(".PatternImage.Selected input").first().attr('aspect');
             $("#target").Jcrop({
-                aspectRatio: 6/10,
-                setSelect: [10, 10, 60, 100],
+                aspectRatio: aspect,
+                setSelect: [10, 10, 60, 60/aspect],
                 onSelect: getImageInformation
             }, function(){
                 jcrop_api = this;
@@ -94,14 +95,14 @@ $(document).ready(function(){
     });
     
     function insertAddButtonImage(object){
-        selected_width = $(object).find('img').attr('image_w');
-        selected_height = $(object).find('img').attr('image_h');
-        $('#PatternImage'+selected_id+ ' input[type="hidden"]').each(function(){            
-            var x = $(this).attr('x');
-            var y = $(this).attr('y');  
-            var style = 'top: ' + (y*height/selected_height - 30) + 'px; left: ' + (x*width/selected_width + 145) + 'px;';
-            $(".Center").append('<a class="addButton" style="position: absolute;' + style+'"><img src="'+base_url+'images/common/addButton.png" width="60px"/></a>');           
-        });
+//        selected_width = $(object).find('img').attr('image_w');
+//        selected_height = $(object).find('img').attr('image_h');
+//        $('#PatternImage'+selected_id+ ' input[type="hidden"]').each(function(){            
+//            var x = $(this).attr('x');
+//            var y = $(this).attr('y');  
+//            var style = 'top: ' + (y*height/selected_height - 30) + 'px; left: ' + (x*width/selected_width + 145) + 'px;';
+//            $(".Center").append('<a class="addButton" style="position: absolute;' + style+'"><img src="'+base_url+'images/common/addButton.png" width="60px"/></a>');           
+//        });
     }
     
     $("#download").live('click', function(){

@@ -58,7 +58,8 @@ class Frame extends CI_Controller{
 
         $selected_frame = $this->frame_model->get($frame_id);       
         $arr_frame_detail = $this->frame_detail_model->get($frame_id);
-        $result = ImageLib::AddFrameArray($image_path,  './'.$selected_frame[0]->link, $arr_frame_detail, $crop_x, $crop_y, $crop_width, $crop_height);
+
+        $result = ImageLib::AddFrame($image_path, $selected_frame[0]->link, $arr_frame_detail[0]->x, $arr_frame_detail[0]->y, $arr_frame_detail[0]->width, $arr_frame_detail[0]->height, $arr_frame_detail[0]->degree, $crop_x, $crop_y, $crop_width, $crop_height);
         if ($result === ""){
             echo json_encode(array('status' => 'error'));
         }else{

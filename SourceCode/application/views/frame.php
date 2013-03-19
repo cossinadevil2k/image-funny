@@ -82,7 +82,7 @@
                             <?php foreach ($frame_detail_list as $frame_details):?>
                                 <?php foreach ($frame_details as $frame_detail):?>
                                     <?php if ($frame_detail->frame_id == $frame->id):?>
-                                        <input type="hidden" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>"/>
+                                        <input type="hidden" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>" aspect="<?php echo $frame_detail->width/$frame_detail->height?>"/>
                                     <?php endif;?>
                                 <?php endforeach;?>
                             <?php endforeach;?>
