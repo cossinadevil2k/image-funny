@@ -39,7 +39,7 @@ class ImageLib {
      * @param int $height
      * @param int $degrees
      */
-    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees, $crop_x, $crop_y, $crop_width, $crop_height,$resize_by = '') {
+    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees, $crop_x, $crop_y, $crop_width, $crop_height, $resize_by = '') {
         $frameLayer = ImageWorkshop::initFromPath($frame);
         $w = $frameLayer->getWidth();
         $h = $frameLayer->getHeight();
@@ -77,7 +77,7 @@ class ImageLib {
         $logoLayer = ImageWorkshop::initFromPath($imageLib->logoPath);
         //$logoLayer->resizeInPixel(105,30);
         //$logoLayer->rotate(-45);
-        $document->addLayer(3,$logoLayer, 0,0,'RB');
+        $document->addLayer(3, $logoLayer, 0, 0, 'RB');
         $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
 
         $session_id = $imageLib->CI->session->userdata('session_id');
@@ -121,13 +121,13 @@ class ImageLib {
                 $temp = clone $imageToAdd;
                 switch ($resize_by) {
                     case 'width':
-                        $imageToAdd->resizeInPixel($width, $w * $h / $width);
+                        $temp->resizeInPixel($width, $w * $h / $width);
                         break;
                     case 'height':
-                        $imageToAdd->resizeInPixel($width, $w * $h / $height);
+                        $temp->resizeInPixel($width, $w * $h / $height);
                         break;
                     default :
-                        $imageToAdd->resizeInPixel($width, $height);
+                        $temp->resizeInPixel($width, $height);
                         break;
                 }
                 $temp->rotate($degrees);
@@ -155,6 +155,43 @@ class ImageLib {
             echo 'Caught exception: ', $e->getMessage(), "\n";
             return "";
         }
+    }
+
+    public static function AddWaterMark($imagePath, $array = array()) {
+        $document = ImageWorkshop::initFromPath($imagePath);
+
+        foreach ($array as $blockDetail) {
+            $type = $blockDetail->type;
+            if ($type == 'tBlock') {
+                $blockText = $blockDetail->blockText;
+                $blockFont = $blockDetail->blockFont;
+                $blockFontSize = $blockDetail->blockFontSize;
+                $blockStyle = $blockDetail->blockStyle;
+                $blockTextDecoration = $blockDetail->blockTextDecoration;
+                $blockColor = $blockDetail->blockColor;
+                $blockLeft = $blockDetail->blockLeft;
+                $blockTop = $blockDetail->blockTop;
+                $blockDepth = $blockDetail->blockDepth;
+
+                $waterTextLayer = ImageWorkshop::initTextLayer($blockText, './system/fonts/arial.ttf', 12, $blockColor, 0);
+                $document->addLayer($blockDepth, $waterTextLayer,$blockLeft,$blockTop,'LT');
+            }
+            if ($type == 'cBlock') {
+                $blockColor = $blockDetail->blockColor;
+                $blockLeft = $blockDetail->blockLeft;
+                $blockTop = $blockDetail->blockTop;
+                $blockWidth = $blockDetail->blockWidth;
+                $blockHeight = $blockDetail->blockHeight;
+                $blockDepth = $blockDetail->blockDepth;
+            }
+        }
+
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.png';
+        $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
+        
+        return base_url() . $imageLib->dirPath . '/' . $filename;
     }
 
     /**

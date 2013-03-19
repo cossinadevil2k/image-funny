@@ -42,10 +42,41 @@ class Demo extends CI_Controller {
         $this->load->view('demo_index', $data);
     }
 
-    function session()
+    function watermark()
     {
+         $this->load->view('demo_watermark');       
+    }
+    
+    function createWaterMark()
+    {
+        $detail = $this->input->post('detail');
+        $details = explode("^", $detail);
+        $arr = array();
+        foreach ($details as $watermark)
+        {
+            $watermarks = explode("|", $watermark);
+            if($watermarks[0]=='tBlock')
+            {
+                $blockDetail = new stdClass();
+                
+                $blockDetail->type = 'tBlock';
+                $blockDetail->blockText = $watermarks[1];                
+                $blockDetail->blockFont= $watermarks[2];
+                $blockDetail->blockFontSize= $watermarks[3];
+                $blockDetail->blockStyle= $watermarks[4];
+                $blockDetail->blockTextDecoration= $watermarks[5];
+                $blockDetail->blockColor= substr($watermarks[7],1,strlen($watermarks[7])-1);
+                $blockDetail->blockLeft= $watermarks[8];
+                $blockDetail->blockTop= $watermarks[9];
+                $blockDetail->blockDepth= $watermarks[10];
+                
+                $arr[] = $blockDetail;
+            }
+        }
         
+        $a = ImageLib::AddWaterMark('./images/anh_mau.jpg', $arr);
         
+        echo json_encode($a);
     }
 }
 

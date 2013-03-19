@@ -6,6 +6,10 @@
     font-family: uvnvan_bold;
     src:  url('/fonts/uvnvan_0.ttf') format('truetype');
 }
+@font-face{
+    font-family: im_arial;
+    src:  url('/fonts/arial.ttf') format('truetype');
+}
 body{
     text-align: center;
     font-family: uvnvan_bold;
