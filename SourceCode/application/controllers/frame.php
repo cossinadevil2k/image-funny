@@ -77,6 +77,16 @@ class Frame extends CI_Controller{
             echo json_encode(array('status' => 'error'));
         }
     }
+    
+    public function get_image_dimensions(){
+        $path = $this->input->post('image_path');
+        $image_info = getimagesize($path);
+        $temp = explode('"', $image_info[3]);
+        $dimensions['width'] = $temp[1];
+        $dimensions['height']= $temp[3];
+        echo json_encode($dimensions);
+        die();
+    }
 
     public function download(){
         $image_path = $this->input->get('image');

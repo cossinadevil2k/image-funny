@@ -1,8 +1,10 @@
 
 $(document).ready(function(){
-    var jcrop_api;
-    var width = $("#selected_frame").width();
-    var height = $("#selected_frame").height();
+    var jcrop_api = null;
+    var default_width = 600;
+    var default_height = 400;
+    var original_width = 0;
+    var original_height = 0;
     var imageFile;
 //    insertAddButtonImage($(".PatternImage.Selected"));  
 
@@ -36,8 +38,15 @@ $(document).ready(function(){
     });
     
     $("#selectBtn").live('click', function(){
-        $.fancybox.close();
+        $.fancybox.close();        
         $.blockUI();
+
+        x = $('#x').val() * original_height / $('#target').height();
+        y = $('#y').val() * original_width / $('#target').width();
+        width = $('#w').val() * original_height / $('#target').height();
+        height = $('#h').val() * original_width / $('#target').width();
+        
+        alert(x + "###" + y + "###" + width + "###" + height);
         $.ajax({
                 type: "post",
                 url : base_url + 'tao-khung/create_frame',
@@ -45,10 +54,10 @@ $(document).ready(function(){
                 data: {
                     'frame_id': selected_id,
                     'image_path': './uploads/'+ imageFile.name,
-                    'x': $('#x').val(),
-                    'y': $('#y').val(),
-                    'width' : $('#w').val(),
-                    'height': $('#h').val()
+                    'x': x,
+                    'y': y,
+                    'width' : width,
+                    'height': height
                 },
                 success: function(data){
                     $.unblockUI();
@@ -73,24 +82,59 @@ $(document).ready(function(){
             $("#load_more").show();
         },
         'onUploadComplete' : function(file, data) {
-            imageFile = file;
-            $("#target").attr('src', base_url+'uploads/'+ file.name);
-            $(".jcrop-holder").find('img').attr('src', base_url+'uploads/'+ file.name);
-            $.fancybox({
-                'closeBtn' : true,
-                'padding' : 0,
-                'autoDimensions': true,
-                'scrolling': 'auto',
-                'href' : '#cropDiv'
-            });
-            aspect = $(".PatternImage.Selected input").first().attr('aspect');
-            $("#target").Jcrop({
-                aspectRatio: aspect,
-                setSelect: [10, 10, 60, 60/aspect],
-                onSelect: getImageInformation
-            }, function(){
-                jcrop_api = this;
-            });
+            imageFile = file;           
+            $.ajax({
+                type: 'post',
+                url: base_url + 'frame/get_image_dimensions',
+                dataType: 'json',
+                data:{
+                    'image_path': 'uploads/'+ file.name
+                },
+                success: function(data){
+                    original_width = data.width;
+                    original_height = data.height;
+                    
+                    width_scale = default_width/parseFloat(data.width);
+                    height_scale = default_height/parseFloat(data.height);
+
+                    var scale_ratio = width_scale;
+                    if (width_scale > height_scale){
+                        scale_ratio = height_scale;
+                    }
+
+                    var new_width = scale_ratio*parseFloat(data.width);
+                    var new_height = scale_ratio*parseFloat(data.height);
+
+                    $('#target').height(new_height);
+                    $('#target').width(new_width);
+                    
+                    $("#target").attr('src', base_url+'uploads/'+ file.name);
+            
+                    $.fancybox({
+                        'padding':0,
+                        'closeBtn' : true,
+                        'href' : '#cropDiv',
+                        'aspectRatio': true,
+                        'width': 'auto',
+                        'height': 'auto',
+                        'scrolling': 'no'
+                    });
+            
+                    aspect = $(".PatternImage.Selected input").first().attr('aspect');
+            
+                    if (jcrop_api){
+                        jcrop_api.destroy();
+                    }  
+                    $("#target").Jcrop({
+                        aspectRatio: aspect,
+                        setSelect: [20, 20, 60, 60/aspect],
+                        onSelect: getImageInformation,
+                        maxSize: [600, 600]
+                    }, function(){
+                        jcrop_api = this;
+                    });
+                }
+            }); 
         }
     });
     
@@ -108,9 +152,6 @@ $(document).ready(function(){
     $("#download").live('click', function(){
         temp = $("#selected_frame").attr('src')
         path = temp.split(base_url);
-        $.each(path, function(key, value){
-            alert(value);
-        });
         window.location = base_url + 'tao-khung/download?image='+path[1]+'' ;
     });
 });

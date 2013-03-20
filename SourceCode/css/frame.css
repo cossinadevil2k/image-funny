@@ -118,3 +118,13 @@
 #download:hover{
     cursor: pointer;
 }
+.CropBoxImageWrapper{
+    clear: both;
+    display: block;
+    float: left;
+    height: auto;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+}

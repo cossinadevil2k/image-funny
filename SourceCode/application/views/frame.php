@@ -10,6 +10,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>jcrop/css/jquery.Jcrop.css" />
+        
+        <!--<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.9.0.min.js"></script>-->
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.7.min.js"></script>
         <script>
             var base_url = '<?php echo base_url();?>';
@@ -95,14 +97,14 @@
                     <div id="Previous">
                         <img src="<?php echo base_url()?>images/frame/previous.png"/>
                     </div>
-                    <div id="cropDiv" style="display: none; width: 720px;">
-                        <img src="" width="100%" id="target"/>
-                        <input type="hidden" id="x"/>
-                        <input type="hidden" id="y"/>
-                        <input type="hidden" id="w"/>
-                        <input type="hidden" id="h"/>
+                    <div id="cropDiv" style="display: none; max-height: 610px; max-height: 400px">
+                        <img src="" id="target"/>                    
                         <div id="selectBtn" class="fancybox-buttons" href="#" style="position: absolute; top:10px; z-index: 1000">Chọn</div>
                     </div>
+                    <input type="hidden" id="x"/>
+                    <input type="hidden" id="y"/>
+                    <input type="hidden" id="w"/>
+                    <input type="hidden" id="h"/>
                 </div>
             </div>      
             <input id="fileupload" type="file" name="files[]" data-url="/tao-khung/upload" multiple>
