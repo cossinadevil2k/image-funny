@@ -113,6 +113,35 @@ class Frame extends CI_Controller{
     public function post_to_facebook(){
         echo 1;
     }
-}
+    
+    public function facebook($frame_id = 0){
+        $category_arr = $this->category_model->get_facebook_category();
+        if ($category_arr){
+            $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
+        }
+        
+        foreach ($frame_list as $frame){
+            $arr_frame_detail = $this->frame_detail_model->get($frame->id);
+            $frame_detail[] = $arr_frame_detail;
+        }
 
+        if ($frame_id != 0){
+            $selected_frame = $this->frame_model->get($frame_id);
+            $arr['selected_frame'] = $selected_frame[0];
+        }else{
+            if (!empty($frame_list)){
+                $selected_frame = $frame_list[0];
+                $frame_id = $selected_frame->id;
+                $arr['selected_frame'] = $selected_frame;                 
+            }            
+        }
+        
+        $arr['frame_list'] = $frame_list;
+        if (isset($frame_detail)){
+            $arr['frame_detail_list'] = $frame_detail;
+        }
+        
+        $this->load->view('facebook', $arr);
+    }
+}
 ?>

@@ -11,7 +11,6 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>jcrop/css/jquery.Jcrop.css" />
         
-        <!--<script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.9.0.min.js"></script>-->
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.7.min.js"></script>
         <script>
             var base_url = '<?php echo base_url();?>';
@@ -32,7 +31,7 @@
                 <div class="HeaderMenu">
                     <div class=""><a href="/trang-chu"><img src="<?php echo base_url() ?>images/home/home_disable.png" width="100%"/></a></div>
                     <div class=""><a href="/tao-khung"><img src="<?php echo base_url() ?>images/frame/frame_disable.png" width="95%"/></a></div>
-                    <div class=""><a href="#"><img src="<?php echo base_url() ?>images/effect/effect_disable.png" width="100%"/></a></div>
+                    <div class=""><a href="/tao-khung/facebook-cover"><img src="<?php echo base_url() ?>images/effect/effect_disable.png" width="100%"/></a></div>
                 </div>                
             </div>
             <div class="MainContent">

@@ -6,10 +6,11 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>uploadify/uploadify.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>uploadifive/uploadifive.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>jcrop/css/jquery.Jcrop.css" />
+        
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery-1.7.min.js"></script>
         <script>
             var base_url = '<?php echo base_url();?>';
@@ -20,7 +21,7 @@
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url()?>uploadify/jquery.uploadify.js"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>uploadifive/jquery.uploadifive.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>        
     </head>
     <body>
@@ -36,29 +37,13 @@
             <div class="MainContent">
                 <div class="Line"></div>
                 <div class="FrameContent">
-                    <div class="Left">
-                        <ul style="list-style-type: none">
-                            <?php $i = 0;?>
-                            <?php foreach ($category_arr as $category):?>
-                                <?php $i++;?>
-                                <li>
-                                    <div class="Category <?php if ((isset($category_enable)) && ($category_enable == $category['id'])) echo "Enable"?>" id="<?php echo $category['id'];?>">
-                                        <img src="<?php echo base_url()?>images/frame/category<?php echo $i?>.png" width="100%"/>
-                                        <label><?php echo $category['name']?></label>
-                                    </div>
-                                </li>
-                            <?php endforeach;?>
-                        </ul>
-                    </div>
-                    <div class="Center">
+                    <div class="Center Facebook">
                         <?php if (isset($selected_frame)):?>
-                        <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px"/>
+                        <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
                             <input type="file" name="file_upload" id="file_upload" />
                         <?php endif;?>
-<!--                            <div id="addButtonDiv"></div>-->
                     </div>
-                    <!--<div id="addButtonDiv" style="width: 720px; height: 405px; position: absolute; z-index: 100"></div>-->
-                    <div class="Right">
+                    <div class="Right RightF">
                         <ul style="list-style-type: none">
                             <li>
                                 <div><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
@@ -66,17 +51,11 @@
                             <li>
                                 <div><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
                             </li>
-                            <li>
-                                <div><img src="<?php echo base_url()?>images/frame/twitter.png" width="100%"/></div>
-                            </li>
-                            <li>
-                                <div><img src="<?php echo base_url()?>images/frame/google.png" width="100%"/></div>
-                            </li>  
                         </ul>
                     </div>
                     <div id="Pattern">
                         <?php foreach ($frame_list as $frame):?>
-                        <div frame_id ="<?php echo $frame->id?>" id="PatternImage<?php echo $frame->id?>" class="PatternImage<?php if ($frame->id == $selected_frame->id) {
+                        <div frame_id ="<?php echo $frame->id?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
                             echo " Selected";
                         }?>">
                             <img src="<?php echo base_url().$frame->pattern;?>" width="100%">
@@ -90,10 +69,10 @@
                         </div>
                         <?php endforeach;?>                       
                     </div>
-                    <div id="Next">
+                    <div id="Next" class="NaviF">
                         <img src="<?php echo base_url()?>images/frame/next.png"/>
                     </div>
-                    <div id="Previous">
+                    <div id="Previous" class="NaviF">
                         <img src="<?php echo base_url()?>images/frame/previous.png"/>
                     </div>
                     <div id="cropDiv" style="display: none; width: 720px;">

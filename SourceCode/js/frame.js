@@ -10,7 +10,7 @@ $(document).ready(function(){
 
     $("#Pattern").mCustomScrollbar({
         horizontalScroll:true,
-        autoHideScrollbar: false
+        autoHideScrollbar: true
     });
     
     $(".Category").click(function(){

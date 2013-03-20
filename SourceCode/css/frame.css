@@ -62,7 +62,7 @@
     overflow-y: auto;
 }
 .PatternImage{
-    width: 130px;
+    width: 165px;
     float: left;
     margin-right: 2px;
     opacity: 0.4;
@@ -120,4 +120,24 @@
 }
 #facebook:hover{
     cursor: pointer;
+}
+
+/*Facebook Page*/
+.Facebook{
+    width: 850px;
+    height: 315px;
+    margin-left: 58px;
+}
+.RightF{
+    height: 320px;
+    width: 85px;
+}
+.PatternImageF{
+    width: 315px;
+}
+.NaviF{
+    bottom: -71px !important;
+}
+.mCSB_scrollTools{
+    bottom: -1px !important;
 }

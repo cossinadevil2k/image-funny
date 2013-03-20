@@ -73,6 +73,24 @@ class Category_model extends CI_Model {
     }
     
     /**
+     * Get Facebook cover category
+     * @return boolean
+     */
+    public function get_facebook_category(){
+        $sql = "SELECT * FROM tbl_category WHERE frame_type = 1";
+        $query = $this->db->query($sql);
+        if ($query->num_rows > 0)
+        {
+            $result = $query->result_array();
+            return $result;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    /**
      * Add a category
      * @param string $name
      * @param string $description
