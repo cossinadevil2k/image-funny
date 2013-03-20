@@ -102,6 +102,7 @@ class ImageLib {
             $imageToAdd->cropInPixel($crop_width, $crop_height, $crop_x, $crop_y, $position);
 
             //Resize
+            $i=1;
             foreach ($array as $frameItem) {
                 $x = $frameItem->x;
                 $y = $frameItem->y;
@@ -113,10 +114,11 @@ class ImageLib {
                 $temp->resizeInPixel($width, $height);
                 
                 $temp->rotate($degrees);
-                $document->addLayer(1, $temp, $x - $width / 2, $y - $height / 2, 'LT');
+                $document->addLayer($i, $temp, $x - $width / 2, $y - $height / 2, 'LT');
+                $i = $i+1;
             }
 
-            $document->addLayer(2, $frameLayer);
+            $document->addLayer($i, $frameLayer);
 
             $data = new DateTime();
             $imageLib = new ImageLib();
