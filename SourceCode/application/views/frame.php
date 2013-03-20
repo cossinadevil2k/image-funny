@@ -53,10 +53,14 @@
                         </ul>
                     </div>
                     <div class="Center">
+                        
                         <?php if (isset($selected_frame)):?>                        
                             <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="720px" height="405px" />
-                            <input type="file" name="file_upload" id="file_upload" />
-                            
+                            <?php if($is_text_frame != 1):?>
+                                <input type="file" name="file_upload" id="file_upload" /> 
+                            <?php else:?>
+                                
+                            <?php endif;?>
                         <?php endif;?>
                     </div>
                     <div class="Right">
@@ -65,7 +69,7 @@
                                 <div id="download"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
                             </li>
                             <li>
-                                <div><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
+                                <div id="facebook"><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
                             </li>
                             <li>
                                 <div><img src="<?php echo base_url()?>images/frame/twitter.png" width="100%"/></div>

@@ -154,6 +154,10 @@ $(document).ready(function(){
         path = temp.split(base_url);
         window.location = base_url + 'tao-khung/download?image='+path[1]+'' ;
     });
+    
+    $("#facebook").live('click', function(){
+        
+    });
 });
 
 function getImageInformation(c){

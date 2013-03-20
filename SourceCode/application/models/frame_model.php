@@ -54,7 +54,7 @@ class Frame_model extends CI_Model {
      * @return type
      */
     function get($id = 0, $name = '', $limit = -1, $offset = 10) {
-        $this->db->select('id, name, description, link, category_id, pattern,width,height');
+        $this->db->select('id, name, description, link, category_id, pattern, width, height');
         $this->db->from('tbl_frame');
 
         if ($id == 0) {

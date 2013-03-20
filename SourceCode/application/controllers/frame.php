@@ -5,6 +5,7 @@
  *
  * @author Tan
  */
+
 class Frame extends CI_Controller{
     public function __construct() {
         parent::__construct();
@@ -15,13 +16,15 @@ class Frame extends CI_Controller{
     } 
     
     public function index($category_id = 0, $frame_id = 0){
-        $category_arr = $this->category_model->get(null, null, null, TRUE);
-        if ($category_id !=0){            
+        $category_arr = $this->category_model->get_non_facebook_category();
+        if ($category_id > 0){            
             $frame_list = $this->frame_model->get_by_category($category_id, 10, 0);    
+            $is_text_frame = $this->category_model->is_text_frame($category_id);
             $arr['category_enable'] = $category_id;
         }else{
             $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
             $arr['category_enable'] = $category_arr[0]['id'];
+            $is_text_frame = FALSE;
         }
         
         foreach ($frame_list as $frame){
@@ -43,7 +46,10 @@ class Frame extends CI_Controller{
         
         $arr['category_arr'] = $category_arr;        
         $arr['frame_list'] = $frame_list;
-        $arr['frame_detail_list'] = $frame_detail;
+        $arr['is_text_frame'] = $is_text_frame;
+        if (isset($frame_detail)){
+            $arr['frame_detail_list'] = $frame_detail;
+        }
         
         $this->load->view('frame', $arr);
     }
@@ -102,6 +108,10 @@ class Frame extends CI_Controller{
         flush();    
         readfile($image_path);
         die();
+    }
+    
+    public function post_to_facebook(){
+        echo 1;
     }
 }
 
