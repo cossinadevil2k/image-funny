@@ -39,7 +39,7 @@ class ImageLib {
      * @param int $height
      * @param int $degrees
      */
-    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees, $crop_x, $crop_y, $crop_width, $crop_height, $resize_by = '') {
+    public static function AddFrame($image, $frame, $x, $y, $width, $height, $degrees, $crop_x, $crop_y, $crop_width, $crop_height) {
         $frameLayer = ImageWorkshop::initFromPath($frame);
         $w = $frameLayer->getWidth();
         $h = $frameLayer->getHeight();
@@ -109,20 +109,11 @@ class ImageLib {
                 $height = $frameItem->height;
                 $degrees = $frameItem->degree;
 
-                $temp = clone $imageToAdd;
-                switch ($resize_by) {
-                    case 'width':
-                        $temp->resizeInPixel($width, $w * $h / $width);
-                        break;
-                    case 'height':
-                        $temp->resizeInPixel($width, $w * $h / $height);
-                        break;
-                    default :
-                        $temp->resizeInPixel($width, $height);
-                        break;
-                }
+                $temp = clone $imageToAdd;               
+                $temp->resizeInPixel($width, $height);
+                
                 $temp->rotate($degrees);
-                $document->addLayer(1, $temp, $x - $width / 2, $y - $height / 2, 'LT');
+                $document->addLayer(1, $temp, $x, $y, 'LT');
             }
 
             $document->addLayer(2, $frameLayer);
