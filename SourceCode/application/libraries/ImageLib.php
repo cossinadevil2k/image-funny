@@ -173,7 +173,7 @@ class ImageLib {
                 $blockTop = $blockDetail->blockTop;
                 $blockDepth = $blockDetail->blockDepth;
 
-                $waterTextLayer = ImageWorkshop::initTextLayer($blockText, './system/fonts/arial.ttf', 12, $blockColor, 0);
+                $waterTextLayer = ImageWorkshop::initTextLayer($blockText, './system/fonts/arial.ttf', 3/4*$blockFontSize, $blockColor, 0);
                 $document->addLayer($blockDepth, $waterTextLayer,$blockLeft,$blockTop,'LT');
             }
             if ($type == 'cBlock') {
