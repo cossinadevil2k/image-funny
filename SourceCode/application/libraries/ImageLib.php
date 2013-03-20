@@ -52,21 +52,12 @@ class ImageLib {
         $imageToAdd->cropInPixel($crop_width, $crop_height, $crop_x, $crop_y, $position);
 
         //Resize
-        switch ($resize_by) {
-            case 'width':
-                $imageToAdd->resizeInPixel($width, $w * $h / $width);
-                break;
-            case 'height':
-                $imageToAdd->resizeInPixel($width, $w * $h / $height);
-                break;
-            default :
-                $imageToAdd->resizeInPixel($width, $height);
-                break;
-        }
-
+        
+        $imageToAdd->resizeInPixel($width, $height);
+        
         $imageToAdd->rotate($degrees);
 
-        $document->addLayer(1, $imageToAdd, $x - $width / 2, $y - $height / 2, 'LT');
+        $document->addLayer(1, $imageToAdd, $x, $y, 'LT');
 
         $document->addLayer(2, $frameLayer);
 
