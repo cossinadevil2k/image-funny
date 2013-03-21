@@ -80,3 +80,19 @@ enable{
     font-size: 11px;
     left: 43% !important;
 }
+#text_frame
+{
+    
+}
+#textOnlyControls{
+    float: right;
+    margin-right: 45px;
+}
+#colorBox{
+    float: left;
+    margin-left: -95px;
+}
+#choosePhoto{
+    position: relative;
+    top: 15px;
+}

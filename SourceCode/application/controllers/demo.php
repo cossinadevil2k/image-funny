@@ -50,6 +50,7 @@ class Demo extends CI_Controller {
     function createWaterMark()
     {
         $detail = $this->input->post('detail');
+        $imagePath = $this->input->post('imagePath');
         $details = explode("^", $detail);
         $arr = array();
         foreach ($details as $watermark)
@@ -74,7 +75,7 @@ class Demo extends CI_Controller {
             }
         }
         
-        $a = ImageLib::AddWaterMark('./images/anh_mau.jpg', $arr);
+        $a = ImageLib::AddWaterMark($imagePath, $arr);
         
         echo json_encode($a);
     }
