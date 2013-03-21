@@ -8,7 +8,7 @@ class Frame_detail_model extends CI_Model
     
     function get($frame_id)
     {
-        $this->db->select('id,frame_id,x,y,width,height,degree');
+        $this->db->select('*');
         $this->db->where("frame_id",$frame_id);
         $this->db->from('tbl_framedetail');
         

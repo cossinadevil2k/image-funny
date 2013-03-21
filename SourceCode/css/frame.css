@@ -58,7 +58,7 @@
     width: 935px;
     height: 120px;
     margin-left: 40px;
-    margin-top: 70px;
+    margin-top: 25px;
     overflow-y: auto;
 }
 .PatternImage{
@@ -82,7 +82,7 @@
     position: absolute;
     width: 30px;
     height: 55px;    
-    bottom: -160px;
+    bottom: -115px;
     opacity: 0.7;
 }
 #Next{

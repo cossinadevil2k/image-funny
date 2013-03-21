@@ -6,6 +6,7 @@
  * @author Tan
  */
 
+require 'UploadHandler.php';
 class Frame extends CI_Controller{
     public function __construct() {
         parent::__construct();
@@ -142,6 +143,10 @@ class Frame extends CI_Controller{
         }
         
         $this->load->view('facebook', $arr);
+    }
+    
+    public function upload(){
+        $upload_handler = new UploadHandler();
     }
 }
 ?>
