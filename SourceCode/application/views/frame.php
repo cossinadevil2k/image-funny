@@ -23,12 +23,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>             
-        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/selector.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/event.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ajax.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/fx.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/offset.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>            
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.mouse.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.draggable.js"></script>
