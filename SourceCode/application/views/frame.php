@@ -109,8 +109,7 @@
                     <input type="hidden" id="w"/>
                     <input type="hidden" id="h"/>
                 </div>
-            </div>      
-            <input id="fileupload" type="file" name="files[]" data-url="/tao-khung/upload" multiple>
+            </div>
             <div class="Footer">
                 
             </div>

@@ -129,7 +129,7 @@ class ImageLib {
                 $temp->resizeInPixel($width, $height);
                 
                 $temp->rotate($degrees);
-                $document->addLayer($i, $temp, $x - $width / 2, $y - $height / 2, 'LT');
+                $document->addLayer($i, $temp, $x, $y, 'LT');
                 $i = $i+1;
             }
 
