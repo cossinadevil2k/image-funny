@@ -29,7 +29,20 @@ class ImageLib {
     var $imageQuality = 100;
     var $logoPath = './images/common/waterMarkTaoAnh.png';
 
-    /**
+    public static function Demo()
+    {
+        $document = ImageWorkshop::initVirginLayer(1000,600,'000000');
+        $frameLayer = ImageWorkshop::initFromPath('./images/b.jpg');
+        $frameLayer->rotate(25);
+        $document->addLayer(1, $frameLayer,20,70,"LT");
+        $data = new DateTime();
+        $imageLib = new ImageLib();
+        $filename = $data->getTimestamp() . '.png';
+                
+        $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
+    }
+
+        /**
      * Add frame for a image as simple
      * @param string $image // Đường dẫn đến ảnh
      * @param string $frame //Đường dẫn đến frame
@@ -110,7 +123,9 @@ class ImageLib {
                 $height = $frameItem->height;
                 $degrees = $frameItem->degree;
 
-                $temp = clone $imageToAdd;               
+                $temp = clone $imageToAdd; 
+                //$width = $width*cos(deg2rad($degrees))+$height*sin(deg2rad($degrees));
+                //$height = $height*cos(deg2rad($degrees))+$width*sin(deg2rad($degrees));
                 $temp->resizeInPixel($width, $height);
                 
                 $temp->rotate($degrees);

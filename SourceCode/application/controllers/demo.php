@@ -78,6 +78,11 @@ class Demo extends CI_Controller {
         
         echo json_encode($a);
     }
+    
+    function abc()
+    {
+        ImageLib::Demo();
+    }
 }
 
 ?>
