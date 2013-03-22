@@ -48,7 +48,6 @@ $(document).ready(function(){
         width = $('#w').val() * original_height / $('#target').height();
         height = $('#h').val() * original_width / $('#target').width();
         
-        alert(x + "###" + y + "###" + width + "###" + height);
         $.ajax({
             type: "post",
             url : base_url + 'tao-khung/create_frame',
@@ -72,87 +71,11 @@ $(document).ready(function(){
         
     });
     
-//    $('#file_upload').uploadifive({
-//        'fileSizeLimit' : '10MB',
-//        'buttonText': 'Tải ảnh lên',
-//        'multi': false,
-//        'removeCompleted': true,
-//        'fileType'  : 'image',
-//        'uploadScript'  : '/uploadifive/uploadifive.php',
-//        'onUploadStart':function(){
-//            $.blockUI();
-//            $("#load_more").show();
-//        },
-//        'onUploadComplete' : function(file, data) {
-//            imageFile = file;           
-//            $.ajax({
-//                type: 'post',
-//                url: base_url + 'frame/get_image_dimensions',
-//                dataType: 'json',
-//                data:{
-//                    'image_path': 'uploads/'+ file.name
-//                },
-//                success: function(data){
-//                    
-//                    var type_file = $('#file_upload').attr('file_type');
-//                    if(type_file!='watermark')
-//                    {
-//                        original_width = data.width;
-//                        original_height = data.height;
-//                    
-//                        width_scale = default_width/parseFloat(data.width);
-//                        height_scale = default_height/parseFloat(data.height);
-//
-//                        var scale_ratio = width_scale;
-//                        if (width_scale > height_scale){
-//                            scale_ratio = height_scale;
-//                        }
-//
-//                        var new_width = scale_ratio*parseFloat(data.width);
-//                        var new_height = scale_ratio*parseFloat(data.height);
-//
-//                        $('#target').height(new_height);
-//                        $('#target').width(new_width);
-//                    
-//                        $("#target").attr('src', base_url+'uploads/'+ file.name);
-//            
-//                        $.fancybox({
-//                            'padding':0,
-//                            'closeBtn' : true,
-//                            'href' : '#cropDiv',
-//                            'aspectRatio': true,
-//                            'width': 'auto',
-//                            'height': 'auto',
-//                            'scrolling': 'no'
-//                        });
-//            
-//                        aspect = $(".PatternImage.Selected input").first().attr('aspect');
-//            
-//                        if (jcrop_api){
-//                            jcrop_api.destroy();
-//                        }  
-//                        $("#target").Jcrop({
-//                            aspectRatio: aspect,
-//                            setSelect: [20, 20, 60, 60/aspect],
-//                            onSelect: getImageInformation,
-//                            maxSize: [600, 600]
-//                        }, function(){
-//                            jcrop_api = this;
-//                        });
-//                    }
-//                    else
-//                    {
-//                        $("#selected_image").attr('src', base_url+'uploads/'+ file.name);
-//                    }
-//                }
-//            }); 
-//        }
-//    });
-    
      $('#fileupload').fileupload({
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
+                imageFile = file
                 $.ajax({
                     type: 'post',
                     url: base_url + 'frame/get_image_dimensions',

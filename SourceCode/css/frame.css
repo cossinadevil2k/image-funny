@@ -82,8 +82,8 @@
     position: absolute;
     width: 30px;
     height: 55px;    
-    bottom: -115px;
     opacity: 0.7;
+    top: 464px;
 }
 #Next{
     right: 48px;

@@ -84,8 +84,7 @@
                             </li>  
                         </ul>
                     </div>
-                    <div id="choosePhoto" <?php
-                        if ($is_text_frame == 1) {
+                    <div id="choosePhoto" <?php if ($is_text_frame == 1) {
                             echo 'style="top:115px;"';
                         }
                         ?>>
@@ -101,11 +100,11 @@
                                         <?php foreach ($frame_details as $frame_detail): ?>
                                             <?php if ($frame_detail->frame_id == $frame->id): ?>
                                                 <input type="hidden" x="<?php echo $frame_detail->xc ?>" y="<?php echo $frame_detail->yc ?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
-                                        <?php endif; ?>
-        <?php endforeach; ?>
-    <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    <?php endforeach; ?>
                                 </div>
-<?php endforeach; ?>                       
+                            <?php endforeach; ?> 
                         </div>
                         <div id="Next">
                             <img src="<?php echo base_url() ?>images/frame/next.png"/>
