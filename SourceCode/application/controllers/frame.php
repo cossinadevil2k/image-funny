@@ -58,16 +58,29 @@ class Frame extends CI_Controller{
     
     public function create_frame(){
         $frame_id = $this->input->post('frame_id');
-        $image_path = $this->input->post('image_path');
-        $crop_x = $this->input->post('x');
-        $crop_y = $this->input->post('y');
-        $crop_width = $this->input->post('width');
-        $crop_height = $this->input->post('height');
+        $image_string = $this->input->post('imageString');
+        $temps = explode("#", $image_string);
+        
+        $imageArray = array();
+        foreach ($temps as $temp){
+            $temp = explode("|", $temp);
+            if (!empty($temp[0])){
+                $image = new stdClass();
+                $image->frame_detail_id = $temp[0];
+                $image->path = $temp[1];
+                $image->crop_x = $temp[2];
+                $image->crop_y = $temp[3];
+                $image->crop_width = $temp[4];
+                $image->crop_height = $temp[5];
+                $imageArray[] = $image;
+            }            
+        }
 
         $selected_frame = $this->frame_model->get($frame_id);       
         $arr_frame_detail = $this->frame_detail_model->get($frame_id);
         
-        $result = ImageLib::AddFrameArray($image_path, $selected_frame[0]->link, $arr_frame_detail, $crop_x, $crop_y, $crop_width, $crop_height);
+        $result = ImageLib::AddImageFrame($imageArray, $selected_frame[0]->link, $arr_frame_detail);
+//        $result = ImageLib::AddFrameArray($image_path, $selected_frame[0]->link, $arr_frame_detail, $crop_x, $crop_y, $crop_width, $crop_height);
 //        $result = ImageLib::AddFrame($image_path, $selected_frame[0]->link, $arr_frame_detail[0]->x, $arr_frame_detail[0]->y, $arr_frame_detail[0]->width, $arr_frame_detail[0]->height, $arr_frame_detail[0]->degree, $crop_x, $crop_y, $crop_width, $crop_height);
         if ($result === ""){
             echo json_encode(array('status' => 'error'));
@@ -89,6 +102,7 @@ class Frame extends CI_Controller{
     
     public function get_image_dimensions(){
         $path = $this->input->post('image_path');
+        $this->session->set_userdata('UserImage', $path);
         $image_info = getimagesize($path);
         $temp = explode('"', $image_info[3]);
         $dimensions['width'] = $temp[1];

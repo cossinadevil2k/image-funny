@@ -24,7 +24,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
         <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>            
-        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>
+        <!--<script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>-->
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.mouse.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.draggable.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.draggable.ext.js"></script>
@@ -99,19 +99,19 @@
                                     <?php foreach ($frame_detail_list as $frame_details): ?>
                                         <?php foreach ($frame_details as $frame_detail): ?>
                                             <?php if ($frame_detail->frame_id == $frame->id): ?>
-                                                <input type="hidden" x="<?php echo $frame_detail->xc ?>" y="<?php echo $frame_detail->yc ?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
+                                                <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->xc ?>" y="<?php echo $frame_detail->yc ?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     <?php endforeach; ?>
                                 </div>
                             <?php endforeach; ?> 
                         </div>
-                        <div id="Next">
-                            <img src="<?php echo base_url() ?>images/frame/next.png"/>
-                        </div>
                         <div id="Previous">
                             <img src="<?php echo base_url() ?>images/frame/previous.png"/>
                         </div>
+                        <div id="Next">
+                            <img src="<?php echo base_url() ?>images/frame/next.png"/>
+                        </div>                        
                     </div>
                 </div> 
                 <div id="cropDiv" style="display: none; max-height: 610px; max-height: 400px">

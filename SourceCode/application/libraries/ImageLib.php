@@ -154,23 +154,30 @@ class ImageLib {
             //Resize
             $i = 0;
             $position = "LT";
+            $selected_image = null;
             foreach ($frame_details as $frameItem) {
                 $x = $frameItem->x;
                 $y = $frameItem->y;
                 $width = $frameItem->width;
                 $height = $frameItem->height;
                 $degrees = $frameItem->degree;
+                
+                foreach ($imageArray as $image){
+                    if ($image->frame_detail_id == $frameItem->id){
+                        $selected_image = $image;
+                    }
+                }
 
-                $imageToAdd = ImageWorkshop::initFromPath($imageArray[$i]->path);
+                $imageToAdd = ImageWorkshop::initFromPath($selected_image->path);
                 //Crop        
                 
-                $imageToAdd->cropInPixel($imageArray[$i]->crop_width, $imageArray[$i]->crop_height,
-                                        $imageArray[$i]->crop_x, $imageArray[$i]->crop_y, $position);
+                $imageToAdd->cropInPixel($selected_image->crop_width, $selected_image->crop_height,
+                                        $selected_image->crop_x, $selected_image->crop_y, $position);
                 $imageToAdd->resizeInPixel($width, $height);
 
                 $imageToAdd->rotate($degrees);
                 $document->addLayer($i + 1, $imageToAdd, $x, $y, 'LT');
-                $imageArray = null;
+                $selected_image = null;
                 $i = $i + 1;
             }
 
