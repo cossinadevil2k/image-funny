@@ -14,6 +14,7 @@ class Frame extends CI_Controller{
         $this->load->model('frame_model');
         $this->load->model('frame_detail_model');
         $this->load->library('ImageLib');
+        $this->load->model("Watermark");
     } 
     
     public function index($category_id = 0, $frame_id = 0){
@@ -148,5 +149,53 @@ class Frame extends CI_Controller{
     public function upload(){
         $upload_handler = new UploadHandler();
     }
+    
+    function createWaterMark()
+    {
+        $detail = $this->input->post('detail');
+        $imagePath = $this->input->post('imagePath');
+        $details = explode("^", $detail);
+        $arr = array();
+        foreach ($details as $watermark)
+        {
+            $watermarks = explode("|", $watermark);
+            if($watermarks[0]=='tBlock')
+            {
+                $blockDetail = new Watermark();
+                
+                $blockDetail->type = 'tBlock';
+                $blockDetail->blockText = $watermarks[1];                
+                $blockDetail->blockFont= $watermarks[2];
+                $blockDetail->blockFontSize= $watermarks[3];
+                $blockDetail->blockStyle= $watermarks[4];
+                $blockDetail->blockTextDecoration= $watermarks[5];
+                $blockDetail->blockColor= substr($watermarks[7],1,strlen($watermarks[7])-1);
+                $blockDetail->blockLeft= $watermarks[8];
+                $blockDetail->blockTop= $watermarks[9];
+                $blockDetail->blockDepth= $watermarks[10];
+                
+                $arr[] = $blockDetail;
+            }
+            elseif($watermarks[0]=='cBlock')
+            {
+                $blockDetail = new Watermark();
+                
+                $blockDetail->type = 'cBlock';                
+                
+                $blockDetail->blockColor = substr($watermarks[1],1,strlen($watermarks[1])-1);
+                $blockDetail->blockLeft = $watermarks[2];
+                $blockDetail->blockTop = $watermarks[3];
+                $blockDetail->blockWidth = $watermarks[4];
+                $blockDetail->blockHeight = $watermarks[5];
+                $blockDetail->blockDepth = $watermarks[6];
+                
+                $arr[] = $blockDetail;
+            }
+        }
+        usort($arr, array("Watermark","compare_block_deep"));
+        $result = ImageLib::AddWaterMark($imagePath, $arr);        
+        echo json_encode($result);
+    }  
+    
 }
 ?>

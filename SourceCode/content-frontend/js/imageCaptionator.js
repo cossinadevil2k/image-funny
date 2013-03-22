@@ -365,7 +365,7 @@ $(document).ready(function() {
             $("#textData").val(dataLine);            
         });
                 
-        var url =base_url+"/demo/createwatermark";                
+        var url =base_url+"/tao-khung/createwatermark";                
         var detail = $("#textData").val();
         var imagePath = $("#selected_frame").attr('src');
         imagePath = imagePath.replace(base_url, "");
@@ -374,6 +374,7 @@ $(document).ready(function() {
             imagePath:imagePath
         }, function(data){
             $('.textBlock').remove();
+            $('.colorBlock').remove();
             $("#selected_frame").attr('src',data.toString());
         }, 'json');
         return false;

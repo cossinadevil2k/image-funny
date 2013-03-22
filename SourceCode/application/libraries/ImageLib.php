@@ -199,7 +199,7 @@ class ImageLib {
     public static function AddWaterMark($imagePath, $array = array()) {
         $document = ImageWorkshop::initFromPath($imagePath);
 
-        foreach ($array as $blockDetail) {
+        foreach ($array as $blockDetail) {            
             $type = $blockDetail->type;
             if ($type == 'tBlock') {
                 $blockText = $blockDetail->blockText;
@@ -215,13 +215,16 @@ class ImageLib {
                 $waterTextLayer = ImageWorkshop::initTextLayer($blockText, './system/fonts/arial.ttf', 3 / 4 * $blockFontSize, $blockColor, 0);
                 $document->addLayer($blockDepth, $waterTextLayer, $blockLeft, $blockTop, 'LT');
             }
-            if ($type == 'cBlock') {
+            elseif ($type == 'cBlock') {
                 $blockColor = $blockDetail->blockColor;
                 $blockLeft = $blockDetail->blockLeft;
                 $blockTop = $blockDetail->blockTop;
                 $blockWidth = $blockDetail->blockWidth;
                 $blockHeight = $blockDetail->blockHeight;
                 $blockDepth = $blockDetail->blockDepth;
+                
+                $waterColorLayer = ImageWorkshop::initVirginLayer($blockWidth, $blockHeight, $blockColor);
+                $document->addLayer($blockDepth, $waterColorLayer, $blockLeft, $blockTop, 'LT');
             }
         }
 
