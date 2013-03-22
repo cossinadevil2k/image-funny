@@ -5,6 +5,7 @@ class Demo extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->library('ImageLib');
+        $this->load->model("Frame_detail_model");
     }
 
     /**
@@ -82,7 +83,35 @@ class Demo extends CI_Controller {
     
     function abc()
     {
-        ImageLib::Demo();
+        $imageArray = array();
+        $image = new stdClass();
+        $image->path = "./images/a.jpg";
+        $image->crop_x = 197;
+        $image->crop_y = 389;
+        $image->crop_width = 827;
+        $image->crop_height = 891;
+        $imageArray[] = $image;
+        
+        $image1 = new stdClass();
+        $image1->path = "./images/a.png";
+        $image1->crop_x = 0;
+        $image1->crop_y = 0;
+        $image1->crop_width = 200;
+        $image1->crop_height = 200;
+        $imageArray[] = $image1;
+        
+        $image2 = new stdClass();
+        $image2->path = "./images/anh_mau.jpg";
+        $image2->crop_x = 1;
+        $image2->crop_y = 34;
+        $image2->crop_width = 433;
+        $image2->crop_height = 495;
+        $imageArray[] = $image2;
+        
+        
+        $arr_frame_detail = $this->Frame_detail_model->get(6);
+        ImageLib::AddImageFrame($imageArray, "./resources/frames/khungteen/1.png", $arr_frame_detail);
+       
     }
 }
 
