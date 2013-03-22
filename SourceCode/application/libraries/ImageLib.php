@@ -170,6 +170,7 @@ class ImageLib {
 
                 $imageToAdd->rotate($degrees);
                 $document->addLayer($i + 1, $imageToAdd, $x, $y, 'LT');
+                $imageArray = null;
                 $i = $i + 1;
             }
 
