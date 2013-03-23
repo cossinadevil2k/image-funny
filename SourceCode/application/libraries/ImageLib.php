@@ -23,7 +23,7 @@ class ImageLib {
         $this->CI->load->database();
     }
 
-    var $dirPath = './elfinder/files/resources/users';
+    var $dirPath = './resources/users';
     var $createFolders = true;
     var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
     var $imageQuality = 100;
@@ -186,6 +186,11 @@ class ImageLib {
             $data = new DateTime();
             $imageLib = new ImageLib();
             $filename = $data->getTimestamp() . '.png';
+            
+            //Add logo
+            $logoLayer = ImageWorkshop::initFromPath($imageLib->logoPath);
+            $document->addLayer(3, $logoLayer, 0, 0, 'RB');
+            
             $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
 
             $session_id = $imageLib->CI->session->userdata('session_id');

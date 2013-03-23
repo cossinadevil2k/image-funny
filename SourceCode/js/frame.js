@@ -8,8 +8,8 @@ $(document).ready(function(){
     var height = $("#selected_frame").height();
     var width = $("#selected_frame").width();
     var imageFile;
-    var frame_count = 0;
-    var imageString = "";
+    var frame_count = 0;        //Count number of a frame
+    var imageString = "";       //Store information about image
     insertAddButtonImage($(".PatternImage.Selected"));  
 
     $("#Pattern").mCustomScrollbar({
@@ -47,9 +47,9 @@ $(document).ready(function(){
 
         x = $('#x').val() * original_height / $('#target').height();
         y = $('#y').val() * original_width / $('#target').width();
-        width = $('#w').val() * original_height / $('#target').height();
-        height = $('#h').val() * original_width / $('#target').width();
-        imageString += frameDetailID + "|" + "./resources/users/" + imageFile.name + "|"+x+"|"+y+"|"+width+"|"+height+"#";
+        crop_width = $('#w').val() * original_height / $('#target').height();
+        crop_height = $('#h').val() * original_width / $('#target').width();
+        imageString += frameDetailID + "|" + "./resources/users/" + imageFile.name + "|"+x+"|"+y+"|"+crop_width+"|"+crop_height+"#";
         if (frame_count == 1){            
             $.ajax({
                 type: "post",
@@ -118,7 +118,7 @@ $(document).ready(function(){
                                 'scrolling': 'no'
                             });
 
-                            aspect = $(".PatternImage.Selected input").first().attr('aspect');
+                            aspect = $("#frame"+frameDetailID).attr('aspect');
 
                             if (jcrop_api){
                                 jcrop_api.destroy();
