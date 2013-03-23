@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tạo Ảnh.Net| Tạo khung ảnh</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/jquery.minicolors.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>fancybox/jquery.fancybox.css" />
@@ -31,6 +32,7 @@
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.resizable.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.form.js"></script>
         <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/imageCaptionator.js"></script>
+        <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.minicolors.js"></script>
     </head>
     <body>
         <div class="Form"> 

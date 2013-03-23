@@ -1,3 +1,4 @@
+
 <div id="text_frame">
     <input type="hidden" id="blockCount" name="blockCount" value="1" size="2">
     <input type="hidden" id="blockId" name="blockId" value="" size="2">
@@ -10,19 +11,15 @@
 
         <label for="font" id="lblFont">Font:</label>
         <select name="font" id="font">
-            <option value="im_arial">Arial</option>
-            <option value="Arial Black">Arial Black</option>
-            <option value="Comic Sans MS">Comic Sans MS</option>
-            <option value="Courier New">Courier New</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Impact">Impact</option>
-            <option value="Tahoma">Tahoma</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Trebuchet MS">Trebuchet MS</option>
-            <option value="Verdana">Verdana</option>
+            <option value="im_arial" style="font-family: im_arial !important;">Arial</option>            
+            <option value="im_CourierNew" style="font-family: im_CourierNew !important">Courier New</option>
+            <option value="im_PalatinoLinotype" style="font-family: im_PalatinoLinotype !important">Palatino Linotype</option>
+            <option value="uvnvan_bold" style="font-family: uvnvan_bold !important">UVNVAN</option>            
         </select>
         <label for="fontSize" id="lblFontSize">Font Size:</label>
         <input type="text" name="fontSize" id="fontSize" size="2" value=""> px
+        <label for="fontColor" id="lblFontSize">Font Size:</label>
+        <input type="text" class="minicolor" name="fontColor" id="fontColor"  value="#ffffff">
         <p style="display: none;">
             <label for="style" id="lblStyle">Font Style:</label>
             <select name="style" id="style">
@@ -46,13 +43,13 @@
             <div id="workspaceLeft">                                
             </div>
             <br>
-            <input type="button" name="buttonAddText" id="buttonAddText" value="Add Text Block">            
-            <input type="button" name="buttonDelete" id="buttonDelete" value="Delete This Block" class="noShow">
-            <input type="button" name="buttonAddColor" id="buttonAddColor" value="Add Color Block">
-            <br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" name="buttonGenerateImage" id="buttonGenerateImage" value="Generate Image">	
+            <input type="button" class="btnWatermark" name="buttonAddText" id="buttonAddText" value="Add Text Block">                        
+            <input type="button" class="btnWatermark" name="buttonAddColor" id="buttonAddColor" value="Add Color Block">         
+            <input type="button" class="btnWatermark" name="buttonDelete" id="buttonDelete" value="Delete This Block" class="noShow">
+            <input class="btnWatermark" type="submit" name="buttonGenerateImage" id="buttonGenerateImage" value="Generate Image">	
         </div>
     </div>     
+    <!--
     <div id="colorBox">
         <table id="gridTbl" frame="1" border="0" cellpadding="0" cellspacing="0" style="background-color:black;">
             <tbody><tr>
@@ -526,5 +523,6 @@
             </tbody>
         </table>
     </div>
+    -->
 </div>
 

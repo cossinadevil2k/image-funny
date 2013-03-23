@@ -240,7 +240,7 @@ $(document).ready(function() {
         $("#" + blockId).css("z-index",$("#depth").val());
     });
 	
-    $(".aColor").click(function () {
+    /*$(".aColor").click(function () {
         //Determine if a text block or color block
         var blockId= $("#blockId").val();
         var blockType= findBlockType(blockId);
@@ -253,133 +253,175 @@ $(document).ready(function() {
             $("#" + blockId).css("background-color",$(this).css("background-color"));	
         }
     });
-	
-    $("#buttonGenerateImage").click(function() {
-        //Clear textData
-        $("#textData").val("");
+    */
+    var consoleTimeout;
+    $(".minicolor").minicolors({
+        change:function(){
+            var blockId= $("#blockId").val();
+            var blockType= findBlockType(blockId);
+            if (blockType== "T")
+            {
+                $("#" + blockId).css("color",$(this).val());
+            }
+            else
+            {
+                $("#" + blockId).css("background-color",$(this).val());	
+            }
+        }
+    },{
+        control: $(this).attr('data-control') || 'wheel',
+        defaultValue: $(this).attr('data-default-value') || '',
+        inline: $(this).hasClass('inline'),
+        letterCase: $(this).hasClass('uppercase') ? 'uppercase' : 'lowercase',
+        opacity: $(this).hasClass('opacity'),
+        position: $(this).attr('data-position') || 'default',
+        styles: $(this).attr('data-style') || '',
+        swatchPosition: $(this).attr('data-swatch-position') || 'left',
+        textfield: !$(this).hasClass('no-textfield'),
+        theme: $(this).attr('data-theme') || 'default',
+        change: function(hex, opacity) {
+                        
+            // Generate text to show in console
+            text = hex ? hex : 'transparent';
+            if( opacity ) text += ', ' + opacity;
+            text += ' / ' + $(this).minicolors('rgbaString');
+                        
+            // Show text in console; disappear after a few seconds
+            $('#console').text(text).addClass('busy');
+            clearTimeout(consoleTimeout);
+            consoleTimeout = setTimeout( function() {
+                $('#console').removeClass('busy');
+            }, 3000);
+                        
+        }
+    });
+   
+$("#buttonGenerateImage").click(function() {
+    //Clear textData
+    $("#textData").val("");
 		
-        //Get the position of the image
-        var imagePos= $("#selected_frame").position();
+    //Get the position of the image
+    var imagePos= $("#selected_frame").position();
             
-        //Loop through all textBlock elements
-        $(".textBlock").each(function(i) {
-            var blockText= $(this).text();
-            var blockFont= $(this).css("font-family");
-            var initialBlockFontSize= $(this).css("font-size");
+    //Loop through all textBlock elements
+    $(".textBlock").each(function(i) {
+        var blockText= $(this).text();
+        var blockFont= $(this).css("font-family");
+        var initialBlockFontSize= $(this).css("font-size");
 			
-            var sizeLen= parseInt(initialBlockFontSize.length)-2;
-            var blockFontSize= initialBlockFontSize.substring(0,sizeLen);
-            var blockFontStyle= $(this).css("font-style");
-            var blockFontWeight= $(this).css("font-weight");
+        var sizeLen= parseInt(initialBlockFontSize.length)-2;
+        var blockFontSize= initialBlockFontSize.substring(0,sizeLen);
+        var blockFontStyle= $(this).css("font-style");
+        var blockFontWeight= $(this).css("font-weight");
 			
 			
-            if (blockFontStyle== "normal" && (blockFontWeight== "normal" || blockFontWeight== "400"))
-            {
-                var blockStyle= "plain";
-            }
-            else if (blockFontStyle== "italic" && blockFontWeight== "bold")
-            {
-                var blockStyle= "boldItalic";
-            }
-            else if (blockFontStyle== "italic")
-            {
-                var blockStyle= "italic";
-            }
-            else 
-            {
-                var blockStyle= "bold";
-            }
+        if (blockFontStyle== "normal" && (blockFontWeight== "normal" || blockFontWeight== "400"))
+        {
+            var blockStyle= "plain";
+        }
+        else if (blockFontStyle== "italic" && blockFontWeight== "bold")
+        {
+            var blockStyle= "boldItalic";
+        }
+        else if (blockFontStyle== "italic")
+        {
+            var blockStyle= "italic";
+        }
+        else 
+        {
+            var blockStyle= "bold";
+        }
 			
-            if ($(this).css("text-decoration")== "line-through")
-            {
-                var blockTextDecoration= "yes|no";
+        if ($(this).css("text-decoration")== "line-through")
+        {
+            var blockTextDecoration= "yes|no";
 					
-            }
-            else if ($(this).css("text-decoration")== "underline")
+        }
+        else if ($(this).css("text-decoration")== "underline")
+        {
+            var blockTextDecoration= "no|yes";
+        }
+        else
+        {
+            var blockTextDecoration= "no|no";
+        }
+			
+        if ($(this).css("color")== "rgb(255, 255, 255)" || $(this).css("color")== "#ffffff")
+        {
+            //alert("is white");
+            var blockColor= "#ffffff";
+        }
+        else
+        {
+					
+            if ($("#browserType").val()== "ie")
             {
-                var blockTextDecoration= "no|yes";
+                var blockColor= $(this).css("color");
             }
             else
             {
-                var blockTextDecoration= "no|no";
+                var blockColor= convertRGBToHex($(this).css("color"));
             }
+					
+        }
+					
+        var blockLeft= parseInt($(this).position().left) - parseInt(imagePos.left);
+        var blockTop= parseInt($(this).position().top) - parseInt(imagePos.top);
+        var blockDepth= $(this).css("z-index");
 			
-            if ($(this).css("color")== "rgb(255, 255, 255)" || $(this).css("color")== "#ffffff")
-            {
-                //alert("is white");
-                var blockColor= "#ffffff";
-            }
-            else
-            {
-					
-                if ($("#browserType").val()== "ie")
-                {
-                    var blockColor= $(this).css("color");
-                }
-                else
-                {
-                    var blockColor= convertRGBToHex($(this).css("color"));
-                }
-					
-            }
-					
-            var blockLeft= parseInt($(this).position().left) - parseInt(imagePos.left);
-            var blockTop= parseInt($(this).position().top) - parseInt(imagePos.top);
-            var blockDepth= $(this).css("z-index");
-			
-            var dataLine= $("#textData").val() + "tBlock" + "|" + blockText + "|" + blockFont + "|" + blockFontSize + "|" + blockStyle + "|" + blockTextDecoration + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockDepth + "^";
-            $("#textData").val(dataLine);                       
-            alert(dataLine);
-        });
+        var dataLine= $("#textData").val() + "tBlock" + "|" + blockText + "|" + blockFont + "|" + blockFontSize + "|" + blockStyle + "|" + blockTextDecoration + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockDepth + "^";
+        $("#textData").val(dataLine);                       
+        alert(dataLine);
+    });
 	
-        //Loop through each colorBlock
-        $(".colorBlock").each(function(i) {
+    //Loop through each colorBlock
+    $(".colorBlock").each(function(i) {
 			
-            if ($(this).css("background-color")== "rgb(0, 0, 0)" || $(this).css("background-color")== "#000000")
+        if ($(this).css("background-color")== "rgb(0, 0, 0)" || $(this).css("background-color")== "#000000")
+        {
+            var blockColor= "#000000";
+        }
+        else
+        {
+            if ($("#browserType").val()== "ie")
             {
-                var blockColor= "#000000";
+                var blockColor= $(this).css("background-color");
             }
             else
             {
-                if ($("#browserType").val()== "ie")
-                {
-                    var blockColor= $(this).css("background-color");
-                }
-                else
-                {
-                    var blockColor= convertRGBToHex($(this).css("background-color"));
-                }
+                var blockColor= convertRGBToHex($(this).css("background-color"));
             }
+        }
 			
-            //var blockLeft= parseInt($(this).css("left")) - parseInt(imagePos.left);
-            //var blockTop= parseInt($(this).css("top")) + parseInt(imagePos.top);
-            var blockLeft= parseInt($(this).css("left")) - parseInt(imagePos.left);
-            var blockTop= parseInt($(this).css("top")) - parseInt(imagePos.top);
+        //var blockLeft= parseInt($(this).css("left")) - parseInt(imagePos.left);
+        //var blockTop= parseInt($(this).css("top")) + parseInt(imagePos.top);
+        var blockLeft= parseInt($(this).css("left")) - parseInt(imagePos.left);
+        var blockTop= parseInt($(this).css("top")) - parseInt(imagePos.top);
 			
-            var blockWidth= $(this).width();
-            var blockHeight= $(this).height();
+        var blockWidth= $(this).width();
+        var blockHeight= $(this).height();
 			
-            var blockDepth= $(this).css("z-index");
+        var blockDepth= $(this).css("z-index");
 			
-            var dataLine= $("#textData").val() + "cBlock" + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockWidth + "|" + blockHeight + "|" + blockDepth + "^";
-            $("#textData").val(dataLine);            
-        });
+        var dataLine= $("#textData").val() + "cBlock" + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockWidth + "|" + blockHeight + "|" + blockDepth + "^";
+        $("#textData").val(dataLine);            
+    });
                 
-        var url =base_url+"/tao-khung/createwatermark";                
-        var detail = $("#textData").val();
-        var imagePath = $("#selected_frame").attr('src');
-        imagePath = imagePath.replace(base_url, "");
-        $.post(url, {            
-            detail:detail,
-            imagePath:imagePath
-        }, function(data){
-            $('.textBlock').remove();
-            $('.colorBlock').remove();
-            $("#selected_frame").attr('src',data.toString());
-        }, 'json');
-        return false;
+    var url =base_url+"/tao-khung/createwatermark";                
+    var detail = $("#textData").val();
+    var imagePath = $("#selected_frame").attr('src');
+    imagePath = imagePath.replace(base_url, "");
+    $.post(url, {            
+        detail:detail,
+        imagePath:imagePath
+    }, function(data){
+        $('.textBlock').remove();
+        $('.colorBlock').remove();
+        $("#selected_frame").attr('src',data.toString());
+    }, 'json');
+    return false;
                 
-    });  //end of buttonGenerateImage
+});  //end of buttonGenerateImage
 	
 });  //end of ready
 
