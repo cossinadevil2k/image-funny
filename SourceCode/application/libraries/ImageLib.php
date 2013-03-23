@@ -153,9 +153,11 @@ class ImageLib {
 
             //Resize
             $i = 0;
-            $position = "LT";
+            $position = "LT";           
+            
             $selected_image = null;
             foreach ($frame_details as $frameItem) {
+                
                 $x = $frameItem->x;
                 $y = $frameItem->y;
                 $width = $frameItem->width;
@@ -177,14 +179,19 @@ class ImageLib {
 
                 $imageToAdd->rotate($degrees);
                 $document->addLayer($i + 1, $imageToAdd, $x, $y, 'LT');
-                $selected_image = null;
+
                 $i = $i + 1;
             }
 
             $document->addLayer($i + 1, $frameLayer);
-
+            
             $data = new DateTime();
             $imageLib = new ImageLib();
+            
+            //Add logo
+            $logo = ImageWorkshop::initFromPath($imageLib->logoPath);
+            $document->addLayer($i+2, $logo,5,5,'RB');
+            
             $filename = $data->getTimestamp() . '.png';
             
             //Add logo
@@ -199,7 +206,7 @@ class ImageLib {
             );
             $imageLib->CI->db->where('session_id', $session_id);
             $imageLib->CI->db->update("tbl_sessions", $arr);
-
+            
 
             return base_url() . $imageLib->dirPath . '/' . $filename;
         } catch (Exception $e) {
