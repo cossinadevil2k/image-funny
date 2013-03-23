@@ -153,28 +153,27 @@ class ImageLib {
 
             //Resize
             $i = 0;
-            $position = "LT";           
-            
+            $position = "LT";
+
             $selected_image = null;
             foreach ($frame_details as $frameItem) {
-                
+
                 $x = $frameItem->x;
                 $y = $frameItem->y;
                 $width = $frameItem->width;
                 $height = $frameItem->height;
                 $degrees = $frameItem->degree;
-                
-                foreach ($imageArray as $image){
-                    if ($image->frame_detail_id == $frameItem->id){
+
+                foreach ($imageArray as $image) {
+                    if ($image->frame_detail_id == $frameItem->id) {
                         $selected_image = $image;
                     }
                 }
 
                 $imageToAdd = ImageWorkshop::initFromPath($selected_image->path);
                 //Crop        
-                
-                $imageToAdd->cropInPixel($selected_image->crop_width, $selected_image->crop_height,
-                                        $selected_image->crop_x, $selected_image->crop_y, $position);
+
+                $imageToAdd->cropInPixel($selected_image->crop_width, $selected_image->crop_height, $selected_image->crop_x, $selected_image->crop_y, $position);
                 $imageToAdd->resizeInPixel($width, $height);
 
                 $imageToAdd->rotate($degrees);
@@ -184,29 +183,29 @@ class ImageLib {
             }
 
             $document->addLayer($i + 1, $frameLayer);
-            
+
             $data = new DateTime();
             $imageLib = new ImageLib();
-            
+
             //Add logo
             $logo = ImageWorkshop::initFromPath($imageLib->logoPath);
-            $document->addLayer($i+2, $logo,5,5,'RB');
-            
+            $document->addLayer($i + 2, $logo, 5, 5, 'RB');
+
             $filename = $data->getTimestamp() . '.png';
-            
+
             //Add logo
             $logoLayer = ImageWorkshop::initFromPath($imageLib->logoPath);
             $document->addLayer(3, $logoLayer, 0, 0, 'RB');
-            
+
             $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
 
             $session_id = $imageLib->CI->session->userdata('session_id');
-            $arr = array(                
+            $arr = array(
                 'image_after' => base_url() . $imageLib->dirPath . '/' . $filename
             );
             $imageLib->CI->db->where('session_id', $session_id);
             $imageLib->CI->db->update("tbl_sessions", $arr);
-            
+
 
             return base_url() . $imageLib->dirPath . '/' . $filename;
         } catch (Exception $e) {
@@ -218,7 +217,7 @@ class ImageLib {
     public static function AddWaterMark($imagePath, $array = array()) {
         $document = ImageWorkshop::initFromPath($imagePath);
 
-        foreach ($array as $blockDetail) {            
+        foreach ($array as $blockDetail) {
             $type = $blockDetail->type;
             if ($type == 'tBlock') {
                 $blockText = $blockDetail->blockText;
@@ -230,18 +229,35 @@ class ImageLib {
                 $blockLeft = $blockDetail->blockLeft;
                 $blockTop = $blockDetail->blockTop;
                 $blockDepth = $blockDetail->blockDepth;
-                
-                $waterTextLayer = ImageWorkshop::initTextLayer($blockText, './fonts/'.str_replace('im_','',$blockFont).'.ttf', 3 / 4 * $blockFontSize, $blockColor, 0);
+
+                switch ($blockFont) {
+                    case 'im_arial':
+                        $font = './fonts/arial.ttf';
+                        break;
+                    case 'uvnvan_bold':
+                        $font = './fonts/uvnvan_0.ttf';
+                        break;
+                    case 'im_CourierNew':
+                        $font = './fonts/CourierNew.ttf';
+                        break;
+                    case 'im_PalatinoLinotype':
+                        $font = './fonts/PalatinoLinotype.ttf';
+                        break;
+                    default :
+                        $font = './fonts/arial.ttf';
+                        break;
+                }
+
+                $waterTextLayer = ImageWorkshop::initTextLayer($blockText, $font, 3 / 4 * $blockFontSize, $blockColor, 0);
                 $document->addLayer($blockDepth, $waterTextLayer, $blockLeft, $blockTop, 'LT');
-            }
-            elseif ($type == 'cBlock') {
+            } elseif ($type == 'cBlock') {
                 $blockColor = $blockDetail->blockColor;
                 $blockLeft = $blockDetail->blockLeft;
                 $blockTop = $blockDetail->blockTop;
                 $blockWidth = $blockDetail->blockWidth;
                 $blockHeight = $blockDetail->blockHeight;
                 $blockDepth = $blockDetail->blockDepth;
-                
+
                 $waterColorLayer = ImageWorkshop::initVirginLayer($blockWidth, $blockHeight, $blockColor);
                 $document->addLayer($blockDepth, $waterColorLayer, $blockLeft, $blockTop, 'LT');
             }
