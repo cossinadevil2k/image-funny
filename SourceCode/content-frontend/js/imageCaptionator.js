@@ -371,7 +371,7 @@ $("#buttonGenerateImage").click(function() {
 			
         var dataLine= $("#textData").val() + "tBlock" + "|" + blockText + "|" + blockFont + "|" + blockFontSize + "|" + blockStyle + "|" + blockTextDecoration + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockDepth + "^";
         $("#textData").val(dataLine);                       
-        alert(dataLine);
+        
     });
 	
     //Loop through each colorBlock
