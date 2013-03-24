@@ -18,6 +18,9 @@
         <script type="text/javascript" src="<?php echo base_url()?>jcrop/js/jquery.Jcrop.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.mCustomScrollbar.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.blockUI.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.iframe-transport.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
         <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>        
@@ -27,9 +30,18 @@
             <div class="Header">
                 <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>
                 <div class="HeaderMenu">
-                    <div class=""><a href="/trang-chu"><img src="<?php echo base_url() ?>images/home/home_disable.png" width="100%"/></a></div>
-                    <div class=""><a href="/tao-khung"><img src="<?php echo base_url() ?>images/frame/frame_disable.png" width="95%"/></a></div>
-                    <div class=""><a href="#"><img src="<?php echo base_url() ?>images/effect/effect_disable.png" width="100%"/></a></div>
+                    <div class="MenuPuzzle">
+                        <a href="/trang-chu"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
+                        <div class="MenuText "><label>Trang chủ</label></div>
+                    </div>
+                    <div class="MenuPuzzle">
+                        <a href="/tao-khung"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
+                        <div class="MenuText"><label>Tạo khung</label></div>
+                    </div>
+                    <div class="MenuPuzzle Enable">
+                        <a href="/tao-khung/facebook-cover"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
+                        <div class="MenuText Enable"><label>Facebook cover</label></div>
+                    </div>
                 </div>                
             </div>
             <div class="MainContent">

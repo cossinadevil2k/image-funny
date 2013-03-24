@@ -13,9 +13,18 @@
             <div class="Header">
                 <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>
                 <div class="HeaderMenu">
-                    <div class=""><a href="/trang-chu"><img src="<?php echo base_url() ?>images/home/home_disable.png" width="100%"/></a></div>
-                    <div class=""><a href="/tao-khung"><img src="<?php echo base_url() ?>images/frame/frame_disable.png" width="95%"/></a></div>
-                    <div class=""><a href="#"><img src="<?php echo base_url() ?>images/effect/effect_disable.png" width="100%"/></a></div>
+                    <div class="MenuPuzzle Enable">
+                        <a href="/trang-chu"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
+                        <div class="MenuText Enable"><label>Trang chủ</label></div>
+                    </div>
+                    <div class="MenuPuzzle">
+                        <a href="/tao-khung"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
+                        <div class="MenuText"><label>Tạo khung</label></div>
+                    </div>
+                    <div class="MenuPuzzle">
+                        <a href="/tao-khung/facebook-cover"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
+                        <div class="MenuText"><label>Facebook cover</label></div>
+                    </div>
                 </div>                
             </div>
             <div class="MainContent">

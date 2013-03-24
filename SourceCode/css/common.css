@@ -32,14 +32,20 @@ body{
     top: 20px;
     right: 10px;
 }
-.HeaderMenu div{
+.MenuPuzzle{
     float: left;
     width: 115px;
 }
-enable{
-    position: absolute; 
-    top: 70px;
-    z-index: 1000;
+.MenuText{
+    font-size: 15px;
+    left: 23px;
+    position: relative;
+    top: -70px;
+    width: 67px;
+    color: #133b4a;
+}
+.Enable{
+    color: white !important;
 }
 .Logo{
     position: relative;
