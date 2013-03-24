@@ -6,7 +6,6 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>uploadifive/uploadifive.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>jcrop/css/jquery.Jcrop.css" />
@@ -21,7 +20,6 @@
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url()?>uploadifive/jquery.uploadifive.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>        
     </head>
     <body>
@@ -40,7 +38,6 @@
                     <div class="Center Facebook">
                         <?php if (isset($selected_frame)):?>
                         <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
-                            <input type="file" name="file_upload" id="file_upload" />
                         <?php endif;?>
                     </div>
                     <div class="Right RightF">
@@ -53,21 +50,23 @@
                             </li>
                         </ul>
                     </div>
-                    <div id="Pattern">
-                        <?php foreach ($frame_list as $frame):?>
-                        <div frame_id ="<?php echo $frame->id?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
-                            echo " Selected";
-                        }?>">
-                            <img src="<?php echo base_url().$frame->pattern;?>" width="100%">
-                            <?php foreach ($frame_detail_list as $frame_details):?>
-                                <?php foreach ($frame_details as $frame_detail):?>
-                                    <?php if ($frame_detail->frame_id == $frame->id):?>
-                                        <input type="hidden" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>"/>
-                                    <?php endif;?>
+                    <div id="choosePhoto">
+                        <div id="Pattern">
+                            <?php foreach ($frame_list as $frame):?>
+                            <div frame_id ="<?php echo $frame->id?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
+                                echo " Selected";
+                            }?>">
+                                <img src="<?php echo base_url().$frame->pattern;?>" width="100%">
+                                <?php foreach ($frame_detail_list as $frame_details):?>
+                                    <?php foreach ($frame_details as $frame_detail):?>
+                                        <?php if ($frame_detail->frame_id == $frame->id):?>
+                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>"/>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
                                 <?php endforeach;?>
-                            <?php endforeach;?>
+                            </div>
+                            <?php endforeach;?>                       
                         </div>
-                        <?php endforeach;?>                       
                     </div>
                     <div id="Next" class="NaviF">
                         <img src="<?php echo base_url()?>images/frame/next.png"/>
@@ -85,6 +84,7 @@
                     </div>
                 </div>
             </div>            
+            <input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
             <div class="Footer">
 
             </div>
