@@ -1,5 +1,8 @@
 $(document).ready(function() {
-	
+    
+    //$('.slideControl').slideControl();
+    
+    
     $('input').keyup(function(e) {
         //alert(e.keyCode);
         if(e.keyCode == 13) {
@@ -26,10 +29,13 @@ $(document).ready(function() {
 	
     $("#buttonAddColor").click(function() {
         var imageDivObj= document.getElementById("workspaceBlock");
+        var newBoderBlock = document.createElement("DIV");    
         var newColorBlock= document.createElement("SPAN");
         var newBlockId= $("#blockCount").val() + "C";
+        newBoderBlock.setAttribute("id", newBlockId+"B");
         newColorBlock.setAttribute("id",newBlockId);
-        imageDivObj.appendChild(newColorBlock);
+        newBoderBlock.appendChild(newColorBlock);
+        imageDivObj.appendChild(newBoderBlock);
 		
         //Remove border from any other colorBlocks and textBlocks
         $(".textBlock").css("border","0px");
@@ -43,8 +49,9 @@ $(document).ready(function() {
 	
         //Set intial styles using jQuery.  Have to represent all styles that
         //can be manipulated 
-		
-        $("#" + newBlockId).attr("style","left:" + imagePos.left + "px;top:" + imagePos.top + "px;width:100px;height:50px;position:absolute;background-color:#000000;border:1px dotted white;z-index:" + $("#blockCount").val() + ";");
+	$("#"+newBlockId+"B").attr("style","left:" + imagePos.left + "px;top:" + imagePos.top + "px;width:100px;height:50px;position:absolute;background-color:#000000;border:1px dotted white");
+        $("#"+newBlockId+"B").attr("degree",0);	
+        $("#" + newBlockId).attr("style","z-index:" + $("#blockCount").val() + ";");
         $("#" + newBlockId).addClass("colorBlock");
 		
         //Update form
@@ -61,12 +68,16 @@ $(document).ready(function() {
         $("#textOnlyControls").addClass("noShow");
 		
         //Make draggable and resizable
-        $('.colorBlock').draggable();
-        $('.colorBlock').resizable({
+        //$('.colorBlock').draggable();
+        //$('.colorBlock').resizable({
+        //    autohide: true, 
+        //    handles: 'all'
+        //});
+	$('#'+newBlockId+'B').draggable();
+	$('#'+newBlockId+'B').resizable({
             autohide: true, 
             handles: 'all'
         });
-		
         $('.colorBlock').click(function() {
             $("#blockId").val($(this).attr("id"));
             //Remove border from any other textBlocks and colorBlocks
@@ -84,12 +95,16 @@ $(document).ready(function() {
 		
         //Create new span
         var imageDivObj= document.getElementById("workspaceBlock");
+        
+        var newBoderBlock = document.createElement("DIV");        
         var newTextBlock= document.createElement("SPAN");
         var newBlockId= $("#blockCount").val() + "T";
+        newBoderBlock.setAttribute("id", newBlockId+"B");
         newTextBlock.setAttribute("id",newBlockId);
         var newText= document.createTextNode("Edit text");
         newTextBlock.appendChild(newText);
-        imageDivObj.appendChild(newTextBlock);
+        newBoderBlock.appendChild(newTextBlock);        
+        imageDivObj.appendChild(newBoderBlock);
 		
         //Remove border from any other textBlocks
         $(".textBlock").css("border","0px");
@@ -103,8 +118,9 @@ $(document).ready(function() {
 	
         //Set intial styles using jQuery.  Have to represent all styles that
         //can be manipulated 
-		
-        $("#" + newBlockId).attr("style","left:" + imagePos.left + "px;top:" + imagePos.top + "px;position:absolute;color:#ffffff;background-color:transparent;border:1px dotted white;font-style:normal;font-weight:normal;font-family:im_arial;font-size:16px;text-decoration:none;z-index:" + $("#blockCount").val() + ";");
+        $("#"+newBlockId+"B").attr("style","left:" + imagePos.left + "px;top:" + imagePos.top + "px;position:absolute;");
+        $("#"+newBlockId+"B").attr("degree",0);
+        $("#" + newBlockId).attr("style","color:#ffffff;background-color:transparent;border:1px dotted white;font-style:normal;font-weight:normal;font-family:im_arial;font-size:16px;text-decoration:none;z-index:" + $("#blockCount").val() + ";");
         $("#" + newBlockId).addClass("textBlock");
 		
 		
@@ -127,7 +143,8 @@ $(document).ready(function() {
         $("#blockCount").val(parseInt($("#blockCount").val())+1);
 		
         //Make draggable
-        $('.textBlock').draggable();
+        //$('.textBlock').draggable();
+        $('#'+newBlockId+'B').draggable();
 		
         $('.textBlock').click(function() {
 			
@@ -184,7 +201,7 @@ $(document).ready(function() {
 	
     $("#buttonDelete").click(function() {
         var blockId= $("#blockId").val();
-        $("#" + blockId).remove();
+        $("#" + blockId+"B").remove();
     });
 	
     $("#str").change(function() {
@@ -238,22 +255,27 @@ $(document).ready(function() {
     $("#depth").change(function () {
         var blockId= $("#blockId").val();
         $("#" + blockId).css("z-index",$("#depth").val());
-    });
-	
-    /*$(".aColor").click(function () {
-        //Determine if a text block or color block
-        var blockId= $("#blockId").val();
-        var blockType= findBlockType(blockId);
-        if (blockType== "T")
-        {
-            $("#" + blockId).css("color",$(this).css("background-color"));
+    });	
+    
+    $("#degree").rangeinput({
+        change:function(){
+            var degree = $('#degree').val();
+            var blockId= $("#blockId").val();
+            var blockType= findBlockType(blockId);
+            if (blockType== "T")
+            {         
+                $("#" + blockId+"B").css("transform",  "rotate("+degree+"deg)");
+                $("#" + blockId+"B").css("-webkit-transform",  "rotate("+degree+"deg)");
+                $("#" + blockId+"B").attr("degree",degree);
+            }
+            else
+            {             
+                $("#" + blockId+"B").css("transform",  "rotate("+degree+"deg)");
+                $("#" + blockId+"B").css("-webkit-transform",  "rotate("+degree+"deg)");
+                $("#" + blockId+"B").attr("degree",degree);
+            }
         }
-        else
-        {
-            $("#" + blockId).css("background-color",$(this).css("background-color"));	
-        }
     });
-    */
     var consoleTimeout;
     $(".minicolor").minicolors({
         change:function(){
@@ -265,7 +287,7 @@ $(document).ready(function() {
             }
             else
             {
-                $("#" + blockId).css("background-color",$(this).val());	
+                $("#" + blockId+"B").css("background-color",$(this).val());	
             }
         }
     },{
@@ -296,132 +318,133 @@ $(document).ready(function() {
         }
     });
    
-$("#buttonGenerateImage").click(function() {
-    //Clear textData
-    $("#textData").val("");
+    $("#buttonGenerateImage").click(function() {
+        //Clear textData
+        $("#textData").val("");
 		
-    //Get the position of the image
-    var imagePos= $("#selected_frame").position();
+        //Get the position of the image
+        var imagePos= $("#selected_frame").position();
             
-    //Loop through all textBlock elements
-    $(".textBlock").each(function(i) {
-        var blockText= $(this).text();
-        var blockFont= $(this).css("font-family");
-        var initialBlockFontSize= $(this).css("font-size");
+        //Loop through all textBlock elements
+        $(".textBlock").each(function(i) {
+            var blockText= $(this).text();
+            var blockFont= $(this).css("font-family");
+            var initialBlockFontSize= $(this).css("font-size");
 			
-        var sizeLen= parseInt(initialBlockFontSize.length)-2;
-        var blockFontSize= initialBlockFontSize.substring(0,sizeLen);
-        var blockFontStyle= $(this).css("font-style");
-        var blockFontWeight= $(this).css("font-weight");
+            var sizeLen= parseInt(initialBlockFontSize.length)-2;
+            var blockFontSize= initialBlockFontSize.substring(0,sizeLen);
+            var blockFontStyle= $(this).css("font-style");
+            var blockFontWeight= $(this).css("font-weight");
 			
 			
-        if (blockFontStyle== "normal" && (blockFontWeight== "normal" || blockFontWeight== "400"))
-        {
-            var blockStyle= "plain";
-        }
-        else if (blockFontStyle== "italic" && blockFontWeight== "bold")
-        {
-            var blockStyle= "boldItalic";
-        }
-        else if (blockFontStyle== "italic")
-        {
-            var blockStyle= "italic";
-        }
-        else 
-        {
-            var blockStyle= "bold";
-        }
-			
-        if ($(this).css("text-decoration")== "line-through")
-        {
-            var blockTextDecoration= "yes|no";
-					
-        }
-        else if ($(this).css("text-decoration")== "underline")
-        {
-            var blockTextDecoration= "no|yes";
-        }
-        else
-        {
-            var blockTextDecoration= "no|no";
-        }
-			
-        if ($(this).css("color")== "rgb(255, 255, 255)" || $(this).css("color")== "#ffffff")
-        {
-            //alert("is white");
-            var blockColor= "#ffffff";
-        }
-        else
-        {
-					
-            if ($("#browserType").val()== "ie")
+            if (blockFontStyle== "normal" && (blockFontWeight== "normal" || blockFontWeight== "400"))
             {
-                var blockColor= $(this).css("color");
+                var blockStyle= "plain";
+            }
+            else if (blockFontStyle== "italic" && blockFontWeight== "bold")
+            {
+                var blockStyle= "boldItalic";
+            }
+            else if (blockFontStyle== "italic")
+            {
+                var blockStyle= "italic";
+            }
+            else 
+            {
+                var blockStyle= "bold";
+            }
+			
+            if ($(this).css("text-decoration")== "line-through")
+            {
+                var blockTextDecoration= "yes|no";
+					
+            }
+            else if ($(this).css("text-decoration")== "underline")
+            {
+                var blockTextDecoration= "no|yes";
             }
             else
             {
-                var blockColor= convertRGBToHex($(this).css("color"));
+                var blockTextDecoration= "no|no";
+            }
+			
+            if ($(this).css("color")== "rgb(255, 255, 255)" || $(this).css("color")== "#ffffff")
+            {
+                //alert("is white");
+                var blockColor= "#ffffff";
+            }
+            else
+            {
+					
+                if ($("#browserType").val()== "ie")
+                {
+                    var blockColor= $(this).css("color");
+                }
+                else
+                {
+                    var blockColor= convertRGBToHex($(this).css("color"));
+                }
+					
             }
 					
-        }
-					
-        var blockLeft= parseInt($(this).position().left) - parseInt(imagePos.left);
-        var blockTop= parseInt($(this).position().top) - parseInt(imagePos.top);
-        var blockDepth= $(this).css("z-index");
-			
-        var dataLine= $("#textData").val() + "tBlock" + "|" + blockText + "|" + blockFont + "|" + blockFontSize + "|" + blockStyle + "|" + blockTextDecoration + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockDepth + "^";
-        $("#textData").val(dataLine);                       
+            var blockLeft= parseInt($(this).parent().position().left) - parseInt(imagePos.left);
+            var blockTop= parseInt($(this).parent().position().top) - parseInt(imagePos.top);
+            var blockDepth= $(this).css("z-index");
+            var degree = $(this).parent().attr("degree");                      
+            
+            var dataLine= $("#textData").val() + "tBlock" + "|" + blockText + "|" + blockFont + "|" + blockFontSize + "|" + blockStyle + "|" + blockTextDecoration + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockDepth +"|"+degree+ "^";
+            $("#textData").val(dataLine);                       
         
-    });
+        });
 	
-    //Loop through each colorBlock
-    $(".colorBlock").each(function(i) {
+        //Loop through each colorBlock
+        $(".colorBlock").each(function(i) {
 			
-        if ($(this).css("background-color")== "rgb(0, 0, 0)" || $(this).css("background-color")== "#000000")
-        {
-            var blockColor= "#000000";
-        }
-        else
-        {
-            if ($("#browserType").val()== "ie")
+            if ($(this).css("background-color")== "rgb(0, 0, 0)" || $(this).css("background-color")== "#000000")
             {
-                var blockColor= $(this).css("background-color");
+                var blockColor= "#000000";
             }
             else
             {
-                var blockColor= convertRGBToHex($(this).css("background-color"));
+                if ($("#browserType").val()== "ie")
+                {
+                    var blockColor= $(this).parent().css("background-color");
+                }
+                else
+                {
+                    var blockColor= convertRGBToHex($(this).parent().css("background-color"));
+                }
             }
-        }
+            
+            //var blockLeft= parseInt($(this).css("left")) - parseInt(imagePos.left);
+            //var blockTop= parseInt($(this).css("top")) + parseInt(imagePos.top);
+            var blockLeft= parseInt($(this).parent().position().left) - parseInt(imagePos.left);
+            var blockTop= parseInt($(this).parent().position().top) - parseInt(imagePos.top);
+            var degree = $(this).parent().attr("degree");   
+            
+            var blockWidth= $(this).parent().width();
+            var blockHeight= $(this).parent().height();            
+            var blockDepth= $(this).css("z-index");
 			
-        //var blockLeft= parseInt($(this).css("left")) - parseInt(imagePos.left);
-        //var blockTop= parseInt($(this).css("top")) + parseInt(imagePos.top);
-        var blockLeft= parseInt($(this).css("left")) - parseInt(imagePos.left);
-        var blockTop= parseInt($(this).css("top")) - parseInt(imagePos.top);
-			
-        var blockWidth= $(this).width();
-        var blockHeight= $(this).height();
-			
-        var blockDepth= $(this).css("z-index");
-			
-        var dataLine= $("#textData").val() + "cBlock" + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockWidth + "|" + blockHeight + "|" + blockDepth + "^";
-        $("#textData").val(dataLine);            
-    });
+            var dataLine= $("#textData").val() + "cBlock" + "|" + blockColor + "|" + blockLeft + "|" + blockTop + "|" + blockWidth + "|" + blockHeight + "|" + blockDepth+"|"+degree + "^";
+            $("#textData").val(dataLine);            
+        });
                 
-    var url =base_url+"/tao-khung/createwatermark";                
-    var detail = $("#textData").val();
-    var imagePath = $("#selected_frame").attr('src');
-    imagePath = imagePath.replace(base_url, "");
-    $.post(url, {            
-        detail:detail,
-        imagePath:imagePath
-    }, function(data){
-        $('.textBlock').remove();
-        $('.colorBlock').remove();
-        $("#selected_frame").attr('src',data.toString());
-    }, 'json');
-    return false;
+        var url =base_url+"/tao-khung/createwatermark";                
+        var detail = $("#textData").val();
+        var imagePath = $("#selected_frame").attr('src');
+        imagePath = imagePath.replace(base_url, "");
+        $.post(url, {            
+            detail:detail,
+            imagePath:imagePath
+        }, function(data){
+            $('.textBlock').parent().remove();
+            $('.colorBlock').parent().remove();
+            $("#selected_frame").attr('src',data.toString());
+        }, 'json');
+        return false;
                 
-});  //end of buttonGenerateImage
+    });  //end of buttonGenerateImage
 	
 });  //end of ready
 

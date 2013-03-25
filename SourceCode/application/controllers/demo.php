@@ -8,11 +8,19 @@ class Demo extends CI_Controller {
         $this->load->model("Frame_detail_model");
     }
 
+    function a()
+    {
+        $image = './images/anh_mau.jpg';
+        $frame = './images/d.png';
+        
+        ImageLib::AddFrameNew($image, $frame);
+    }
+    
     /**
      * add 1 frame đơn giản
      */
     function oneFrame() {
-        $image = './images/a.jpg';
+        $image = './images/anh_mau.jpg';
         $frame = './images/0001.png';
 
         $result[] = ImageLib::AddFrame($image, $frame, 272, 272, 333, 325, 0,145,433,879,847);

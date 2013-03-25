@@ -29,7 +29,24 @@ class ImageLib {
     var $imageQuality = 100;
     var $logoPath = './images/common/waterMarkTaoAnh.png';
 
-    /**
+    public static function AddFrameNew($image,$frame)
+    {
+        $frameLayer = ImageWorkshop::initFromPath($frame);
+        
+        $w = $frameLayer->getWidth();
+        $h = $frameLayer->getHeight();
+        
+        $imageToAdd = ImageWorkshop::initFromPath($image);
+        $imageToAdd->resizeInPixel($w,$h);
+        
+        $document = ImageWorkshop::initVirginLayer($w, $h);
+        $document->addLayer(1,$imageToAdd, 0,0,'LT');
+        $document->addLayer(2,$frameLayer, 0,0,'LT');
+        
+        $document->save('./images','abc.png');
+    }
+
+        /**
      * Add frame for a image as simple
      * @param string $image // Đường dẫn đến ảnh
      * @param string $frame //Đường dẫn đến frame
@@ -229,7 +246,8 @@ class ImageLib {
                 $blockLeft = $blockDetail->blockLeft;
                 $blockTop = $blockDetail->blockTop;
                 $blockDepth = $blockDetail->blockDepth;
-
+                $blockDegree = $blockDetail->blockDegree;
+                
                 switch ($blockFont) {
                     case 'im_arial':
                         $font = './fonts/arial.ttf';
@@ -247,8 +265,9 @@ class ImageLib {
                         $font = './fonts/arial.ttf';
                         break;
                 }
-
+                
                 $waterTextLayer = ImageWorkshop::initTextLayer($blockText, $font, 3 / 4 * $blockFontSize, $blockColor, 0);
+                $waterTextLayer->rotate($blockDegree);
                 $document->addLayer($blockDepth, $waterTextLayer, $blockLeft, $blockTop, 'LT');
             } elseif ($type == 'cBlock') {
                 $blockColor = $blockDetail->blockColor;
@@ -257,8 +276,10 @@ class ImageLib {
                 $blockWidth = $blockDetail->blockWidth;
                 $blockHeight = $blockDetail->blockHeight;
                 $blockDepth = $blockDetail->blockDepth;
+                $blockDegree = $blockDetail->blockDegree;
 
                 $waterColorLayer = ImageWorkshop::initVirginLayer($blockWidth, $blockHeight, $blockColor);
+                $waterColorLayer->rotate($blockDegree);
                 $document->addLayer($blockDepth, $waterColorLayer, $blockLeft, $blockTop, 'LT');
             }
         }

@@ -187,6 +187,7 @@ class Frame extends CI_Controller{
                 $blockDetail->blockLeft= $watermarks[8];
                 $blockDetail->blockTop= $watermarks[9];
                 $blockDetail->blockDepth= $watermarks[10];
+                $blockDetail->blockDegree= $watermarks[11];
                 
                 $arr[] = $blockDetail;
             }
@@ -202,6 +203,7 @@ class Frame extends CI_Controller{
                 $blockDetail->blockWidth = $watermarks[4];
                 $blockDetail->blockHeight = $watermarks[5];
                 $blockDetail->blockDepth = $watermarks[6];
+                $blockDetail->blockDegree= $watermarks[7];
                 
                 $arr[] = $blockDetail;
             }

@@ -5,6 +5,8 @@
         <title>Tạo Ảnh.Net| Tạo khung ảnh</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/jquery.minicolors.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/skin1.css">
+        <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/slideControl.css">-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>fancybox/jquery.fancybox.css" />
@@ -25,14 +27,17 @@
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
         <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>            
-        <!--<script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>-->
+        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.mouse.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.draggable.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.draggable.ext.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.resizable.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.form.js"></script>
-        <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/imageCaptionator.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.form.js"></script>        
         <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.minicolors.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jQueryRotate.2.2.js"></script>	
+        <!--<script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.slideControl.js"></script>-->
+        <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.tools.min.js"></script>	
+        <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/imageCaptionator.js"></script>
     </head>
     <body>
         <div class="Form"> 
