@@ -37,13 +37,18 @@ body{
     width: 115px;
 }
 .MenuText{
-    font-size: 15px;
+    font-size: 16px;
     left: 23px;
     position: relative;
     top: -70px;
     width: 67px;
     color: #133b4a;
+    z-index: 1;
 }
+.MenuText label:hover{
+    cursor: pointer;
+}
+
 .Enable{
     color: white !important;
 }
@@ -73,6 +78,7 @@ body{
 }
 .MainContent{
     background-image: url('/images/common/background.png');
+    background-repeat: repeat;
     height: 110%;
     width: 100%;
 }

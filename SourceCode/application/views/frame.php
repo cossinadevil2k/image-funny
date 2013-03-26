@@ -26,7 +26,8 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>            
+        <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>   
+        <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.mouse.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.draggable.js"></script>
@@ -46,15 +47,15 @@
                 <div class="HeaderMenu">
                     <div class="MenuPuzzle">
                         <a href="/trang-chu"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
-                        <div class="MenuText "><label>Trang chủ</label></div>
+                        <div class="MenuText"><label link="/trang-chu">Trang chủ</label></div>
                     </div>
-                    <div class="MenuPuzzle Enable">
+                    <div class="MenuPuzzle ">
                         <a href="/tao-khung"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
-                        <div class="MenuText Enable"><label>Tạo khung</label></div>
+                        <div class="MenuText Enable"><label link="/tao-khung">Tạo khung</label></div>
                     </div>
                     <div class="MenuPuzzle">
                         <a href="/tao-khung/facebook-cover"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
-                        <div class="MenuText"><label>Facebook cover</label></div>
+                        <div class="MenuText"><label link="/tao-khung/facebook-cover">Facebook cover</label></div>
                     </div>
                 </div>                
             </div>

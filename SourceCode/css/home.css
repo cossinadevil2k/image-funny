@@ -2,12 +2,13 @@
     position: absolute;
     width: 100%;
     height: 100%;    
-    margin-left: 50px;    
+    margin-left: 62px;    
 }
 .Category{
     height: 25%;
-    width: 888px;
+    width: 865px;
     background-image: url('/images/home/category_bg.png');
+    background-repeat: repeat;
     padding-left: 25px;
     margin-top: 30px;
 }
@@ -24,7 +25,7 @@
     position: relative;
     top: -73px;
     color: white;
-    font-size: 15px;
+    font-size: 17px;
     float: left;
 }
 .More{
@@ -37,25 +38,50 @@
     cursor: pointer;
 }
 .Pattern{
-    left: -12px;
-    margin-left: 18px;
+    float: left;
     margin-top: 40px;
     position: absolute;
+    width: 850px;
+}
+.Gallery{
+    max-width: 900px;
+    max-height: 240px;
+    margin-top: 10px;
+    float: left;
 }
 .PatternImage{
     width: 100px;
     height: 100px;
     border: 3px solid whitesmoke;
     border-radius: 3px;
+    margin-right: 10px;
+    margin-top: 10px;
+    float:left;
 }
 .Pattern table{
-    margin-left: -1px;
-    float: left;
+    float: left;    
+    max-height: 200px;
+    margin-left: -22px;
+    margin-top: -23px;
+    overflow: auto;  
 }
-.Pattern div{
+
+.Transform{
+    transform: translate(0, 250px);
+}
+
+.rowa{
+    height: 248px;
+    width: 857px;
+    overflow: auto;
+}
+.rowb{
+    
+}
+/*.Pattern div{
     width: 100%;
     height: 100%;
-}
+}*/
 .Pattern a:hover{
     opacity: 0.4;
     cursor: pointer;
