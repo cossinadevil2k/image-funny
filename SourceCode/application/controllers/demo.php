@@ -8,6 +8,12 @@ class Demo extends CI_Controller {
         $this->load->model("Frame_detail_model");
     }
 
+    function instagram()
+    {
+        $image = './images/anh_mau.jpg';
+        echo ImageLib::Instagram_Array($image,array('kenvin'));
+    }
+    
     function a()
     {
         $image = './images/anh_mau.jpg';

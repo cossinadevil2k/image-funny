@@ -29,24 +29,79 @@ class ImageLib {
     var $imageQuality = 100;
     var $logoPath = './images/common/waterMarkTaoAnh.png';
 
-    public static function AddFrameNew($image,$frame)
-    {
-        $frameLayer = ImageWorkshop::initFromPath($frame);
-        
-        $w = $frameLayer->getWidth();
-        $h = $frameLayer->getHeight();
-        
-        $imageToAdd = ImageWorkshop::initFromPath($image);
-        $imageToAdd->resizeInPixel($w,$h);
-        
-        $document = ImageWorkshop::initVirginLayer($w, $h);
-        $document->addLayer(1,$imageToAdd, 0,0,'LT');
-        $document->addLayer(2,$frameLayer, 0,0,'LT');
-        
-        $document->save('./images','abc.png');
+    //Instagram Effects
+    public function Instagram_Common($imagePath, $effect) {
+        $instagraph = new Instagraph;
+        $instagraph->setInput($imagePath);
+        $imageLib = new ImageLib();
+        $imageOut = $imageLib->dirPath . '/' . uniqid('taoanhnet_', FALSE) . '.png';
+        $instagraph->setOutput($imageOut);
+        $instagraph->process($effect);
+
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before' => base_url() . $imagePath,
+            'image_after' => base_url() . $imageOut
+        );
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
+        return base_url() . $imageOut;
     }
 
-        /**
+    public static function Instagram_Array($imagePath, $effect = array()) {
+        $imageLib = new ImageLib();
+        $imageOut = '';
+        
+        foreach ($effect as $method) {
+            $instagraph = new Instagraph;
+            $imageOut = $imageLib->dirPath . '/' . uniqid('taoanhnet_', FALSE) . '.png';
+            
+            $instagraph->setInput($imagePath);
+            $instagraph->setOutput($imageOut);
+            $imagePath = $imageOut;
+            
+            $instagraph->process($method);
+            
+        }
+
+        $session_id = $imageLib->CI->session->userdata('session_id');
+        $arr = array(
+            'image_before' => base_url() . $imagePath,
+            'image_after' => base_url() . $imageOut
+        );
+        $imageLib->CI->db->where('session_id', $session_id);
+        $imageLib->CI->db->update("tbl_sessions", $arr);
+
+        return base_url() . $imageOut;
+    }
+
+    public static function Instagram_Gotham($imagePath) {
+        $imageLib = new ImageLib();
+        return $imageLib->Instagram_Common($imagePath, 'gotham');
+    }
+
+    public static function Instagram_Toaster($imagePath) {
+        $imageLib = new ImageLib();
+        return $imageLib->Instagram_Common($imagePath, 'toaster');
+    }
+
+    public static function Instagram_Nashville($imagePath) {
+        $imageLib = new ImageLib();
+        return $imageLib->Instagram_Common($imagePath, 'nashville');
+    }
+
+    public static function Instagram_Lomo($imagePath) {
+        $imageLib = new ImageLib();
+        return $imageLib->Instagram_Common($imagePath, 'lomo');
+    }
+
+    public static function Instagram_Kelvin($imagePath) {
+        $imageLib = new ImageLib();
+        return $imageLib->Instagram_Common($imagePath, 'kelvin');
+    }
+
+    /**
      * Add frame for a image as simple
      * @param string $image // Đường dẫn đến ảnh
      * @param string $frame //Đường dẫn đến frame
@@ -247,7 +302,7 @@ class ImageLib {
                 $blockTop = $blockDetail->blockTop;
                 $blockDepth = $blockDetail->blockDepth;
                 $blockDegree = $blockDetail->blockDegree;
-                
+
                 switch ($blockFont) {
                     case 'im_arial':
                         $font = './fonts/arial.ttf';
@@ -265,7 +320,7 @@ class ImageLib {
                         $font = './fonts/arial.ttf';
                         break;
                 }
-                
+
                 $waterTextLayer = ImageWorkshop::initTextLayer($blockText, $font, 3 / 4 * $blockFontSize, $blockColor, 0);
                 $waterTextLayer->rotate($blockDegree);
                 $document->addLayer($blockDepth, $waterTextLayer, $blockLeft, $blockTop, 'LT');
