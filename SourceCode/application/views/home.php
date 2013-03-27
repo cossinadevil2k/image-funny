@@ -11,7 +11,7 @@
         <script type="text/javascript" src="<?php echo base_url()?>js/common.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/home.js"></script>
     </head>
-    <body>
+    <body> 
         <div class="Form"> 
             <div class="Header">
                 <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>

@@ -7,6 +7,8 @@
  */
 
 require 'UploadHandler.php';
+require 'facebook.php';
+
 class Frame extends CI_Controller{
     public function __construct() {
         parent::__construct();
@@ -52,7 +54,7 @@ class Frame extends CI_Controller{
         if (isset($frame_detail)){
             $arr['frame_detail_list'] = $frame_detail;
         }
-        
+        $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
         $this->load->view('frame', $arr);
     }
     
@@ -127,7 +129,24 @@ class Frame extends CI_Controller{
     }
     
     public function post_to_facebook(){
-        echo 1;
+        $image_path = $this->input->post('imagePath');
+        $temp = explode("http://local.image.vn/", $image_path);
+        $real_path = $temp[1];
+
+        $config = array();
+        $config['appId'] = $this->config->item('FACEBOOK_APP_ID');
+        $config['secret'] = $this->config->item('FACEBOOK_APP_SECRET');
+        $config['fileUpload'] = true;
+
+        $facebook = new Facebook($config);
+        $user = $facebook->getUser();
+        if ($user){
+            $facebook->setFileUploadSupport(true);
+            $args = array('message' => 'TaoAnh.Net');
+            $args['image'] = '@'.realpath($real_path);            
+            $data = $facebook->api('/me/photos', 'POST', $args);
+            print_r($data);
+        }
     }
     
     public function facebook($frame_id = 0){

@@ -17,6 +17,7 @@
         <script>
             var base_url = '<?php echo base_url(); ?>';
             var selected_id = '<?php if (isset($selected_frame)) echo $selected_frame->id ?>';
+            var fb_app_id = '<?php echo $fb_app_id?>';
         </script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.iframe-transport.js"></script>
@@ -26,8 +27,9 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.blockUI.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
+        <script type="text/javascript" src="<?php echo base_url() ?>js/facebook.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>   
-        <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>
+        <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>        
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.mouse.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.draggable.js"></script>
@@ -41,6 +43,7 @@
         <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/imageCaptionator.js"></script>
     </head>
     <body>
+        <div id="fb-root"></div>
         <div class="Form"> 
             <div class="Header">
                 <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>

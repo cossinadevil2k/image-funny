@@ -364,8 +364,8 @@ $config['pattern_number'] = 15;
 $config['image_name'] = "taoanh_net";
 
 //Config Facebook
-$config['FACEBOOK_APP_ID'] = '';
-$config['FACEBOOK_APP_SECRET'] = '';
+$config['FACEBOOK_APP_ID'] = '483257198396912';
+$config['FACEBOOK_APP_SECRET'] = '902277d5f609daeb54d865d6f485bfa8';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

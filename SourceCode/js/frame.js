@@ -162,10 +162,6 @@ $(document).ready(function(){
         window.location = base_url + 'tao-khung/download?image='+path[1]+'' ;
     });
     
-    $("#facebook").live('click', function(){
-        
-    });
-    
     function getImageInformation(c){
         $('#x').val(c.x);
         $('#y').val(c.y);

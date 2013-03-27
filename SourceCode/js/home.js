@@ -5,8 +5,9 @@ $(document).ready(function(){
         mouseWheel: false,
         callbacks:{
             onTotalScroll: function(){
-                
                 id = $(this).parent().parent().attr('cat_id');
+                var container = $(this).children().children().first();
+                offset = container.children().length;
                 $.ajax({
                     type: 'post',
                     url: '/home/get_more_frame',
@@ -16,10 +17,13 @@ $(document).ready(function(){
                         'categoryID': id
                     },
                     success: function(data){
-                        if (data.status == 'NO_DATA'){
-                            alert('NO DATA');
-                        }else if (data.status == 'SUCCESS'){
-                            
+                        if (data.status == 'SUCCESS'){
+                            frames = data.frame_list;
+                            var html;
+                            for (i = 0; i < frames.length; i++){
+                                html = '<div class="PatternImage"><a href="'+'/tao-khung/'+id+"/"+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></a></div>';                                
+                                container.append(html);
+                            }
                         }
                     }
                 });
