@@ -14,7 +14,42 @@ $(document).ready(function(){
 
     $("#Pattern").mCustomScrollbar({
         horizontalScroll:true,
-        autoHideScrollbar: true
+        autoHideScrollbar: true,
+        advanced:{
+            updateOnBrowserResize: true,
+            updateOnContentResize: true,
+            autoExpandHorizontalScroll: true
+        },
+        callbacks:{
+            onTotalScroll: function(){
+                id = $(this).attr('cat_id');
+                var container = $(this).children().children().first();
+                offset = container.children().length;
+                $.ajax({
+                    type: 'post',
+                    url: '/home/get_more_frame',
+                    dataType: 'json',
+                    data:{
+                        'categoryID': id,
+                        'offset'    : offset
+                    },
+                    beforeSend: function(){
+                        
+                    },
+                    success: function(data){
+                        if (data.status == 'SUCCESS'){
+                            frames = data.frame_list;
+                            var html;
+                            for (i = 0; i < frames.length; i++){
+                                html = '<div id="PatternImage'+frames[i].id+'" class="PatternImage" frame_id="'+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></div>';                                
+                                container.append(html);
+//                                $(this).mCustomScrollbar("update");
+                            }                            
+                        }
+                    }
+                });
+            }
+        }
     });
     
     $(".Category").click(function(){

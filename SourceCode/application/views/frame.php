@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>fancybox/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>jcrop/css/jquery.Jcrop.css" />
-
+        
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery-1.7.min.js"></script>
         <script>
             var base_url = '<?php echo base_url(); ?>';
@@ -108,7 +108,7 @@
                             echo 'style="top:115px;"';
                         }
                         ?>>
-                        <div id="Pattern">
+                        <div id="Pattern" cat_id ="<?php echo $category_enable;?>">
                             <?php foreach ($frame_list as $frame): ?>
                                 <div frame_id ="<?php echo $frame->id ?>" id="PatternImage<?php echo $frame->id ?>" class="PatternImage<?php
                                  if ($frame->id == $selected_frame->id) {

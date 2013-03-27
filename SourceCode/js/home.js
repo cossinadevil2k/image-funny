@@ -3,6 +3,10 @@ $(document).ready(function(){
         horizontalScroll:false,
         autoHideScrollbar: false,
         mouseWheel: false,
+        advanced:{
+            updateOnBrowserResize: true,
+            updateOnContentResize: true
+        },
         callbacks:{
             onTotalScroll: function(){
                 id = $(this).parent().parent().attr('cat_id');
@@ -22,7 +26,7 @@ $(document).ready(function(){
                             var html;
                             for (i = 0; i < frames.length; i++){
                                 html = '<div class="PatternImage"><a href="'+'/tao-khung/'+id+"/"+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></a></div>';                                
-                                container.append(html);
+                                container.append(html);                                
                             }
                         }
                     }
