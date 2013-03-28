@@ -21,9 +21,11 @@ $(document).ready(function(){
                         'categoryID': id
                     },
                     beforeSend: function(){
-                        
+                        html = '<div class="PatternImage" id="loading"><a><img src="/images/common/loading.gif" width="100%"/></a></div>';
+                        container.append(html); 
                     },
                     success: function(data){
+                        $("#loading").remove();
                         if (data.status == 'SUCCESS'){
                             frames = data.frame_list;
                             var html;

@@ -32,9 +32,6 @@ $(document).ready(function(){
                         'categoryID': id,
                         'offset'    : offset
                     },
-                    beforeSend: function(){
-                        
-                    },
                     success: function(data){
                         if (data.status == 'SUCCESS'){
                             frames = data.frame_list;
