@@ -31,7 +31,7 @@
                     </p>            
                     </br>        
                 </div>
-            </div>
+            </div>            
         </div>
         <div class="edit-right">
             <div class="widgetbox">

@@ -49,33 +49,6 @@ class ImageLib {
         return base_url() . $imageOut;
     }
 
-    public static function Instagram_Array($imagePath, $effect = array()) {
-        $imageLib = new ImageLib();
-        $imageOut = '';
-        
-        foreach ($effect as $method) {
-            $instagraph = new Instagraph;
-            $imageOut = $imageLib->dirPath . '/' . uniqid('taoanhnet_', FALSE) . '.png';
-            
-            $instagraph->setInput($imagePath);
-            $instagraph->setOutput($imageOut);
-            $imagePath = $imageOut;
-            
-            $instagraph->process($method);
-            
-        }
-
-        $session_id = $imageLib->CI->session->userdata('session_id');
-        $arr = array(
-            'image_before' => base_url() . $imagePath,
-            'image_after' => base_url() . $imageOut
-        );
-        $imageLib->CI->db->where('session_id', $session_id);
-        $imageLib->CI->db->update("tbl_sessions", $arr);
-
-        return base_url() . $imageOut;
-    }
-
     public static function Instagram_Gotham($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'gotham');
@@ -99,6 +72,11 @@ class ImageLib {
     public static function Instagram_Kelvin($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'kelvin');
+    }
+
+    public static function Instagram_TiltShift($imagePath) {
+        $imageLib = new ImageLib();
+        return $imageLib->Instagram_Common($imagePath, 'TiltShift');
     }
 
     /**
@@ -315,6 +293,18 @@ class ImageLib {
                         break;
                     case 'im_PalatinoLinotype':
                         $font = './fonts/PalatinoLinotype.ttf';
+                        break;
+                    case 'im_Americana':
+                        $font = './fonts/UTMAmericanaBEx.ttf';
+                        break;
+                    case 'im_Androgyne':
+                        $font = './fonts/UTMAndrogyne.ttf';
+                        break;
+                    case 'im_CooperBlack':
+                        $font = './fonts/UTMCooperBlack.ttf';
+                        break;
+                    case 'im_CooperBlackItalic':
+                        $font = './fonts/UTMCooperBlackItalic.ttf';
                         break;
                     default :
                         $font = './fonts/arial.ttf';

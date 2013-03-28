@@ -14,7 +14,11 @@
             <option value="im_arial" style="font-family: im_arial !important;">Arial</option>            
             <option value="im_CourierNew" style="font-family: im_CourierNew !important">Courier New</option>
             <option value="im_PalatinoLinotype" style="font-family: im_PalatinoLinotype !important">Palatino Linotype</option>
-            <option value="uvnvan_bold" style="font-family: uvnvan_bold !important">UVNVAN</option>            
+            <option value="uvnvan_bold" style="font-family: uvnvan_bold !important">Uvnan</option>   
+            <option value="im_Americana" style="font-family: im_Americana !important">Americana</option> 
+            <option value="im_Androgyne" style="font-family: im_Androgyne !important">Androgyne</option> 
+            <option value="im_CooperBlack" style="font-family: im_CooperBlack !important">CooperBlack</option> 
+            <option value="im_CooperBlackItalic" style="font-family: im_CooperBlackItalic !important">CooperBlackItalic</option> 
         </select>
         <label for="fontSize" id="lblFontSize">Font Size:</label>
         <input type="text" name="fontSize" id="fontSize" size="2" value=""> px

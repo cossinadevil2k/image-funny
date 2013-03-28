@@ -1,5 +1,8 @@
 <?php
-
+require_once('./Instafilter/classes/Image.php');
+require_once('./Instafilter/classes/Filter.php');
+require_once('./Instafilter/classes/Filter/Earlybird.php');
+require_once('./Instafilter/classes/Filter/Inkwell.php');
 class Demo extends CI_Controller {
 
     function __construct() {
@@ -11,7 +14,10 @@ class Demo extends CI_Controller {
     function instagram()
     {
         $image = './images/anh_mau.jpg';
-        echo ImageLib::Instagram_Array($image,array('kenvin'));
+        Instafilter\Image::load($image)
+        ->resize(200, 200)
+        ->apply_filter(new Instafilter\Filter\Earlybird())
+        ->save('new.jpg');
     }
     
     function a()

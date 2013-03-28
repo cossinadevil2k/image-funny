@@ -11,8 +11,8 @@
             </li>
             <li><a href="<?php echo base_url(); ?>" class="tables menudrop"><span>Khung ảnh</span></a>
                 <ul>                
-                    <li><a href="<?php echo base_url(); ?>admin/frames"><span>Tất cả danh mục</span></a></li>     
-                    <li><a href="<?php echo base_url(); ?>admin/frames/add"><span>Thêm mới danh mục</span></a></li>                
+                    <li><a href="<?php echo base_url(); ?>admin/frames"><span>Tất cả khung ảnh</span></a></li>     
+                    <li><a href="<?php echo base_url(); ?>admin/frames/add"><span>Thêm mới khung ảnh</span></a></li>                
                 </ul>
             </li>
         </ul>

@@ -38,6 +38,7 @@
     -webkit-box-shadow:0 0 6px #000;
     -moz-border-radius:14px;
     -webkit-border-radius:14px;
+    border-radius: 14px;
 
 }
 
@@ -52,5 +53,6 @@
     width:50px;
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
+    border-radius: 5px;
 }
 
