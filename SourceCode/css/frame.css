@@ -21,7 +21,6 @@
     float:left;
     height: 100%;
     width: 720px;
-    background-color: white;
 }
 .Right{
     float:left;
@@ -65,11 +64,11 @@
     width: 165px;
     float: left;
     margin-right: 2px;
-    opacity: 0.4;
+    opacity: 0.5;
 }
 .PatternImage:hover{
     cursor: pointer;
-    opacity: 2;
+    opacity: 1;
 }
 .mCSB_draggerRail{
     height: 4px !important;
@@ -111,9 +110,6 @@
 }
 #selectBtn:hover{
     cursor: pointer;
-}
-.uploadifive-queue{
-    display: none !important;
 }
 #download:hover{
     cursor: pointer;

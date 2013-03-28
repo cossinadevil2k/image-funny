@@ -14,9 +14,8 @@ $(document).ready(function(){
 
     $("#Pattern").mCustomScrollbar({
         horizontalScroll:true,
-        autoHideScrollbar: true,
+        autoHideScrollbar: false,
         advanced:{
-            updateOnBrowserResize: true,
             updateOnContentResize: true,
             autoExpandHorizontalScroll: true
         },
@@ -43,7 +42,6 @@ $(document).ready(function(){
                             for (i = 0; i < frames.length; i++){
                                 html = '<div id="PatternImage'+frames[i].id+'" class="PatternImage" frame_id="'+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></div>';                                
                                 container.append(html);
-//                                $(this).mCustomScrollbar("update");
                             }                            
                         }
                     }
@@ -70,7 +68,7 @@ $(document).ready(function(){
         $('#PatternImage'+selected_id).removeClass("Selected");
         $(this).addClass("Selected");
         selected_id = frame_id;
-        $("#selected_frame").attr('src', $('#PatternImage'+frame_id+' img').attr('src'));
+        $("#selected_frame").attr('src', base_url + $('#PatternImage'+frame_id).attr('link'));
         $("#selected_frame").attr('frame_id', selected_id);
         $(".addButton").remove();
         insertAddButtonImage(this);
@@ -78,7 +76,9 @@ $(document).ready(function(){
     
     $("#selectBtn").live('click', function(){
         $.fancybox.close();        
-        $.blockUI();
+        $.blockUI({
+            message: '<h1>Vui lòng chờ ...</h1>'
+        });
 
         x = $('#x').val() * original_height / $('#target').height();
         y = $('#y').val() * original_width / $('#target').width();

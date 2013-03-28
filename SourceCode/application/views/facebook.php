@@ -66,7 +66,7 @@
                     <div id="choosePhoto">
                         <div id="Pattern">
                             <?php foreach ($frame_list as $frame):?>
-                            <div frame_id ="<?php echo $frame->id?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
+                            <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
                                 echo " Selected";
                             }?>">
                                 <img src="<?php echo base_url().$frame->pattern;?>" width="100%">

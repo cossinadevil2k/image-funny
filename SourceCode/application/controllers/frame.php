@@ -132,7 +132,7 @@ class Frame extends CI_Controller{
         $image_path = $this->input->post('imagePath');
         $temp = explode("http://local.image.vn/", $image_path);
         $real_path = $temp[1];
-
+        
         $config = array();
         $config['appId'] = $this->config->item('FACEBOOK_APP_ID');
         $config['secret'] = $this->config->item('FACEBOOK_APP_SECRET');

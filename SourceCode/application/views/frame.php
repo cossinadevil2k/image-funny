@@ -110,7 +110,7 @@
                         ?>>
                         <div id="Pattern" cat_id ="<?php echo $category_enable;?>">
                             <?php foreach ($frame_list as $frame): ?>
-                                <div frame_id ="<?php echo $frame->id ?>" id="PatternImage<?php echo $frame->id ?>" class="PatternImage<?php
+                                <div frame_id ="<?php echo $frame->id ?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id ?>" class="PatternImage<?php
                                  if ($frame->id == $selected_frame->id) {
                                      echo " Selected";
                                  }

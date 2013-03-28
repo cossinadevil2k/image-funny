@@ -20,14 +20,17 @@ $(document).ready(function(){
                         'offset' : offset,
                         'categoryID': id
                     },
+                    beforeSend: function(){
+                        
+                    },
                     success: function(data){
                         if (data.status == 'SUCCESS'){
                             frames = data.frame_list;
                             var html;
                             for (i = 0; i < frames.length; i++){
-                                html = '<div class="PatternImage"><a href="'+'/tao-khung/'+id+"/"+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></a></div>';                                
-                                container.append(html);                                
-                            }
+                                html = '<div class="PatternImage"><a href="'+'/tao-khung/'+id+"/"+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></a></div>';         
+                                container.append(html); 
+                            }                             
                         }
                     }
                 });
