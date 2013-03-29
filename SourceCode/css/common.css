@@ -79,7 +79,7 @@ body{
 }
 .Form{
     width: 1024px;
-    height: 1240px;
+    height: 875px;
     margin: 0 auto 0 auto;
     position: relative;
 }
@@ -95,7 +95,7 @@ body{
 .MainContent{
     background-image: url('/images/common/background.png');
     background-repeat: repeat;
-    height: 110%;
+    height: 100%;
     width: 100%;
 }
 .Line{
@@ -127,10 +127,6 @@ body{
     display: none;
     float: right;
     margin-right: 45px;
-}
-#choosePhoto{
-    position: relative;
-    top: 15px;
 }
 .btnWatermark {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;

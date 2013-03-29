@@ -40,7 +40,7 @@ $(document).ready(function(){
             if (response.authResponse) {
                 $.ajax({
                     type:'post',
-                    url: 'frame/post_to_facebook',
+                    url: '/frame/post_to_facebook',
                     data:{
                       'imagePath' : $("#selected_frame").attr('src')
                     },

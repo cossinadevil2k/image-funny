@@ -51,8 +51,9 @@
                 </div>                
             </div>
             <div class="MainContent">
-                <div class="Line"></div>
+                <div class="Line"></div>                
                 <div class="FrameContent">
+                    <div class="LeftF"></div>
                     <div class="Center Facebook">
                         <?php if (isset($selected_frame)):?>
                         <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
@@ -74,11 +75,11 @@
                             <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
                                 echo " Selected";
                             }?>">
-                                <img src="<?php echo base_url().$frame->pattern;?>" width="100%">
+                                <img src="<?php echo base_url().$frame->pattern;?>" width="100%" image_w="<?php echo $frame->width ?>" image_h="<?php echo $frame->height ?>">
                                 <?php foreach ($frame_detail_list as $frame_details):?>
                                     <?php foreach ($frame_details as $frame_detail):?>
                                         <?php if ($frame_detail->frame_id == $frame->id):?>
-                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>"/>
+                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->xc ?>" y="<?php echo $frame_detail->yc ?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
                                         <?php endif;?>
                                     <?php endforeach;?>
                                 <?php endforeach;?>
@@ -92,13 +93,13 @@
                     <div id="Previous" class="NaviF">
                         <img src="<?php echo base_url()?>images/frame/previous.png"/>
                     </div>
-                    <div id="cropDiv" style="display: none; width: 720px;">
+                    <div id="cropDiv" style="display: none; max-width: 610px; max-height: 400px;">
                         <img src="" width="100%" id="target"/>
                         <input type="hidden" id="x"/>
                         <input type="hidden" id="y"/>
                         <input type="hidden" id="w"/>
                         <input type="hidden" id="h"/>
-                        <a id="selectBtn" class="fancybox-buttons" href="#" style="position: absolute; top:10px; z-index: 1000">Chọn</a>
+                        <div id="selectBtn" class="fancybox-buttons" href="#">Chọn</div>
                     </div>
                 </div>
             </div>            

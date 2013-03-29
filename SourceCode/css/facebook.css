@@ -1,7 +1,11 @@
 .Facebook{
     width: 850px;
     height: 315px;
-    margin-left: 58px;
+}
+.LeftF{
+    float: left;
+    width: 60px;
+    height: 320px;
 }
 .RightF{
     height: 320px;
@@ -14,5 +18,8 @@
     top: 393px !important;
 }
 .mCSB_scrollTools{
-    bottom: -1px !important;
+    bottom: -4px !important;
+}
+#choosePhoto{
+    top: 22px;
 }

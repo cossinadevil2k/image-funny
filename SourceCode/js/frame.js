@@ -37,7 +37,7 @@ $(document).ready(function(){
                             frames = data.frame_list;
                             var html;
                             for (i = 0; i < frames.length; i++){
-                                html = '<div id="PatternImage'+frames[i].id+'" class="PatternImage" frame_id="'+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></div>';                                
+                                html = '<div id="PatternImage'+frames[i].id+'" class="PatternImage" link="'+frames[i].link+'" frame_id="'+frames[i].id+'"><img src="/'+frames[i].pattern+'" width="100%"/></div>';                                
                                 container.append(html);
                             }                            
                         }
@@ -178,11 +178,13 @@ $(document).ready(function(){
             frame_count = 0;
             selected_width = $(object).find('img').attr('image_w');
             selected_height = $(object).find('img').attr('image_h');
+            left_width = $(".Left").width();    //width of Left content
+            addButtonRadius = 30;         //Size of add button image
             $('#PatternImage'+selected_id+ ' input[type="hidden"]').each(function(){            
                 var x = $(this).attr('x');
                 var y = $(this).attr('y'); 
                 var id = $(this).attr('id').split("frame")[1];
-                var style = 'top: ' + (y*height/selected_height - 30) + 'px; left: ' + (x*width/selected_width + 145) + 'px;';
+                var style = 'top: ' + (y*height/selected_height - addButtonRadius) + 'px; left: ' + (x*width/selected_width + left_width-addButtonRadius) + 'px;';
                 $(".Center").append('<a href="javascript:addImage('+id+');" id="add'+id+'" class="addButton" style="position: absolute;' + style+'"><img src="'+base_url+'images/common/addButton.png" width="60px"/></a>');           
                 frame_count ++;
             });

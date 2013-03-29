@@ -97,13 +97,13 @@
                     <div id="Previous" class="NaviE">
                         <img src="<?php echo base_url()?>images/frame/previous.png"/>
                     </div>
-                    <div id="cropDiv" style="display: none; width: 720px;">
+                    <div id="cropDiv" style="display: none; max-width: 610px; max-height: 400px;">
                         <img src="" width="100%" id="target"/>
                         <input type="hidden" id="x"/>
                         <input type="hidden" id="y"/>
                         <input type="hidden" id="w"/>
                         <input type="hidden" id="h"/>
-                        <a id="selectBtn" class="fancybox-buttons" href="#" style="position: absolute; top:10px; z-index: 1000">Chọn</a>
+                        <div id="selectBtn" class="fancybox-buttons" href="#">Chọn</dv>
                     </div>
                 </div>
             </div>       

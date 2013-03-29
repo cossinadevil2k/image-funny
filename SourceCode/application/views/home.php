@@ -12,7 +12,7 @@
         <script type="text/javascript" src="<?php echo base_url()?>js/home.js"></script>
     </head>
     <body> 
-        <div class="Form"> 
+        <div class="Form" style="height: 1240px;"> 
             <div class="Header">
                 <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>
                 <div class="HeaderMenu">
@@ -34,7 +34,7 @@
                     </div>
                 </div>                
             </div>
-            <div class="MainContent">
+            <div class="MainContent" style="height: 150%;">
                 <div class="Line"></div>
                 <div class="HomeContent">
                     <?php foreach ($category_arr as $category):?>
@@ -48,7 +48,13 @@
                                     <?php if (!empty($category['frame_list'])):?>
                                         <?php foreach ($category['frame_list'] as $frame):?>
                                                 <div class="PatternImage">
-                                                    <a href="<?php echo base_url('tao-khung/'.$category['id'].'/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
+                                                    <?php if ($category['frame_type'] == 0): //Normal Category?>
+                                                        <a href="<?php echo base_url('tao-khung/'.$category['id'].'/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
+                                                    <?php elseif ($category['frame_type'] == 1): //Facebook cover Category?>
+                                                        <a href="<?php echo base_url('tao-khung/facebook-cover/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
+                                                        <?php elseif ($category['frame_type'] == 3): //InstaEffect Category?>
+                                                        <a href="<?php echo base_url('tao-khung/hieu-ung/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
+                                                    <?php endif;?>
                                                 </div>
                                         <?php endforeach;?>
                                     <?php endif;?>

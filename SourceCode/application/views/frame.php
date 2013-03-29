@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Tạo Ảnh.Net| Tạo khung ảnh</title>
+        <title>Tạo Ảnh.Net | Tạo khung ảnh</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/jquery.minicolors.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/skin1.css">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="Center" id="workspaceBlock">
                         <?php if (isset($selected_frame)): ?>                        
-                            <img id="selected_frame" frame_id="<?php echo $selected_frame->id ?>" src="<?php echo base_url() . $selected_frame->link; ?>" width="720px" height="405px" />
+                            <img id="selected_frame" frame_id="<?php echo $selected_frame->id ?>" src="<?php echo base_url() . $selected_frame->link; ?>" width="720px" height="500px" />
                         <?php endif; ?>
 
                         <?php if ($is_text_frame == 1) { ?>
@@ -138,9 +138,9 @@
                         </div>                        
                     </div>
                 </div> 
-                <div id="cropDiv" style="display: none; max-height: 610px; max-height: 400px">
+                <div id="cropDiv" style="display: none; max-width: 610px; max-height: 400px">
                     <img src="" id="target"/>                    
-                    <div id="selectBtn" class="fancybox-buttons" href="#" style="position: absolute; top:10px; z-index: 1000">Chọn</div>
+                    <div id="selectBtn" class="fancybox-buttons" href="#">Chọn</div>
                 </div>
                 <input type="hidden" id="x"/>
                 <input type="hidden" id="y"/>

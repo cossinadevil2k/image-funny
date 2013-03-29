@@ -56,6 +56,24 @@ class Category_model extends CI_Model {
     }
     
     /**
+     * Get all categories
+     * @return boolean
+     */
+    public function get_all_category(){
+        $sql = "SELECT * FROM tbl_category ORDER BY frame_type ASC";
+        $query = $this->db->query($sql);
+        if ($query->num_rows > 0)
+        {
+            $result = $query->result_array();
+            return $result;
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    
+    /**
      * Check a frame which is a text frame or not
      * @param type $category_id
      * @return boolean
