@@ -62,7 +62,7 @@
                     </div>
                     <div class="MenuPuzzle">
                         <a href="/tao-khung/hieu-ung"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
-                        <div class="MenuText"><label link="/tao-hieu-ung/">Hiệu ứng</label></div>
+                        <div class="MenuText"><label link="/tao-khung/hieu-ung">Hiệu ứng</label></div>
                     </div>
                 </div>                
             </div>
