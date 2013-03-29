@@ -6,8 +6,8 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/jquery.minicolors.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/skin1.css">
-        <!--<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>content-frontend/css/slideControl.css">-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/text_frame.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>fancybox/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.css" />
@@ -29,6 +29,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
         <script type="text/javascript" src="<?php echo base_url() ?>js/facebook.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/frame.js"></script>   
+        <script language="javascript" src="<?php echo base_url(); ?>js/text_frame.js"></script> 
         <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>        
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.dimensions.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/ui.mouse.js"></script>
@@ -38,7 +39,6 @@
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.form.js"></script>        
         <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.minicolors.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jQueryRotate.2.2.js"></script>	
-        <!--<script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.slideControl.js"></script>-->
         <script type="text/javascript" src="<?php echo base_url(); ?>content-frontend/js/jquery.tools.min.js"></script>	
         <script language="javascript" src="<?php echo base_url(); ?>content-frontend/js/imageCaptionator.js"></script>
     </head>
@@ -100,16 +100,10 @@
                             <li>
                                 <div id="facebook"><img src="<?php echo base_url() ?>images/frame/facebook.png" width="100%"/></div>
                             </li>
-                            <li>
-                                <div><img src="<?php echo base_url() ?>images/frame/twitter.png" width="100%"/></div>
-                            </li>
-                            <li>
-                                <div><img src="<?php echo base_url() ?>images/frame/google.png" width="100%"/></div>
-                            </li>  
                         </ul>
                     </div>
                     <div id="choosePhoto" <?php if ($is_text_frame == 1) {
-                            echo 'style="top:115px;"';
+                            echo 'style="top:75px;"';
                         }
                         ?>>
                         <div id="Pattern" cat_id ="<?php echo $category_enable;?>">

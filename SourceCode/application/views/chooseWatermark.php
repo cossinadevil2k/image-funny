@@ -1,4 +1,3 @@
-
 <div id="text_frame">
     <input type="hidden" id="blockCount" name="blockCount" value="1" size="2">
     <input type="hidden" id="blockId" name="blockId" value="" size="2">
@@ -20,9 +19,9 @@
             <option value="im_CooperBlack" style="font-family: im_CooperBlack !important">CooperBlack</option> 
             <option value="im_CooperBlackItalic" style="font-family: im_CooperBlackItalic !important">CooperBlackItalic</option> 
         </select>
-        <label for="fontSize" id="lblFontSize">Font Size:</label>
-        <input type="text" name="fontSize" id="fontSize" size="2" value=""> px
-        <label for="fontColor" id="lblFontSize">Font Size:</label>
+        <label for="fontSize" id="lblFontSize">Size:</label>
+        <input type="text" name="fontSize" id="fontSize" size="2" value="">
+        <label for="fontColor" id="lblFontSize">Màu:</label>
         <input type="text" class="minicolor" name="fontColor" id="fontColor"  value="#ffffff">
         <p>            
             <input type="range" id="degree" name="degree" min="-180" max="180" value="0"/>
@@ -50,10 +49,10 @@
             <div id="workspaceLeft">                                
             </div>
             <br>
-            <input type="button" class="btnWatermark" name="buttonAddText" id="buttonAddText" value="Add Text Block">                        
-            <input type="button" class="btnWatermark" name="buttonAddColor" id="buttonAddColor" value="Add Color Block">         
-            <input type="button" class="btnWatermark" name="buttonDelete" id="buttonDelete" value="Delete This Block" class="noShow">
-            <input class="btnWatermark" type="submit" name="buttonGenerateImage" id="buttonGenerateImage" value="Generate Image">	
+            <input type="button" class="btnWatermark" name="buttonAddText" id="buttonAddText" value="Thêm Text">                        
+<!--            <input type="button" class="btnWatermark" name="buttonAddColor" id="buttonAddColor" value="Add Color Block">         -->
+            <input type="button" class="btnWatermark" name="buttonDelete" id="buttonDelete" value="Xóa Text" class="noShow">
+            <input class="btnWatermark" type="submit" name="buttonGenerateImage" id="buttonGenerateImage" value="Hoàn Thành">	
         </div>
     </div>         
 </div>

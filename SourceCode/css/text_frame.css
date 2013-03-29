@@ -1,0 +1,8 @@
+.ui-draggable:hover{
+    cursor: pointer;
+}
+.TextSelected{
+    padding: 3px;
+    background-color: #51A351;
+    border-radius: 3px;
+}

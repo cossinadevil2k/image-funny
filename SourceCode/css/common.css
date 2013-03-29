@@ -160,3 +160,7 @@ body{
 	top:1px;
 }
 .textBlock{line-height: 0px;}
+
+a, img{
+    border: none;
+}
