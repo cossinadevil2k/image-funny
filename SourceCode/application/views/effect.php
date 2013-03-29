@@ -2,10 +2,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Tạo Ảnh.Net | Tạo Facebook cover</title>
+        <title>Tạo Ảnh.Net | Tạo hiệu ứng</title>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/common.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/frame.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/facebook.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/effect.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>css/libs/jquery.mCustomScrollbar.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/jquery.fancybox.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.css" />
@@ -26,6 +26,7 @@
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
         <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>     
         <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>
+        <script language="javascript" src="<?php echo base_url(); ?>js/effect.js"></script>
     </head>
     <body>
         <div class="Form"> 
@@ -42,23 +43,27 @@
                     </div>
                     <div class="MenuPuzzle">
                         <a href="/tao-khung/facebook-cover"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
-                        <div class="MenuText Enable"><label link="/tao-khung/facebook-cover">Facebook cover</label></div>
+                        <div class="MenuText"><label link="/tao-khung/facebook-cover">Facebook cover</label></div>
                     </div>
                     <div class="MenuPuzzle">
                         <a href="/tao-khung/hieu-ung"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
-                        <div class="MenuText"><label link="/tao-hieu-ung/">Hiệu ứng</label></div>
+                        <div class="MenuText Enable"><label link="/tao-hieu-ung/">Hiệu ứng</label></div>
                     </div>
                 </div>                
             </div>
             <div class="MainContent">
                 <div class="Line"></div>
                 <div class="FrameContent">
-                    <div class="Center Facebook">
+                    <div class="Left LeftE" id="uploadE">
+                        <div class="BtnUpload">Tải ảnh lên</div>
+                        <div id="preview"></div>
+                    </div>
+                    <div class="Center Effect">
                         <?php if (isset($selected_frame)):?>
-                        <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
+                        <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="450px" height="450px"/>
                         <?php endif;?>
                     </div>
-                    <div class="Right RightF">
+                    <div class="Right RightE">
                         <ul style="list-style-type: none">
                             <li>
                                 <div><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
@@ -78,7 +83,7 @@
                                 <?php foreach ($frame_detail_list as $frame_details):?>
                                     <?php foreach ($frame_details as $frame_detail):?>
                                         <?php if ($frame_detail->frame_id == $frame->id):?>
-                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>"/>
+                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
                                         <?php endif;?>
                                     <?php endforeach;?>
                                 <?php endforeach;?>
@@ -86,10 +91,10 @@
                             <?php endforeach;?>                       
                         </div>
                     </div>
-                    <div id="Next" class="NaviF">
+                    <div id="Next" class="NaviE">
                         <img src="<?php echo base_url()?>images/frame/next.png"/>
                     </div>
-                    <div id="Previous" class="NaviF">
+                    <div id="Previous" class="NaviE">
                         <img src="<?php echo base_url()?>images/frame/previous.png"/>
                     </div>
                     <div id="cropDiv" style="display: none; width: 720px;">
@@ -101,7 +106,7 @@
                         <a id="selectBtn" class="fancybox-buttons" href="#" style="position: absolute; top:10px; z-index: 1000">Chọn</a>
                     </div>
                 </div>
-            </div>            
+            </div>       
             <input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
             <div class="Footer">
 

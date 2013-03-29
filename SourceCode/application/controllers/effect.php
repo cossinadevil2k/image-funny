@@ -20,7 +20,7 @@ class Frame extends CI_Controller{
     } 
     
     public function index($category_id = 0, $frame_id = 0){
-        $category_arr = $this->category_model->get_normal_category();
+        $category_arr = $this->category_model->get_non_facebook_category();
         if ($category_id > 0){            
             $frame_list = $this->frame_model->get_by_category($category_id, 10, 0);    
             $is_text_frame = $this->category_model->is_text_frame($category_id);
@@ -55,7 +55,7 @@ class Frame extends CI_Controller{
             $arr['frame_detail_list'] = $frame_detail;
         }
         $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
-        $this->load->view('frame', $arr);
+        $this->load->view('effect', $arr);
     }
     
     public function create_frame(){
@@ -82,6 +82,8 @@ class Frame extends CI_Controller{
         $arr_frame_detail = $this->frame_detail_model->get($frame_id);
         
         $result = ImageLib::AddImageFrame($imageArray, $selected_frame[0]->link, $arr_frame_detail);
+//        $result = ImageLib::AddFrameArray($image_path, $selected_frame[0]->link, $arr_frame_detail, $crop_x, $crop_y, $crop_width, $crop_height);
+//        $result = ImageLib::AddFrame($image_path, $selected_frame[0]->link, $arr_frame_detail[0]->x, $arr_frame_detail[0]->y, $arr_frame_detail[0]->width, $arr_frame_detail[0]->height, $arr_frame_detail[0]->degree, $crop_x, $crop_y, $crop_width, $crop_height);
         if ($result === ""){
             echo json_encode(array('status' => 'error'));
         }else{
@@ -229,36 +231,6 @@ class Frame extends CI_Controller{
         $result = ImageLib::AddWaterMark($imagePath, $arr);        
         echo json_encode($result);
     }  
-    
-    public function effect($frame_id = 0){
-        $category_arr = $this->category_model->get_effect_category();
-        if ($category_arr){
-            $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
-        }
-        
-        foreach ($frame_list as $frame){
-            $arr_frame_detail = $this->frame_detail_model->get($frame->id);
-            $frame_detail[] = $arr_frame_detail;
-        }
-
-        if ($frame_id != 0){
-            $selected_frame = $this->frame_model->get($frame_id);
-            $arr['selected_frame'] = $selected_frame[0];
-        }else{
-            if (!empty($frame_list)){
-                $selected_frame = $frame_list[0];
-                $frame_id = $selected_frame->id;
-                $arr['selected_frame'] = $selected_frame;                 
-            }            
-        }
-        
-        $arr['frame_list'] = $frame_list;
-        if (isset($frame_detail)){
-            $arr['frame_detail_list'] = $frame_detail;
-        }
-        
-        $this->load->view('effect', $arr);
-    }
     
 }
 ?>

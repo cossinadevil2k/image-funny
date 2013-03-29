@@ -38,11 +38,11 @@ class Category_model extends CI_Model {
     }
     
     /**
-     * Get Non-Facebook Categories
+     * Get Non-Facebook and Non-Effect Categories
      * @return boolean
      */
-    public function get_non_facebook_category(){
-        $sql = "SELECT * FROM tbl_category WHERE frame_type != 1";
+    public function get_normal_category(){
+        $sql = "SELECT * FROM tbl_category WHERE frame_type != 1 and frame_type != 3";
         $query = $this->db->query($sql);
         if ($query->num_rows > 0)
         {
@@ -126,6 +126,24 @@ class Category_model extends CI_Model {
             'description' => $description
         );
         $this->db->update('tbl_category',$arr);
+    }
+    
+    /**
+     * Get Effect Category
+     * @return boolean
+     */
+    public function get_effect_category(){
+        $sql = "SELECT * FROM tbl_category WHERE frame_type = 3";
+        $query = $this->db->query($sql);
+        if ($query->num_rows > 0)
+        {
+            $result = $query->result_array();
+            return $result;
+        }
+        else
+        {
+            return FALSE;
+        }
     }
 
 }

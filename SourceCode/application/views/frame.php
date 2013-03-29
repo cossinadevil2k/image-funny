@@ -52,13 +52,17 @@
                         <a href="/trang-chu"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
                         <div class="MenuText"><label link="/trang-chu">Trang chủ</label></div>
                     </div>
-                    <div class="MenuPuzzle ">
+                    <div class="MenuPuzzle">
                         <a href="/tao-khung"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
                         <div class="MenuText Enable"><label link="/tao-khung">Tạo khung</label></div>
                     </div>
                     <div class="MenuPuzzle">
                         <a href="/tao-khung/facebook-cover"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
                         <div class="MenuText"><label link="/tao-khung/facebook-cover">Facebook cover</label></div>
+                    </div>
+                    <div class="MenuPuzzle">
+                        <a href="/tao-khung/hieu-ung"><img src="<?php echo base_url() ?>images/common/menu_puzzle.png" width="80%"/></a>
+                        <div class="MenuText"><label link="/tao-hieu-ung/">Hiệu ứng</label></div>
                     </div>
                 </div>                
             </div>

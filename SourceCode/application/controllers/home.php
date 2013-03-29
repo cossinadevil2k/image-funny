@@ -13,7 +13,7 @@ class Home extends CI_Controller{
     } 
     
     public function index(){
-        $category_arr = $this->category_model->get_non_facebook_category();        
+        $category_arr = $this->category_model->get_normal_category();        
         foreach ($category_arr as &$category){
             $frame_arr = $this->frame_model->get_by_category($category['id'], $this->config->item('pattern_number'), 0);
             $category['frame_list'] = $frame_arr;

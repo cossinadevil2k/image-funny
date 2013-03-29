@@ -44,8 +44,8 @@ $route['tao-khung'] = 'frame';
 $route['tao-khung/(:num)'] = 'frame/index/$1';
 $route['tao-khung/(:num)/(:num)'] = 'frame/index/$1/$2';
 $route['tao-khung/facebook-cover'] = 'frame/facebook';
+$route['tao-khung/hieu-ung'] = 'frame/effect';
 $route['tao-khung/(:any)'] = 'frame/$1';
-$route['tao-facebook-cover/(:num)'] = 'facebook/index/$1';
 $route['404_override'] = '';
 
 /* End of file routes.php */
