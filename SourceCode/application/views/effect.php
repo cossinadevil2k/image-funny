@@ -24,9 +24,8 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>     
-        <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>
-        <script language="javascript" src="<?php echo base_url(); ?>js/effect.js"></script>
+        <script language="javascript" src="<?php echo base_url(); ?>js/effect.js"></script>   
+        <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>        
     </head>
     <body>
         <div class="Form"> 
