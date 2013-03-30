@@ -83,7 +83,7 @@ class Frame_model extends CI_Model {
      * @return type
      */
     function get_by_category($category_id, $limit = -1, $offset = 0) {
-        $this->db->select('id, name, description, link, category_id, pattern,width,height');
+        $this->db->select('id, name, description, link, category_id, pattern, width, height');
         $this->db->from('tbl_frame');
 
         $this->db->where('category_id', $category_id);

@@ -173,7 +173,7 @@ class Frame extends CI_Controller{
         if (isset($frame_detail)){
             $arr['frame_detail_list'] = $frame_detail;
         }
-        
+        $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
         $this->load->view('facebook', $arr);
     }
     
@@ -256,7 +256,7 @@ class Frame extends CI_Controller{
         if (isset($frame_detail)){
             $arr['frame_detail_list'] = $frame_detail;
         }
-        
+        $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
         $this->load->view('effect', $arr);
     }
     

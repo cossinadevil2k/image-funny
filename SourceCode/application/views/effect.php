@@ -15,6 +15,7 @@
         <script>
             var base_url = '<?php echo base_url();?>';
             var selected_id = '<?php if (isset($selected_frame)) echo $selected_frame->id?>';
+            var fb_app_id = '<?php echo $fb_app_id?>';
         </script>
         <script type="text/javascript" src="<?php echo base_url()?>jcrop/js/jquery.Jcrop.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.mCustomScrollbar.js"></script>

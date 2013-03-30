@@ -15,6 +15,7 @@
         <script>
             var base_url = '<?php echo base_url();?>';
             var selected_id = '<?php if (isset($selected_frame)) echo $selected_frame->id?>';
+            var fb_app_id = '<?php echo $fb_app_id?>';
         </script>
         <script type="text/javascript" src="<?php echo base_url()?>jcrop/js/jquery.Jcrop.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>js/jquery.mCustomScrollbar.js"></script>
@@ -24,7 +25,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url()?>js/frame.js"></script>     
+        <script type="text/javascript" src="<?php echo base_url()?>js/facebook.js"></script>     
         <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>
     </head>
     <body>
@@ -70,7 +71,7 @@
                         </ul>
                     </div>
                     <div id="choosePhoto">
-                        <div id="Pattern">
+                        <div id="Pattern" cat_id ="<?php echo $selected_frame->category_id;?>">
                             <?php foreach ($frame_list as $frame):?>
                             <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
                                 echo " Selected";
