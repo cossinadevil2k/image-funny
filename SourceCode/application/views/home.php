@@ -51,7 +51,7 @@
                                                     <?php if ($category['frame_type'] == 0): //Normal Category?>
                                                         <a href="<?php echo base_url('tao-khung/'.$category['id'].'/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
                                                     <?php elseif ($category['frame_type'] == 1): //Facebook cover Category?>
-                                                        <a href="<?php echo base_url('tao-khung/facebook-cover/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
+                                                        <a href="<?php echo base_url('tao-khung/facebook-cover/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%" height="100%"/></a>
                                                         <?php elseif ($category['frame_type'] == 3): //InstaEffect Category?>
                                                         <a href="<?php echo base_url('tao-khung/hieu-ung/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
                                                     <?php endif;?>

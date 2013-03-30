@@ -21,7 +21,7 @@ $(document).ready(function(){
                         'categoryID': id
                     },
                     beforeSend: function(){
-                        html = '<div class="PatternImage" id="loading"><a><img src="/images/common/loading.gif" width="100%"/></a></div>';
+                        html = '<div class="PatternImage" id="loading"><a><img src="/images/common/loading.gif" width="50%"/></a></div>';
                         container.append(html); 
                     },
                     success: function(data){
@@ -30,7 +30,7 @@ $(document).ready(function(){
                             frames = data.frame_list;
                             var html;
                             for (i = 0; i < frames.length; i++){
-                                html = '<div class="PatternImage"><a href="'+'/tao-khung/'+id+"/"+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%"/></a></div>';         
+                                html = '<div class="PatternImage"><a href="'+'/tao-khung/'+id+"/"+frames[i].id+'"><img src="'+frames[i].pattern+'" width="100%" height="100%"/></a></div>';         
                                 container.append(html); 
                             }                             
                         }
