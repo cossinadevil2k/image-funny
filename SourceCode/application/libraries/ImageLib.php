@@ -49,32 +49,32 @@ class ImageLib {
         return base_url() . $imageOut;
     }
 
-    public static function Instagram_Gotham($imagePath) {
+    public function Instagram_Gotham($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'gotham');
     }
 
-    public static function Instagram_Toaster($imagePath) {
+    public function Instagram_Toaster($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'toaster');
     }
 
-    public static function Instagram_Nashville($imagePath) {
+    public function Instagram_Nashville($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'nashville');
     }
 
-    public static function Instagram_Lomo($imagePath) {
+    public function Instagram_Lomo($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'lomo');
     }
 
-    public static function Instagram_Kelvin($imagePath) {
+    public function Instagram_Kelvin($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'kelvin');
     }
 
-    public static function Instagram_TiltShift($imagePath) {
+    public function Instagram_TiltShift($imagePath) {
         $imageLib = new ImageLib();
         return $imageLib->Instagram_Common($imagePath, 'TiltShift');
     }

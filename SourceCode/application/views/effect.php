@@ -57,7 +57,7 @@
                     <div class="Left LeftE" id="uploadE">
                         <div class="BtnUpload">Tải ảnh lên</div>
                         <div id="preview">
-                            <img id="effect_image" width="100%" height="100%">
+                            <img id="effect_image" image_path=""  width="100%" height="100%">
                         </div>
                     </div>
                     <div class="Center Effect">
@@ -81,7 +81,7 @@
                             <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
                                 echo " Selected";
                             }?>">
-                                <img src="<?php echo base_url().$frame->pattern;?>" width="100%">
+                                <img class="effect_selected" effect="<?php echo $frame->name;?>" src="<?php echo base_url().$frame->pattern;?>" width="100%">
                                 <?php foreach ($frame_detail_list as $frame_details):?>
                                     <?php foreach ($frame_details as $frame_detail):?>
                                         <?php if ($frame_detail->frame_id == $frame->id):?>

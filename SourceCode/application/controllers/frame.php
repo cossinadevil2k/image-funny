@@ -282,15 +282,19 @@ class Frame extends CI_Controller {
             $document->cropInPixel($temp[4], $temp[5], $temp[2], $temp[3],'LT');
             $image_name = uniqid('taoanhnet_', FALSE) . '.' . $ext;
             $document->save('./resources/users', $image_name, true, 'transparent', 100);
-            echo json_encode(array('thumb_path'=>'./resources/users/' . $image_name)) ;
+            echo json_encode(array('thumb_path'=>base_url().'resources/users/' . $image_name,
+                'image_path'=>'./resources/users/' . $image_name
+                )) ;
             
         }
     }
     
     public function create_effect()
     {
+        $effectSelected = $this->input->post('effect');
         $image = $this->input->post('image');
-        $effect = ImageLib::Instagram_Lomo($image);
+        $imageLib = new ImageLib();
+        $effect = $imageLib->{'Instagram_'.$effectSelected}($image);
         echo json_encode(array('image_path'=>$effect)) ;
     }
 

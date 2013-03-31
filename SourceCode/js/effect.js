@@ -82,11 +82,12 @@ $(document).ready(function(){
                 'imageString': imageString
             },
             success: function(data){
-                //$.unblockUI();                
-                //$("#selected_frame").attr('src', data.image_path);
-                //$(".addButton").remove();
-                //alert(data.thumb_path);
-                $.ajax({
+                $.unblockUI();                
+                $("#effect_image").attr('src', data.thumb_path);
+                $("#effect_image").attr('image_path', data.image_path);
+                $(".addButton").remove();
+            //alert(data.thumb_path);
+            /*$.ajax({
                     type: "post",
                     url : base_url + 'frame/create_effect',
                     dataType: "json",
@@ -100,7 +101,31 @@ $(document).ready(function(){
                         //alert(data.image_path);
                         
                     }
-                });
+                });*/
+            }
+        });
+    });
+    
+    $('.effect_selected').click(function(){
+        $.blockUI({
+            message: '<h1>Vui lòng chờ ...</h1>'
+        });
+        var effect = $(this).attr('effect');
+        var image = $("#effect_image").attr('image_path');
+        $.ajax({
+            type: "post",
+            url : base_url + 'frame/create_effect',
+            dataType: "json",
+            data: {
+                'image': image,
+                'effect':effect
+            },
+            success: function(data){
+                $.unblockUI();                
+                $("#selected_frame").attr('src', data.image_path);
+                //$(".addButton").remove();
+            //alert(data.image_path);
+                        
             }
         });
     });
