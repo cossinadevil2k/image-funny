@@ -56,7 +56,9 @@
                 <div class="FrameContent">
                     <div class="Left LeftE" id="uploadE">
                         <div class="BtnUpload">Tải ảnh lên</div>
-                        <div id="preview"></div>
+                        <div id="preview">
+                            <img id="effect_image" width="100%" height="100%">
+                        </div>
                     </div>
                     <div class="Center Effect">
                         <?php if (isset($selected_frame)):?>

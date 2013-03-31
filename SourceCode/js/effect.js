@@ -72,24 +72,40 @@ $(document).ready(function(){
         y = $('#y').val() * original_width / $('#target').width();
         crop_width = $('#w').val() * original_height / $('#target').height();
         crop_height = $('#h').val() * original_width / $('#target').width();
-        imageString += frameDetailID + "|" + "./resources/users/" + imageFile.name + "|"+x+"|"+y+"|"+crop_width+"|"+crop_height+"#";          
+        imageString = frameDetailID + "|" + "./resources/users/" + imageFile.name + "|"+x+"|"+y+"|"+crop_width+"|"+crop_height;          
         $.ajax({
             type: "post",
-            url : base_url + 'frame/create_frame',
+            url : base_url + 'frame/create_thumb',
             dataType: "json",
             data: {
                 'frame_id': selected_id,
                 'imageString': imageString
             },
             success: function(data){
-                $.unblockUI();
-                $("#selected_frame").attr('src', data.image_path);
-                $(".addButton").remove();
+                //$.unblockUI();                
+                //$("#selected_frame").attr('src', data.image_path);
+                //$(".addButton").remove();
+                //alert(data.thumb_path);
+                $.ajax({
+                    type: "post",
+                    url : base_url + 'frame/create_effect',
+                    dataType: "json",
+                    data: {
+                        'image': data.thumb_path                        
+                    },
+                    success: function(data){
+                        $.unblockUI();                
+                        $("#effect_image").attr('src', data.image_path);
+                        $(".addButton").remove();
+                        //alert(data.image_path);
+                        
+                    }
+                });
             }
         });
     });
     
-     $('#fileupload').fileupload({
+    $('#fileupload').fileupload({
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
@@ -159,7 +175,7 @@ $(document).ready(function(){
     });
     
     $("#uploadE").live('click',function(){
-       $("#fileupload").trigger('click');
+        $("#fileupload").trigger('click');
     }); 
     
     $("#download").live('click', function(){

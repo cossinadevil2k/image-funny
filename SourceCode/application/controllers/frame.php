@@ -5,11 +5,12 @@
  *
  * @author Tan
  */
-
 require 'UploadHandler.php';
 require 'facebook.php';
+require_once('./PHPImageWorkshop/ImageWorkshop.php');
 
-class Frame extends CI_Controller{
+class Frame extends CI_Controller {
+
     public function __construct() {
         parent::__construct();
         $this->load->model('category_model');
@@ -17,56 +18,56 @@ class Frame extends CI_Controller{
         $this->load->model('frame_detail_model');
         $this->load->library('ImageLib');
         $this->load->model("Watermark");
-    } 
-    
-    public function index($category_id = 0, $frame_id = 0){
+    }
+
+    public function index($category_id = 0, $frame_id = 0) {
         $category_arr = $this->category_model->get_normal_category();
-        if ($category_id > 0){            
-            $frame_list = $this->frame_model->get_by_category($category_id, 10, 0);    
+        if ($category_id > 0) {
+            $frame_list = $this->frame_model->get_by_category($category_id, 10, 0);
             $is_text_frame = $this->category_model->is_text_frame($category_id);
             $arr['category_enable'] = $category_id;
-        }else{
+        } else {
             $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
             $arr['category_enable'] = $category_arr[0]['id'];
             $is_text_frame = FALSE;
         }
-        
-        foreach ($frame_list as $frame){
+
+        foreach ($frame_list as $frame) {
             $arr_frame_detail = $this->frame_detail_model->get($frame->id);
             $frame_detail[] = $arr_frame_detail;
         }
 
-        if ($frame_id != 0){
+        if ($frame_id != 0) {
             $selected_frame = $this->frame_model->get($frame_id);
             $arr['selected_frame'] = $selected_frame[0];
             $arr['category_enable'] = $selected_frame[0]->category_id;
-        }else{
-            if (!empty($frame_list)){
+        } else {
+            if (!empty($frame_list)) {
                 $selected_frame = $frame_list[0];
                 $frame_id = $selected_frame->id;
-                $arr['selected_frame'] = $selected_frame;                 
-            }            
+                $arr['selected_frame'] = $selected_frame;
+            }
         }
-        
-        $arr['category_arr'] = $category_arr;        
+
+        $arr['category_arr'] = $category_arr;
         $arr['frame_list'] = $frame_list;
         $arr['is_text_frame'] = $is_text_frame;
-        if (isset($frame_detail)){
+        if (isset($frame_detail)) {
             $arr['frame_detail_list'] = $frame_detail;
         }
         $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
         $this->load->view('frame', $arr);
     }
-    
-    public function create_frame(){
+
+    public function create_frame() {
         $frame_id = $this->input->post('frame_id');
         $image_string = $this->input->post('imageString');
         $temps = explode("#", $image_string);
-        
+
         $imageArray = array();
-        foreach ($temps as $temp){
+        foreach ($temps as $temp) {
             $temp = explode("|", $temp);
-            if (!empty($temp[0])){
+            if (!empty($temp[0])) {
                 $image = new stdClass();
                 $image->frame_detail_id = $temp[0];
                 $image->path = $temp[1];
@@ -75,62 +76,62 @@ class Frame extends CI_Controller{
                 $image->crop_width = $temp[4];
                 $image->crop_height = $temp[5];
                 $imageArray[] = $image;
-            }            
+            }
         }
 
-        $selected_frame = $this->frame_model->get($frame_id);       
+        $selected_frame = $this->frame_model->get($frame_id);
         $arr_frame_detail = $this->frame_detail_model->get($frame_id);
-        
+
         $result = ImageLib::AddImageFrame($imageArray, $selected_frame[0]->link, $arr_frame_detail);
-        if ($result === ""){
+        if ($result === "") {
             echo json_encode(array('status' => 'error'));
-        }else{
+        } else {
             echo json_encode(array('status' => 'success', 'image_path' => $result));
         }
         die();
     }
-    
-    public function get_frame_detail(){
+
+    public function get_frame_detail() {
         $frame_id = $this->input->post('frame_id');
         $arr_frame_detail = $this->frame_detail_model->get($frame_id);
-        if ($arr_frame_detail){
+        if ($arr_frame_detail) {
             echo json_encode(array('status' => 'success', 'frame_detail' => $arr_frame_detail));
-        }else{
+        } else {
             echo json_encode(array('status' => 'error'));
         }
     }
-    
-    public function get_image_dimensions(){
+
+    public function get_image_dimensions() {
         $path = $this->input->post('image_path');
         $this->session->set_userdata('UserImage', $path);
         $image_info = getimagesize($path);
         $temp = explode('"', $image_info[3]);
         $dimensions['width'] = $temp[1];
-        $dimensions['height']= $temp[3];
+        $dimensions['height'] = $temp[3];
         echo json_encode($dimensions);
         die();
     }
 
-    public function download(){
+    public function download() {
         $image_path = $this->input->get('image');
         header('Content-Description: File Transfer');
         header("Content-type: application/octet-stream");
-        header('Content-Disposition: attachment; filename="'.basename($image_path).'"');
+        header('Content-Disposition: attachment; filename="' . basename($image_path) . '"');
         header('Content-Transfer-Encoding: binary');
         header('Connection: Keep-Alive');
         header('Expires: 0');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Pragma: public');
-        flush();    
+        flush();
         readfile($image_path);
         die();
     }
-    
-    public function post_to_facebook(){
+
+    public function post_to_facebook() {
         $image_path = $this->input->post('imagePath');
         $temp = explode("http://local.image.vn/", $image_path);
         $real_path = $temp[1];
-        
+
         $config = array();
         $config['appId'] = $this->config->item('FACEBOOK_APP_ID');
         $config['secret'] = $this->config->item('FACEBOOK_APP_SECRET');
@@ -138,127 +139,161 @@ class Frame extends CI_Controller{
 
         $facebook = new Facebook($config);
         $user = $facebook->getUser();
-        if ($user){
+        if ($user) {
             $facebook->setFileUploadSupport(true);
             $args = array('message' => 'TaoAnh.Net');
-            $args['image'] = '@'.realpath($real_path);            
+            $args['image'] = '@' . realpath($real_path);
             $data = $facebook->api('/me/photos', 'POST', $args);
             print_r($data);
         }
     }
-    
-    public function facebook($frame_id = 0){
+
+    public function facebook($frame_id = 0) {
         $category_arr = $this->category_model->get_facebook_category();
-        if ($category_arr){
+        if ($category_arr) {
             $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
         }
-        
-        foreach ($frame_list as $frame){
+
+        foreach ($frame_list as $frame) {
             $arr_frame_detail = $this->frame_detail_model->get($frame->id);
             $frame_detail[] = $arr_frame_detail;
         }
 
-        if ($frame_id != 0){
+        if ($frame_id != 0) {
             $selected_frame = $this->frame_model->get($frame_id);
             $arr['selected_frame'] = $selected_frame[0];
-        }else{
-            if (!empty($frame_list)){
+        } else {
+            if (!empty($frame_list)) {
                 $selected_frame = $frame_list[0];
                 $frame_id = $selected_frame->id;
-                $arr['selected_frame'] = $selected_frame;                 
-            }            
+                $arr['selected_frame'] = $selected_frame;
+            }
         }
-        
+
         $arr['frame_list'] = $frame_list;
-        if (isset($frame_detail)){
+        if (isset($frame_detail)) {
             $arr['frame_detail_list'] = $frame_detail;
         }
+
         $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
+
         $this->load->view('facebook', $arr);
     }
-    
-    public function upload(){
+
+    public function upload() {
         $upload_handler = new UploadHandler();
     }
-    
-    function createWaterMark()
-    {
+
+    function createWaterMark() {
         $detail = $this->input->post('detail');
         $imagePath = $this->input->post('imagePath');
         $details = explode("^", $detail);
         $arr = array();
-        foreach ($details as $watermark)
-        {
+        foreach ($details as $watermark) {
             $watermarks = explode("|", $watermark);
-            if($watermarks[0]=='tBlock')
-            {
+            if ($watermarks[0] == 'tBlock') {
                 $blockDetail = new Watermark();
-                
+
                 $blockDetail->type = 'tBlock';
-                $blockDetail->blockText = $watermarks[1];                
-                $blockDetail->blockFont= $watermarks[2];
-                $blockDetail->blockFontSize= $watermarks[3];
-                $blockDetail->blockStyle= $watermarks[4];
-                $blockDetail->blockTextDecoration= $watermarks[5];
-                $blockDetail->blockColor= substr($watermarks[7],1,strlen($watermarks[7])-1);
-                $blockDetail->blockLeft= $watermarks[8];
-                $blockDetail->blockTop= $watermarks[9];
-                $blockDetail->blockDepth= $watermarks[10];
-                $blockDetail->blockDegree= $watermarks[11];
-                
+                $blockDetail->blockText = $watermarks[1];
+                $blockDetail->blockFont = $watermarks[2];
+                $blockDetail->blockFontSize = $watermarks[3];
+                $blockDetail->blockStyle = $watermarks[4];
+                $blockDetail->blockTextDecoration = $watermarks[5];
+                $blockDetail->blockColor = substr($watermarks[7], 1, strlen($watermarks[7]) - 1);
+                $blockDetail->blockLeft = $watermarks[8];
+                $blockDetail->blockTop = $watermarks[9];
+                $blockDetail->blockDepth = $watermarks[10];
+                $blockDetail->blockDegree = $watermarks[11];
+
                 $arr[] = $blockDetail;
-            }
-            elseif($watermarks[0]=='cBlock')
-            {
+            } elseif ($watermarks[0] == 'cBlock') {
                 $blockDetail = new Watermark();
-                
-                $blockDetail->type = 'cBlock';                
-                
-                $blockDetail->blockColor = substr($watermarks[1],1,strlen($watermarks[1])-1);
+
+                $blockDetail->type = 'cBlock';
+
+                $blockDetail->blockColor = substr($watermarks[1], 1, strlen($watermarks[1]) - 1);
                 $blockDetail->blockLeft = $watermarks[2];
                 $blockDetail->blockTop = $watermarks[3];
                 $blockDetail->blockWidth = $watermarks[4];
                 $blockDetail->blockHeight = $watermarks[5];
                 $blockDetail->blockDepth = $watermarks[6];
-                $blockDetail->blockDegree= $watermarks[7];
-                
+                $blockDetail->blockDegree = $watermarks[7];
+
                 $arr[] = $blockDetail;
             }
         }
-        usort($arr, array("Watermark","compare_block_deep"));
-        $result = ImageLib::AddWaterMark($imagePath, $arr);        
+        usort($arr, array("Watermark", "compare_block_deep"));
+        $result = ImageLib::AddWaterMark($imagePath, $arr);
         echo json_encode($result);
-    }  
-    
-    public function effect($frame_id = 0){
+    }
+
+    public function effect($frame_id = 0) {
         $category_arr = $this->category_model->get_effect_category();
-        if ($category_arr){
+        if ($category_arr) {
             $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
         }
-        
-        foreach ($frame_list as $frame){
+
+        foreach ($frame_list as $frame) {
             $arr_frame_detail = $this->frame_detail_model->get($frame->id);
             $frame_detail[] = $arr_frame_detail;
         }
 
-        if ($frame_id != 0){
+        if ($frame_id != 0) {
             $selected_frame = $this->frame_model->get($frame_id);
             $arr['selected_frame'] = $selected_frame[0];
-        }else{
-            if (!empty($frame_list)){
+        } else {
+            if (!empty($frame_list)) {
                 $selected_frame = $frame_list[0];
                 $frame_id = $selected_frame->id;
-                $arr['selected_frame'] = $selected_frame;                 
-            }            
+                $arr['selected_frame'] = $selected_frame;
+            }
         }
-        
+
         $arr['frame_list'] = $frame_list;
-        if (isset($frame_detail)){
-            $arr['frame_detail_list'] = $frame_detail;
-        }
+        if (isset($frame_detail)) {
+            $arr['frame_detail_list'] = $frame_detail;        }
+            
+
         $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
+
         $this->load->view('effect', $arr);
     }
+
+    public function create_thumb() {
+        //$frame_id = $this->input->post('frame_id');
+        $image_string = $this->input->post('imageString');
+
+        $temp = explode("|", $image_string);
+
+        if (!empty($temp[1])) {
+
+            $image = new stdClass();
+            $image->frame_detail_id = $temp[0];
+            $image->path = $temp[1];
+            $image->crop_x = $temp[2];
+            $image->crop_y = $temp[3];
+            $image->crop_width = $temp[4];
+            $image->crop_height = $temp[5];
+
+
+            $ext = pathinfo($image->path, PATHINFO_EXTENSION);
+            $document = \PHPImageWorkshop\ImageWorkshop::initFromPath($temp[1]);
+            $document->cropInPixel($temp[4], $temp[5], $temp[2], $temp[3],'LT');
+            $image_name = uniqid('taoanhnet_', FALSE) . '.' . $ext;
+            $document->save('./resources/users', $image_name, true, 'transparent', 100);
+            echo json_encode(array('thumb_path'=>'./resources/users/' . $image_name)) ;
+            
+        }
+    }
     
+    public function create_effect()
+    {
+        $image = $this->input->post('image');
+        $effect = ImageLib::Instagram_Lomo($image);
+        echo json_encode(array('image_path'=>$effect)) ;
+    }
+
 }
+
 ?>
