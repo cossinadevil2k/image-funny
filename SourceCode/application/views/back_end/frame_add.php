@@ -21,11 +21,16 @@
                         </span>
                     </p>
                     </br>
-                    <p><label>Link ảnh:</label></p>                            
+                    <p><label>Link khung:</label></p>                            
                     <p>
                         <input type="text" readonly="readonly" class="longinput" name="txtLink">
                     </p>            
-                    </br>        
+                    </br>
+                    <p><label>Link ảnh mẫu:</label></p>                            
+                    <p>
+                        <input type="text" readonly="readonly" class="longinput" name="txtPattern">
+                    </p>            
+                    </br> 
                 </div>
             </div>
             <div class="seo-packages widgetbox" id="parameter_frame">
@@ -49,6 +54,20 @@
                         <label>Y</label>
                         <span class="field small-form">
                             <input name="txtY[]" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>
+                    <br>
+                    <p>                        
+                        <label>X (Tâm)</label>
+                        <span class="field small-form">
+                            <input name="txtXC[]" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>
+                    <br>
+                    <p>                        
+                        <label>Y (Tâm)</label>
+                        <span class="field small-form">
+                            <input name="txtYC[]" class="smallinput validate[required]" type="text" value="">
                         </span>                                            
                     </p>
                     <br>
@@ -80,7 +99,7 @@
                 <div class="title"><h2 class="general"><span>Thêm khung ảnh</span></h2></div>
                 <div class="widgetcontent" style="display: block;">                                  
                     <p class="stdformbutton">
-                        <button class="submit radius2">Thêm khung ảnh</button>
+                        <button class="submit radius2" style="background-color: #51A351; border: none;">Thêm khung ảnh</button>
                         <input type="reset" value="Hủy" class="reset radius2">
                     </p>
                 </div><!--widgetcontent-->

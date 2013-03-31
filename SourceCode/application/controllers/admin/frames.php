@@ -56,18 +56,24 @@ class Frames extends CI_Controller {
         if ($this->input->post('txtName')) {
             $name = $this->input->post('txtName');
             $desc = $this->input->post('txtDescription');
-            $link = $this->input->post('hdffeatured_image');
-            $pattern = $this->input->post('hdffeatured_image_patern');
+//            $link = $this->input->post('hdffeatured_image');
+//            $pattern = $this->input->post('hdffeatured_image_patern');
+            $link = $this->input->post('txtLink');
+            $pattern = $this->input->post('txtPattern');
             $cat_id = $this->input->post('ddlCat');
-            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath(".".$link);
-            $frame_width = $image->getWidth();
-            $frame_height = $image->getHeight();            
+//            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath(".".$link);
+//            $frame_width = $image->getWidth();
+//            $frame_height = $image->getHeight();            
             
             $x = $this->input->post("txtX");
             $y = $this->input->post("txtY");
+            $xc = $this->input->post("txtXC");
+            $yc = $this->input->post("txtYC");
             $width = $this->input->post("txtWidth");
             $height = $this->input->post("txtHeight");
             $degree = $this->input->post("txtDegree");
+            
+            print_r($x);
             
             $this->Frame_model->add($name, $desc, $link, $cat_id,$x,$y,$width,$height,$degree,$frame_width,$frame_height,$pattern);
             redirect('admin/frames');            

@@ -48,6 +48,7 @@ $route['tao-khung/facebook-cover/(:num)'] = 'frame/facebook/$1';
 $route['tao-khung/hieu-ung'] = 'frame/effect';
 $route['tao-khung/hieu-ung/(:num)'] = 'frame/effect/$1';
 $route['tao-khung/(:any)'] = 'frame/$1';
+$route['admin'] = 'admin/category';
 $route['404_override'] = '';
 
 /* End of file routes.php */
