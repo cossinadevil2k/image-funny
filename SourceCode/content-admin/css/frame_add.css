@@ -1,0 +1,27 @@
+.UploadBtn{
+    background-color: #51A351;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    float: left;
+    font-weight: bold;
+    left: 640px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    position: absolute;
+    text-align: center;
+    text-decoration: none;
+    
+    width: 75px;
+}
+
+#btnLink{
+    top: 223px;
+}
+
+#btnPattern{
+    top: 298px;
+}
+
+#btnLink:hover, #btnPattern:hover{
+    cursor: pointer;
+}

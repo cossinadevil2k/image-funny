@@ -25,10 +25,12 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
-        <script type="text/javascript" src="<?php echo base_url()?>js/facebook.js"></script>     
+        <script type="text/javascript" src="<?php echo base_url() ?>js/connect-fb.js"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>js/facebook.js"></script>
         <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>
     </head>
     <body>
+        <div id="fb-root"></div>
         <div class="Form"> 
             <div class="Header">
                 <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>
@@ -63,10 +65,10 @@
                     <div class="Right RightF">
                         <ul style="list-style-type: none">
                             <li>
-                                <div><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
+                                <div id="download"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
                             </li>
                             <li>
-                                <div><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
+                                <div id="facebook"><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
                             </li>
                         </ul>
                     </div>

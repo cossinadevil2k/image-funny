@@ -1,3 +1,11 @@
+<link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/frame_add.css" type="text/css" />
+<script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.iframe-transport.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/frame_add.js"></script>
+<input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/admin/frames/upload" multiple style="display: none;">
 <ul class="maintabmenu multipletabmenu">        
     <li><a href="<?php echo base_url(); ?>admin/frames">Tất cả khung ảnh</a></li>
     <li class="current"><a href="<?php echo base_url(); ?>admin/frames/add">Thêm mới khung ảnh</a></li>    
@@ -24,11 +32,13 @@
                     <p><label>Link khung:</label></p>                            
                     <p>
                         <input type="text" readonly="readonly" class="longinput" name="txtLink">
+                        <div id="btnLink" class="UploadBtn">Upload Ảnh</div>
                     </p>            
                     </br>
                     <p><label>Link ảnh mẫu:</label></p>                            
                     <p>
                         <input type="text" readonly="readonly" class="longinput" name="txtPattern">
+                        <div id="btnPattern" class="UploadBtn">Upload Ảnh</div>
                     </p>            
                     </br> 
                 </div>

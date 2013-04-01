@@ -34,11 +34,11 @@ class UploadHandler
         'min_height' => 'Image requires a minimum height'
     );
 
-    function __construct($options = null, $initialize = true) {
+    function __construct($options = null, $initialize = true, $upload_dir = null) {
         $this->options = array(
             'script_url' => $this->get_full_url().'/',
-            'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']).'/resources/users/',
-            'upload_url' => $this->get_full_url().'/resources/users/',
+            'upload_dir' => dirname($_SERVER['SCRIPT_FILENAME']).(isset($upload_dir) ? $upload_dir : '/resources/users/'),
+            'upload_url' => $this->get_full_url().(isset($upload_dir) ? $upload_dir : '/resources/users/'),
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -100,10 +100,12 @@ class UploadHandler
                     'jpeg_quality' => 80
                 ),
                 */
-                'thumbnail' => array(
-                    'max_width' => 80,
-                    'max_height' => 80
-                )
+                
+                //Remove thumbnail - Tan Hoang
+//                'thumbnail' => array(
+//                    'max_width' => 80,
+//                    'max_height' => 80
+//                )
             )
         );
         if ($options) {

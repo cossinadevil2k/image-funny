@@ -1,5 +1,6 @@
 <?php
 require_once('./PHPImageWorkshop/ImageWorkshop.php');
+require '/../UploadHandler.php';
 /**
  * @author HungPV <phamvanhung0818@gmail.com>
  * @version 1.0.0
@@ -120,6 +121,12 @@ class Frames extends CI_Controller {
         $data['lstCategory'] = $this->Category_model->get();
         $data['view'] = 'back_end/frame_edit';
         $this->load->view('back_end/template_noright', $data);
+    }
+    
+    public function upload() {
+        $category_path = $this->input->post('categoryPath');
+        $upload_dir = '/resources/';
+        $upload_handler = new UploadHandler(null, true, $upload_dir);
     }
 
 }

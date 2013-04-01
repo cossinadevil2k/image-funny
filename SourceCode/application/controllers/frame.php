@@ -144,7 +144,12 @@ class Frame extends CI_Controller {
             $args = array('message' => 'TaoAnh.Net');
             $args['image'] = '@' . realpath($real_path);
             $data = $facebook->api('/me/photos', 'POST', $args);
-            print_r($data);
+            if (!empty($data)){
+                echo json_encode(array('status' => 'SUCCESS'));
+            }else{
+                echo json_encode(array('status' => 'FAIL'));
+            }
+            die();
         }
     }
 

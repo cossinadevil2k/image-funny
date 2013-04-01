@@ -25,10 +25,12 @@
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="<?php echo base_url()?>fancybox/helpers/jquery.fancybox-buttons.js"></script> 
+        <script type="text/javascript" src="<?php echo base_url() ?>js/connect-fb.js"></script>  
         <script language="javascript" src="<?php echo base_url(); ?>js/effect.js"></script>   
         <script language="javascript" src="<?php echo base_url(); ?>js/common.js"></script>        
     </head>
     <body>
+        <div id="fb-root"></div>
         <div class="Form"> 
             <div class="Header">
                 <a href="/trang-chu" class="Logo"><img src="<?php echo base_url() ?>images/common/logo.png" width="100%"/></a>
@@ -68,19 +70,19 @@
                     <div class="Right RightE">
                         <ul style="list-style-type: none">
                             <li>
-                                <div><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
+                                <div id="download"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
                             </li>
                             <li>
-                                <div><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
+                                <div id="facebook"><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
                             </li>
                         </ul>
                     </div>
                     <div id="choosePhoto">
-                        <div id="Pattern">
+                        <div id="Pattern" style="height: 120px">
                             <?php foreach ($frame_list as $frame):?>
                             <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
                                 echo " Selected";
-                            }?>">
+                                }?>" style="width: 120px; height: 120px">
                                 <img class="effect_selected" effect="<?php echo $frame->name;?>" src="<?php echo base_url().$frame->pattern;?>" width="100%">
                                 <?php foreach ($frame_detail_list as $frame_details):?>
                                     <?php foreach ($frame_details as $frame_detail):?>
