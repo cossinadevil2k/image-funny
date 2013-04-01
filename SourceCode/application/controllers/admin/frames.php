@@ -160,7 +160,7 @@ class Frames extends CI_Controller {
     
     public function upload() {
         $category_path = $this->input->post('categoryPath');
-        $upload_dir = '/resources/';
+        $upload_dir = '/resources/'.$category_path."/";
         $upload_handler = new UploadHandler(null, true, $upload_dir);
     }
 

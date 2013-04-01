@@ -2,8 +2,11 @@
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.iframe-transport.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
+<script>
+    var base_url = '<?php echo base_url();?>';
+</script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/frame_add.js"></script>
 <input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/admin/frames/upload" multiple style="display: none;">
 <ul class="maintabmenu multipletabmenu">        
@@ -17,7 +20,7 @@
                 <div class="stepContainer"> 
                     <p><label>Thể loại khung ảnh:</label></p>
                     <p>
-                        <select name="ddlCat" class="longinput" style="width: 97%">                        
+                        <select name="ddlCat" class="longinput" style="width: 97%" id="ddlCat">                        
                             <option value="0">-- Chưa chọn thể loại --</option>                        
                             <?php
                             foreach ($lstCategory as $category) {
@@ -27,6 +30,9 @@
                             }
                             ?>
                         </select>
+                        <?php foreach ($lstCategory as $category):?>
+                            <input type="hidden" id="cate<?php echo $category->id; ?>" path="<?php echo $category->path; ?>"/>
+                        <?php endforeach;?>
                     </p>
                     <br>
                     <p><label>Tên khung ảnh:</label></p>
@@ -45,13 +51,13 @@
                     </br>
                     <p><label>Link khung:</label></p>                            
                     <p>
-                        <input type="text" readonly="readonly" class="longinput" name="txtLink">
+                        <input type="text" readonly="readonly" class="longinput" name="txtLink" id="txtLink">
                         <div id="btnLink" class="UploadBtn">Upload Ảnh</div>
                     </p>            
                     </br>
                     <p><label>Link ảnh mẫu:</label></p>                            
                     <p>
-                        <input type="text" readonly="readonly" class="longinput" name="txtPattern">
+                        <input type="text" readonly="readonly" class="longinput" name="txtPattern" id="txtPattern">
                         <div id="btnPattern" class="UploadBtn">Upload Ảnh</div>
                     </p>            
                     </br> 
