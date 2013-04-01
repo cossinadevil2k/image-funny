@@ -20,7 +20,26 @@
             <p><label>Mô tả:</label></p>                            
             <p>
                 <span class="field"><textarea name="txtdescription"><?php echo $category->description; ?></textarea></span>
-            </p>                        
+            </p> 
+            <br>  
+            <p>
+                <span class="field">
+                    <input name="txtPath" value="<?php echo $category->path?>" id="txtPath" 
+                           class="longinput validate[required]" type="text">
+                </span>
+            </p>
+            
+            <br>
+            <p>
+                <label>Loại khung:</label>
+                
+                <p style="margin-left: 60px;">
+                    <input type="radio" name="rdoType" <?php if($category->frame_type==0) echo 'checked="checked"' ?> value="0"> Khung thường <br>
+                    <input type="radio" name="rdoType" <?php if($category->frame_type==1) echo 'checked="checked"'?> value="1"> Facebook Cover <br>
+                    <input type="radio" name="rdoType" <?php if($category->frame_type==2) echo 'checked="checked"'?> value="2"> Khung điền chữ <br>
+                    <input type="radio" name="rdoType" <?php if($category->frame_type==3) echo 'checked="checked"'?> value="3"> Hiệu ứng
+                </p>
+            </p>
             <br>
             <p class="stdformbutton">
                 <input name="submit" value="Cập nhật" class="submit radius2" type="submit">                                

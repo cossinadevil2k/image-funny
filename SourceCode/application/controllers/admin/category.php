@@ -17,11 +17,14 @@ class Category extends CI_Controller {
         if ($this->input->post('txtname')) {
             $name = $this->input->post('txtname');
             $desc = $this->input->post('txtdescription');
-            
-            $this->Category_model->add($name,$desc);
+            $frame_type = $this->input->post('rdoType');
+            $path = $this->input->post('txtPath');
+                    
+            $this->Category_model->add($name,$desc,$frame_type,trim($path));
             redirect('admin/category');
         }
         include('paging.php');
+        $config['per_page'] = 10;
         $config['base_url'] = base_url() . "admin/category/index/";
         $config['total_rows'] = count($this->Category_model->get());
         $config['cur_page'] = $row;
@@ -45,12 +48,14 @@ class Category extends CI_Controller {
             $id = $this->input->post('id');
             $name = $this->input->post('txtname');
             $desc = $this->input->post('txtdescription');    
-            
-            $this->Category_model->edit($id,$name,$desc);
+            $frame_type = $this->input->post('rdoType');        
+            $path = $this->input->post('txtPath');
+            $this->Category_model->edit($id,$name,$desc,$frame_type,trim($path));
                         
             redirect('admin/category');
         }
         include('paging.php');
+        $config['per_page'] = 10;
         $config['base_url'] = base_url() . "admin/category/edit/".$id;
         $config['total_rows'] = count($this->Category_model->get());
         $config['cur_page'] = $row;

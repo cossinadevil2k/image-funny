@@ -8,11 +8,11 @@
         <div class="edit-main">             
             <div id="wizard" class="wizard post-lang">                               
                 <div class="stepContainer">       
-                    <input type="hidden" name="id" value="<?php echo $frame->id;?>">
+                    <input type="hidden" name="id" value="<?php echo $frame->id; ?>">
                     <p><label>Tên khung ảnh:</label></p>
                     <p>
                         <span class="field">
-                            <input type="text" value="<?php echo $frame->name;?>" 
+                            <input type="text" value="<?php echo $frame->name; ?>" 
                                    class="longinput validate[required]" name="txtName">
                         </span>
                     </p>
@@ -20,62 +20,115 @@
                     <p><label>Mô tả:</label></p>                            
                     <p>
                         <span class="field">
-                            <textarea name="txtDescription" class="validate[required]"><?php echo $frame->description;?></textarea>
+                            <textarea name="txtDescription" class="validate[required]"><?php echo $frame->description; ?></textarea>
                         </span>
                     </p>
                     </br>
-                    <p><label>Link ảnh:</label></p>                            
+                    <p><label>Link khung:</label></p>                            
                     <p>
-                        <input type="text" value="<?php echo $frame->link;?>"
-                               readonly="readonly" class="longinput" name="txtLink">
+                        <input type="text" value="<?php echo $frame->link; ?>" readonly="readonly" class="longinput" name="txtLink">
                     </p>            
-                    </br>        
-                </div>
-            </div>            
-        </div>
-        <div class="edit-right">
-            <div class="widgetbox">
-                <div class="title"><h2 class="general"><span>Thêm khung ảnh</span></h2></div>
-                <div class="widgetcontent" style="display: block;">                                  
-                    <p class="stdformbutton">
-                        <button class="submit radius2">Cập nhật khung ảnh</button>
-                        <input type="reset" value="Hủy" class="reset radius2">
+                    </br>
+                    <p><label>Link ảnh mẫu:</label></p>                            
+                    <p>
+                        <input type="text" value="<?php echo $frame->pattern; ?>" readonly="readonly" class="longinput" name="txtPattern">
+                    </p>            
+                    </br>         
+                </div>                
+            </div>    
+            <div class="seo-packages widgetbox" id="parameter_frame">
+                <div class="contenttitle">
+                    <h2 class="form">
+                        <span>Thông số khung ảnh                             
+                        </span>                                               
+                    </h2>                    
+                </div>      
+
+                <div class="seo-packages widgetcontent">
+                    <?php
+                    $x = '';
+                    $y = '';
+                    $xc = '';
+                    $yc = '';
+                    $width = '';
+                    $height = '';
+                    $degree = '';
+                    foreach ($frame_details as $item) {
+                        $x .= $item->x . '-';
+                        $y .= $item->y . '-';
+                        $xc .= $item->xc . '-';
+                        $yc .= $item->yc . '-';
+                        $width .= $item->width . '-';
+                        $height .= $item->height . '-';
+                        $degree .= $item->degree . '-';
+                    }
+                    $x = rtrim($x, '-');
+                    $y = rtrim($y, '-');
+                    $xc = rtrim($xc, '-');
+                    $yc = rtrim($yc, '-');
+                    $width = rtrim($width, '-');
+                    $height = rtrim($height, '-');
+                    $degree = rtrim($degree, '-');
+                    ?>
+                    <p>
+                        <label></label>
+                        <span>Các thông số theo định dạng XXX-X<sup>1</sup>X<sup>1</sup>X<sup>1</sup>-X<sup>2</sup>X<sup>2</sup>X<sup>2</sup></span>
                     </p>
-                </div><!--widgetcontent-->
-            </div>        
-             <div class="widgetbox">
-                <div class="title"><h2 class="general"><span>Chọn thể loại</span></h2></div>
-                <div class="widgetcontent" style="display: block;">                   
-                    <select name="ddlCat" style="width: 100%;">                        
-                        <option value="0">-- Chưa chọn thể loại --</option>                        
-                        <?php                         
-                        foreach ($lstCategory as $category)
-                        {
-                        ?>
-                        <option <?php if($category->id==$frame->category_id) echo "selected='selected'" ?> 
-                            value="<?php echo $category->id;?>"><?php echo $category->name;?></option>
-                        <?php
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>  
-            <div class="widgetbox">
-                <div class="title"><h2 class="general"><span>Khung ảnh</span></h2></div>
-                <div class="widgetcontent" style="display: block;">
-                    <input type="hidden" value="<?php echo $frame->link;?>" id="featured_image" name="hdffeatured_image" >
-                    <img src="<?php echo $frame->link;?>" id="featured_image_src" width="100%" height="auto" style="margin-bottom:10px;" />
-                    <button id="imageUpload" class="submit radius2" >Chọn khung ảnh</button>
+                    <br>
+                    <p>                        
+                        <label>X</label>
+                        <span class="field small-form">
+                            <input name="txtX" value="<?php echo $x;?>" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>  
+                    <br>
+                    <p>                        
+                        <label>Y</label>
+                        <span class="field small-form">
+                            <input name="txtY" value="<?php echo $y;?>" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>
+                    <br>
+                    <p>                        
+                        <label>X (Tâm)</label>
+                        <span class="field small-form">
+                            <input name="txtXC" value="<?php echo $xc;?>" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>
+                    <br>
+                    <p>                        
+                        <label>Y (Tâm)</label>
+                        <span class="field small-form">
+                            <input name="txtYC" value="<?php echo $yc;?>" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>
+                    <br>
+                    <p>                        
+                        <label>Width</label>
+                        <span class="field small-form">
+                            <input name="txtWidth" value="<?php echo $width;?>" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>   
+                    <br>
+                    <p>                        
+                        <label>Height</label>
+                        <span class="field small-form">
+                            <input name="txtHeight" value="<?php echo $height;?>" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>   
+                    <br>
+                    <p>                        
+                        <label>Degrees</label>
+                        <span class="field small-form">
+                            <input name="txtDegree" value="<?php echo $degree;?>" class="smallinput validate[required]" type="text" value="">
+                        </span>                                            
+                    </p>   
                 </div>
             </div>
-            <div class="widgetbox">
-                <div class="title"><h2 class="general"><span>Khung ảnh mẫu</span></h2></div>
-                <div class="widgetcontent" style="display: block;">
-                    <input type="hidden" id="featured_image_patern" name="hdffeatured_image_patern" value="<?php echo $frame->pattern;?>" >
-                    <img src="<?php echo $frame->pattern;?>" id="featured_image_src_patern" width="100%" height="auto" style="margin-bottom:10px;" />
-                    <button id="imageUpload_patern" class="submit radius2" >Chọn khung ảnh mẫu</button>
-                </div>
-            </div>
-        </div>
+            <p class="stdformbutton" style="float: right;margin-right: 50px;">
+                <button class="submit radius2" style="background-color: #51A351; border: none;">Cập nhật khung ảnh</button>
+                <input type="reset" value="Hủy" class="reset radius2">
+            </p>
+        </div>        
     </form>              
 </div><!--content-->

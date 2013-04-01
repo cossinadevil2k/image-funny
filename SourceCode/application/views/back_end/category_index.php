@@ -18,7 +18,25 @@
             <p><label>Mô tả:</label></p>                            
             <p>
                 <span class="field"><textarea name="txtdescription"></textarea></span>
-            </p>                        
+            </p> 
+            <p><label>Path:</label></p>
+            <p>
+                <span class="field">
+                    <input name="txtPath" value="" id="txtPath" 
+                           class="longinput validate[required]" type="text">
+                </span>
+            </p>
+            <br>      
+            <br>
+            <p>
+                <label>Loại khung:</label>                
+                <p style="margin-left: 60px;">
+                    <input type="radio" name="rdoType" checked="checked" value="0"> Khung thường <br>
+                    <input type="radio" name="rdoType" value="1"> Facebook Cover <br>
+                    <input type="radio" name="rdoType"  value="2"> Khung điền chữ <br>
+                    <input type="radio" name="rdoType" value="3"> Hiệu ứng
+                </p>
+            </p>
             <br>
             <p class="stdformbutton">
                 <input name="submit" value="Thêm mới" class="submit radius2" type="submit">                                

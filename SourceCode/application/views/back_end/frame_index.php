@@ -9,7 +9,7 @@
         <h2 class="table"><span>Danh sách khung ảnh</span></h2>
     </div><!--contenttitle-->
     <div class="tableoptions">
-        <form name="frmfilter" method="post" action="<?php echo base_url();?>admin/frames/index/" >                        	
+        <form name="frmfilter" method="post" action="" >                        	
             <button class="deletebutton radius3" title="table2" value="<?php echo base_url();?>admin/frames/delete">Delete Selected</button> &nbsp;               
                        
             <input type="text" value="<?php if($key_word!='~')echo $key_word;?>" name="txtKeyWord" class="input-keyword">&nbsp;

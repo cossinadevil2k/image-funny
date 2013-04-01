@@ -17,15 +17,16 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(),$frame_width,$frame_height,$pattern) {
+    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(), $frame_width, $frame_height, $pattern,$xc = array(), $yc = array()
+    ) {
         $frame = array(
             'name' => $name,
             'description' => $description,
             'link' => $link,
             'category_id' => $category_id,
-            'width'=>$frame_width,
-            'height'=>$frame_height,
-            'pattern'=>$pattern
+            'width' => $frame_width,
+            'height' => $frame_height,
+            'pattern' => $pattern
         );
         $this->db->insert('tbl_frame', $frame);
         if ($this->db->affected_rows() > 0) {
@@ -34,11 +35,13 @@ class Frame_model extends CI_Model {
             for ($i = 0; $i < $count; $i++) {
                 $frame_detail = array(
                     'frame_id' => $id,
-                    'x' => $x[$i],
-                    'y' => $y[$i],
-                    'width' => $width[$i],
-                    'height' => $height[$i],
-                    'degree' => $degree[$i]
+                    'x' => trim($x[$i]),
+                    'y' => trim($y[$i]),
+                    'width' => trim($width[$i]),
+                    'height' => trim($height[$i]),
+                    'degree' => trim($degree[$i]),
+                    'xc'=>trim($xc[$i]),
+                    'yc'=>trim($yc[$i])
                 );
                 $this->db->insert('tbl_framedetail', $frame_detail);
             }
@@ -90,11 +93,11 @@ class Frame_model extends CI_Model {
         if ($limit > 0) {
             $this->db->limit($limit, $offset);
         }
-        
+
         $query = $this->db->get();
         return $query->result();
     }
-    
+
     /**
      * Get pattern by category
      * @param type $category_id
@@ -102,7 +105,7 @@ class Frame_model extends CI_Model {
      * @param type $offset
      * @return type
      */
-    function get_pattern_by_category($category_id, $limit = 0, $offset = 0){
+    function get_pattern_by_category($category_id, $limit = 0, $offset = 0) {
         $this->db->select('id, name, description, link, category_id, pattern,width,height');
         $this->db->from('tbl_frame');
 
@@ -110,7 +113,7 @@ class Frame_model extends CI_Model {
         if ($limit > 0) {
             $this->db->limit($limit, $offset);
         }
-        
+
         $query = $this->db->get();
         return $query->result();
     }
@@ -132,18 +135,39 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function edit($id, $name, $description, $link, $category_id,$frame_width,$frame_height,$pattern) {
+    function edit($id, $name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(), $frame_width, $frame_height, $pattern, $xc = array(), $yc = array()) {
         $arr = array(
             'name' => $name,
             'description' => $description,
             'link' => $link,
             'category_id' => $category_id,
-            'width'=>$frame_width,
-            'height'=>$frame_height,
-            'pattern'=>$pattern
+            'width' => $frame_width,
+            'height' => $frame_height,
+            'pattern' => $pattern
         );
         $this->db->where('id', $id);
         $this->db->update('tbl_frame', $arr);
+        if ($this->db->affected_rows() > 0) {
+            
+            $this->db->where('frame_id',$id);
+            $this->db->delete('tbl_framedetail');
+            
+            $count = count($x);
+            for ($i = 0; $i < $count; $i++) {
+                $frame_detail = array(
+                    'frame_id' => $id,
+                    'x' => trim($x[$i]),
+                    'y' => trim($y[$i]),
+                    'width' => trim($width[$i]),
+                    'height' => trim($height[$i]),
+                    'degree' => trim($degree[$i]),
+                    'xc'=>trim($xc[$i]),
+                    'yc'=>trim($yc[$i])
+                );
+                $this->db->insert('tbl_framedetail', $frame_detail);
+            }
+        }
+        
     }
 
 }
