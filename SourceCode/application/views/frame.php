@@ -113,7 +113,7 @@
                                      echo " Selected";
                                  }
                                 ?>">
-                                    <img src="<?php echo base_url() . $frame->pattern; ?>" width="100%" image_w="<?php echo $frame->width ?>" image_h="<?php echo $frame->height ?>">
+                                    <img src="<?php echo base_url() . $frame->pattern; ?>" width="100%" height="98%" image_w="<?php echo $frame->width ?>" image_h="<?php echo $frame->height ?>">
                                     <?php foreach ($frame_detail_list as $frame_details): ?>
                                         <?php foreach ($frame_details as $frame_detail): ?>
                                             <?php if ($frame_detail->frame_id == $frame->id): ?>

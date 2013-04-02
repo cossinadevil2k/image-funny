@@ -22,13 +22,19 @@ $(document).ready(function(){
         },
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
-                temp = file.url;
-                temp = temp.split(base_url);
-                if (isFrame){
-                    $("#txtLink").val(temp[1]);
+                if ((file.error != 'undefined') && (file.error == 'File is too big')){
+                    alert('Vui lòng chọn ảnh có dung lượng nhỏ hơn 2MB.');
                 }else{
-                    $("#txtPattern").val(temp[1]);
-                }
+                    temp = file.url;
+                    temp = temp.split(base_url);
+                    if (isFrame){
+                        decodedUri = decodeURI(temp[1]);
+                        $("#txtLink").val(decodedUri);
+                    }else{
+                        decodedUri = decodeURI(temp[1]);
+                        $("#txtPattern").val(decodedUri);
+                    }
+                }                
             });
         }
     });

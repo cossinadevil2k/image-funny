@@ -109,67 +109,71 @@ $(document).ready(function(){
         dataType: 'json',
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
-                imageFile = file;
-                $.ajax({
-                    type: 'post',
-                    url: base_url + 'frame/get_image_dimensions',
-                    dataType: 'json',
-                    data:{
-                        'image_path': 'resources/users/'+ file.name
-                    },
-                    success: function(data){
-                        var type_file = $('#fileupload').attr('file_type');
-                        if(type_file!='watermark')
-                        {
-                            original_width = data.width;
-                            original_height = data.height;
+                if ((file.error != 'undefined') && (file.error == 'File is too big')){
+                    alert('Vui lòng chọn ảnh có dung lượng nhỏ hơn 2MB.');
+                }else{
+                    imageFile = file;
+                    $.ajax({
+                        type: 'post',
+                        url: base_url + 'frame/get_image_dimensions',
+                        dataType: 'json',
+                        data:{
+                            'image_path': 'resources/users/'+ file.name
+                        },
+                        success: function(data){
+                            var type_file = $('#fileupload').attr('file_type');
+                            if(type_file!='watermark')
+                            {
+                                original_width = data.width;
+                                original_height = data.height;
 
-                            width_scale = default_width/parseFloat(data.width);
-                            height_scale = default_height/parseFloat(data.height);
+                                width_scale = default_width/parseFloat(data.width);
+                                height_scale = default_height/parseFloat(data.height);
 
-                            var scale_ratio = width_scale;
-                            if (width_scale > height_scale){
-                                scale_ratio = height_scale;
+                                var scale_ratio = width_scale;
+                                if (width_scale > height_scale){
+                                    scale_ratio = height_scale;
+                                }
+
+                                var new_width = scale_ratio*parseFloat(data.width);
+                                var new_height = scale_ratio*parseFloat(data.height);
+
+                                $('#target').height(new_height);
+                                $('#target').width(new_width);
+
+                                $("#target").attr('src', base_url+'resources/users/'+ file.name);
+
+                                $.fancybox({
+                                    'padding':0,
+                                    'closeBtn' : true,
+                                    'href' : '#cropDiv',
+                                    'aspectRatio': true,
+                                    'width': 'auto',
+                                    'height': 'auto',
+                                    'scrolling': 'no'
+                                });
+
+                                aspect = $("#frame"+frameDetailID).attr('aspect');
+
+                                if (jcrop_api){
+                                    jcrop_api.destroy();
+                                }  
+                                $("#target").Jcrop({
+                                    aspectRatio: aspect,
+                                    setSelect: [20, 20, 60, 60/aspect],
+                                    onSelect: getImageInformation,
+                                    maxSize: [600, 600]
+                                }, function(){
+                                    jcrop_api = this;
+                                });
                             }
-
-                            var new_width = scale_ratio*parseFloat(data.width);
-                            var new_height = scale_ratio*parseFloat(data.height);
-
-                            $('#target').height(new_height);
-                            $('#target').width(new_width);
-
-                            $("#target").attr('src', base_url+'resources/users/'+ file.name);
-
-                            $.fancybox({
-                                'padding':0,
-                                'closeBtn' : true,
-                                'href' : '#cropDiv',
-                                'aspectRatio': true,
-                                'width': 'auto',
-                                'height': 'auto',
-                                'scrolling': 'no'
-                            });
-
-                            aspect = $("#frame"+frameDetailID).attr('aspect');
-
-                            if (jcrop_api){
-                                jcrop_api.destroy();
-                            }  
-                            $("#target").Jcrop({
-                                aspectRatio: aspect,
-                                setSelect: [20, 20, 60, 60/aspect],
-                                onSelect: getImageInformation,
-                                maxSize: [600, 600]
-                            }, function(){
-                                jcrop_api = this;
-                            });
+                            else
+                            {
+                                $("#selected_image").attr('src', base_url+'resources/users/'+ file.name);
+                            }
                         }
-                        else
-                        {
-                            $("#selected_image").attr('src', base_url+'resources/users/'+ file.name);
-                        }
-                    }
-                }); 
+                    }); 
+                }
             });
         }
     });
