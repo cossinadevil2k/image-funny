@@ -19,14 +19,14 @@
             <p>
                 <span class="field"><textarea name="txtdescription"></textarea></span>
             </p> 
-            <p><label>Path:</label></p>
+            <!--<p><label>Path:</label></p>
             <p>
                 <span class="field">
                     <input name="txtPath" value="" id="txtPath" 
                            class="longinput validate[required]" type="text">
                 </span>
             </p>
-            <br>      
+            <br>   -->   
             <br>
             <p>
                 <label>Loại khung:</label>                

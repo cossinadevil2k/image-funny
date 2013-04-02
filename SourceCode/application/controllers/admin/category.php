@@ -18,7 +18,8 @@ class Category extends CI_Controller {
             $name = $this->input->post('txtname');
             $desc = $this->input->post('txtdescription');
             $frame_type = $this->input->post('rdoType');
-            $path = $this->input->post('txtPath');
+            $path = trim($name);
+            $path = str_replace(" ", "", $path);
                     
             $this->Category_model->add($name,$desc,$frame_type,trim($path));
             redirect('admin/category');
@@ -49,7 +50,8 @@ class Category extends CI_Controller {
             $name = $this->input->post('txtname');
             $desc = $this->input->post('txtdescription');    
             $frame_type = $this->input->post('rdoType');        
-            $path = $this->input->post('txtPath');
+            $path = trim($name);
+            $path = str_replace(" ", "", $path);
             $this->Category_model->edit($id,$name,$desc,$frame_type,trim($path));
                         
             redirect('admin/category');

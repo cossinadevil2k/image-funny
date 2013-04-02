@@ -1,4 +1,14 @@
-
+<link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/frame_add.css" type="text/css" />
+<script type="text/javascript" src="<?php echo base_url();?>js/jquery-1.7.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.iframe-transport.js"></script>
+<script type="text/javascript" src="<?php echo base_url() ?>js/jquery.fileupload.js"></script>
+<script>
+    var base_url = '<?php echo base_url();?>';
+</script>
+<script type="text/javascript" src="<?php echo base_url();?>content-admin/js/frame_add.js"></script>
+<input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/admin/frames/upload" multiple style="display: none;">
 <ul class="maintabmenu multipletabmenu">        
     <li><a href="<?php echo base_url(); ?>admin/frames">Tất cả khung ảnh</a></li>
     <li class="current"><a href="<?php echo base_url(); ?>admin/frames/add">Cập nhật khung ảnh</a></li>    
@@ -9,6 +19,23 @@
             <div id="wizard" class="wizard post-lang">                               
                 <div class="stepContainer">       
                     <input type="hidden" name="id" value="<?php echo $frame->id; ?>">
+                    <p><label>Thể loại khung ảnh:</label></p>
+                    <p>
+                        <select name="ddlCat" class="longinput" style="width: 97%" id="ddlCat">                        
+                            <option value="0">-- Chưa chọn thể loại --</option>                        
+                            <?php
+                            foreach ($lstCategory as $category) {
+                                ?>
+                                <option <?php if($category->id==$frame->category_id) echo 'selected="selected"' ?> value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
+                        <?php foreach ($lstCategory as $category):?>
+                            <input type="hidden" id="cate<?php echo $category->id; ?>" path="<?php echo $category->path; ?>"/>
+                        <?php endforeach;?>
+                    </p>
+                    <br>
                     <p><label>Tên khung ảnh:</label></p>
                     <p>
                         <span class="field">
@@ -26,13 +53,16 @@
                     </br>
                     <p><label>Link khung:</label></p>                            
                     <p>
-                        <input type="text" value="<?php echo $frame->link; ?>" readonly="readonly" class="longinput" name="txtLink">
+                        <input type="text" value="<?php echo $frame->link; ?>" readonly="readonly" class="longinput" name="txtLink">                        
                     </p>            
+                    <div id="btnLink" class="UploadBtn">Upload Ảnh</div>
                     </br>
                     <p><label>Link ảnh mẫu:</label></p>                            
                     <p>
                         <input type="text" value="<?php echo $frame->pattern; ?>" readonly="readonly" class="longinput" name="txtPattern">
-                    </p>            
+                        
+                    </p>          
+                    <div id="btnPattern" class="UploadBtn">Upload Ảnh</div>
                     </br>         
                 </div>                
             </div>    

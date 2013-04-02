@@ -22,12 +22,14 @@
                 <span class="field"><textarea name="txtdescription"><?php echo $category->description; ?></textarea></span>
             </p> 
             <br>  
+            <!--<p><label>Path:</label></p>
             <p>
                 <span class="field">
-                    <input name="txtPath" value="<?php echo $category->path?>" id="txtPath" 
+                    <input name="txtPath" value="" id="txtPath" 
                            class="longinput validate[required]" type="text">
                 </span>
             </p>
+            <br>   -->  
             
             <br>
             <p>
