@@ -107,27 +107,33 @@ $(document).ready(function(){
     });
     
     $('.effect_selected').click(function(){
-        $.blockUI({
-            message: '<h1>Vui lòng chờ ...</h1>'
-        });
-        var effect = $(this).attr('effect');
         var image = $("#effect_image").attr('image_path');
-        $.ajax({
-            type: "post",
-            url : base_url + 'frame/create_effect',
-            dataType: "json",
-            data: {
-                'image': image,
-                'effect':effect
-            },
-            success: function(data){
-                $.unblockUI();                
-                $("#selected_frame").attr('src', data.image_path);
-                //$(".addButton").remove();
-            //alert(data.image_path);
-                        
-            }
-        });
+        if (image==""){
+            alert('Vui lòng tải ảnh lên trước khi chọn hiệu ứng.');
+        }else{
+            $.blockUI({
+                message: '<h1>Vui lòng chờ ...</h1>'
+            });
+            var effect = $(this).attr('effect');
+
+            $.ajax({
+                type: "post",
+                url : base_url + 'frame/create_effect',
+                dataType: "json",
+                data: {
+                    'image': image,
+                    'effect':effect
+                },
+                success: function(data){
+                    $.unblockUI();                
+                    $("#selected_frame").attr('src', data.image_path);
+                    //$(".addButton").remove();
+                //alert(data.image_path);
+
+                }
+            });
+        }
+        
     });
     
     $('#fileupload').fileupload({
@@ -175,7 +181,7 @@ $(document).ready(function(){
                                 'scrolling': 'no'
                             });
 
-                            aspect = $("#frame"+frameDetailID).attr('aspect');
+                            aspect = 1.0;
 
                             if (jcrop_api){
                                 jcrop_api.destroy();
