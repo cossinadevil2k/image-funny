@@ -112,6 +112,7 @@ class Frames extends CI_Controller {
      */
     function edit($id = 0) {
         if ($this->input->post('txtName')) {
+            $id = $this->input->post('id');
             $name = $this->input->post('txtName');
             $desc = $this->input->post('txtDescription');
 //            $link = $this->input->post('hdffeatured_image');
@@ -143,6 +144,7 @@ class Frames extends CI_Controller {
             $this->Frame_model->edit($id,$name, $desc, $link, $cat_id,$x_input,$y_input,
                     $width_input,$height_input,$degree_input,$frame_width,
                     $frame_height,$pattern,$xc_input,$yc_input);
+            
             redirect('admin/frames');
         }
         

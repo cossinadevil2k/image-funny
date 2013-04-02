@@ -136,6 +136,7 @@ class Frame_model extends CI_Model {
      * @param int $category_id
      */
     function edit($id, $name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(), $frame_width, $frame_height, $pattern, $xc = array(), $yc = array()) {
+        
         $arr = array(
             'name' => $name,
             'description' => $description,
@@ -147,7 +148,7 @@ class Frame_model extends CI_Model {
         );
         $this->db->where('id', $id);
         $this->db->update('tbl_frame', $arr);
-        if ($this->db->affected_rows() > 0) {
+        
             
             $this->db->where('frame_id',$id);
             $this->db->delete('tbl_framedetail');
@@ -168,7 +169,7 @@ class Frame_model extends CI_Model {
             }
         }
         
-    }
+    
 
 }
 
