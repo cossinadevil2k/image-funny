@@ -53,13 +53,14 @@
                     </br>
                     <p><label>Link khung:</label></p>                            
                     <p>
-                        <input type="text" value="<?php echo $frame->link; ?>" readonly="readonly" class="longinput" name="txtLink">                        
+                        <input type="text" value="<?php echo $frame->link; ?>" readonly="readonly" class="longinput" name="txtLink" id="txtLink">                        
                     </p>            
                     <div id="btnLink" class="UploadBtn">Upload Ảnh</div>
                     </br>
                     <p><label>Link ảnh mẫu:</label></p>                            
                     <p>
-                        <input type="text" value="<?php echo $frame->pattern; ?>" readonly="readonly" class="longinput" name="txtPattern">
+                        <input type="text" value="<?php echo $frame->pattern; ?>" readonly="readonly" class="longinput" name="txtPattern" id
+                               ="txtPattern">
                         
                     </p>          
                     <div id="btnPattern" class="UploadBtn">Upload Ảnh</div>
