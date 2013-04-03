@@ -85,25 +85,25 @@
                     $height = '';
                     $degree = '';
                     foreach ($frame_details as $item) {
-                        $x .= $item->x . '-';
-                        $y .= $item->y . '-';
-                        $xc .= $item->xc . '-';
-                        $yc .= $item->yc . '-';
-                        $width .= $item->width . '-';
-                        $height .= $item->height . '-';
-                        $degree .= $item->degree . '-';
+                        $x .= $item->x . ';';
+                        $y .= $item->y . ';';
+                        $xc .= $item->xc . ';';
+                        $yc .= $item->yc . ';';
+                        $width .= $item->width . ';';
+                        $height .= $item->height . ';';
+                        $degree .= $item->degree . ';';
                     }
-                    $x = rtrim($x, '-');
-                    $y = rtrim($y, '-');
-                    $xc = rtrim($xc, '-');
-                    $yc = rtrim($yc, '-');
-                    $width = rtrim($width, '-');
-                    $height = rtrim($height, '-');
-                    $degree = rtrim($degree, '-');
+                    $x = rtrim($x, ';');
+                    $y = rtrim($y, ';');
+                    $xc = rtrim($xc, ';');
+                    $yc = rtrim($yc, ';');
+                    $width = rtrim($width, ';');
+                    $height = rtrim($height, ';');
+                    $degree = rtrim($degree, ';');
                     ?>
                     <p>
                         <label></label>
-                        <span>Các thông số theo định dạng XXX-X<sup>1</sup>X<sup>1</sup>X<sup>1</sup>-X<sup>2</sup>X<sup>2</sup>X<sup>2</sup></span>
+                        <span>Các thông số theo định dạng XXX<b> ; </b>X<sup>1</sup>X<sup>1</sup>X<sup>1</sup><b> ; </b>X<sup>2</sup>X<sup>2</sup>X<sup>2</sup></span>
                     </p>
                     <br>
                     <p>                        

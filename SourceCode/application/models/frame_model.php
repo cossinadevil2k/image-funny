@@ -17,7 +17,7 @@ class Frame_model extends CI_Model {
      * @param string $link
      * @param int $category_id
      */
-    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(), $frame_width, $frame_height, $pattern,$xc = array(), $yc = array()
+    function add($name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(), $frame_width, $frame_height, $pattern, $xc = array(), $yc = array()
     ) {
         $frame = array(
             'name' => $name,
@@ -40,8 +40,8 @@ class Frame_model extends CI_Model {
                     'width' => trim($width[$i]),
                     'height' => trim($height[$i]),
                     'degree' => trim($degree[$i]),
-                    'xc'=>trim($xc[$i]),
-                    'yc'=>trim($yc[$i])
+                    'xc' => trim($xc[$i]),
+                    'yc' => trim($yc[$i])
                 );
                 $this->db->insert('tbl_framedetail', $frame_detail);
             }
@@ -125,6 +125,11 @@ class Frame_model extends CI_Model {
     function delete($id) {
         $this->db->where('id', $id);
         $this->db->delete('tbl_frame');
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     /**
@@ -136,7 +141,7 @@ class Frame_model extends CI_Model {
      * @param int $category_id
      */
     function edit($id, $name, $description, $link, $category_id, $x = array(), $y = array(), $width = array(), $height = array(), $degree = array(), $frame_width, $frame_height, $pattern, $xc = array(), $yc = array()) {
-        
+
         $arr = array(
             'name' => $name,
             'description' => $description,
@@ -148,28 +153,32 @@ class Frame_model extends CI_Model {
         );
         $this->db->where('id', $id);
         $this->db->update('tbl_frame', $arr);
-        
-            
-            $this->db->where('frame_id',$id);
-            $this->db->delete('tbl_framedetail');
-            
-            $count = count($x);
-            for ($i = 0; $i < $count; $i++) {
-                $frame_detail = array(
-                    'frame_id' => $id,
-                    'x' => trim($x[$i]),
-                    'y' => trim($y[$i]),
-                    'width' => trim($width[$i]),
-                    'height' => trim($height[$i]),
-                    'degree' => trim($degree[$i]),
-                    'xc'=>trim($xc[$i]),
-                    'yc'=>trim($yc[$i])
-                );
-                $this->db->insert('tbl_framedetail', $frame_detail);
-            }
+
+
+        $this->db->where('frame_id', $id);
+        $this->db->delete('tbl_framedetail');
+
+        $count = count($x);
+        for ($i = 0; $i < $count; $i++) {
+            $frame_detail = array(
+                'frame_id' => $id,
+                'x' => trim($x[$i]),
+                'y' => trim($y[$i]),
+                'width' => trim($width[$i]),
+                'height' => trim($height[$i]),
+                'degree' => trim($degree[$i]),
+                'xc' => trim($xc[$i]),
+                'yc' => trim($yc[$i])
+            );
+            $this->db->insert('tbl_framedetail', $frame_detail);
         }
         
-    
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
 
 }
 

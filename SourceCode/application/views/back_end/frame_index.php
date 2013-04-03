@@ -2,18 +2,29 @@
     <li  class="current"><a href="<?php echo base_url(); ?>admin/frames">Tất cả khung ảnh</a></li>
     <li><a href="<?php echo base_url(); ?>admin/frames/add">Thêm mới khung ảnh</a></li>    
 </ul>        
-     
+
 <div class="content">
-        <h1 id="ajaxtitle"></h1>                       	                            
+    <h1 id="ajaxtitle"></h1>   
+    <?php 
+        //print_r($this->session->flashdata('result'));
+        if($this->session->flashdata('result')=='success')
+        {
+    ?>
+    <div class="notification msgsuccess">
+        <a class="close"></a>
+        <p>Cập nhật thành công!</p>
+    </div>
+    <?php }?>
+    
     <div class="contenttitle radiusbottom0">
         <h2 class="table"><span>Danh sách khung ảnh</span></h2>
     </div><!--contenttitle-->
     <div class="tableoptions">
         <form name="frmfilter" method="post" action="" >                        	
-            <button class="deletebutton radius3" title="table2" value="<?php echo base_url();?>admin/frames/delete">Delete Selected</button> &nbsp;               
-                       
-            <input type="text" value="<?php if($key_word!='~')echo $key_word;?>" name="txtKeyWord" class="input-keyword">&nbsp;
-           
+            <button class="deletebutton radius3" title="table2" value="<?php echo base_url(); ?>admin/frames/delete">Delete Selected</button> &nbsp;               
+
+            <input type="text" value="<?php if ($key_word != '~') echo $key_word; ?>" name="txtKeyWord" class="input-keyword">&nbsp;
+
             <input type="submit" class="btn" value="Tìm kiếm"/>
         </form>
     </div><!--tableoptions-->	
@@ -47,35 +58,33 @@
             </tr>
         </tfoot>
         <tbody>                               	
-            <?php 
-                foreach ($lstFrame as $frame)
-                {
-            ?>
-            <tr>
-                <td class="center"><input value="<?php echo $frame->id;?>" type="checkbox"></td>
-                <td><?php echo $frame->name;?></td>
-                <td><?php echo $frame->description;?></td>
-                <td>
-                    <a href="<?php echo $frame->link;?>"><?php echo $frame->link;?></a>
-                </td>    
-                <td>
-                    <?php 
-                    $cat = $this->Category_model->get($frame->category_id);
-                    if(count($cat)>0)
-                    {
-                        echo $cat[0]->name;
-                    }
-                    ?>                    
-                </td>
-                <td class="center">
-                    <a class="edit" href="<?php echo base_url();?>admin/frames/edit/<?php echo $frame->id;?>">Sửa</a> &nbsp; 
-                    <a class="delete" id="<?php echo $frame->id;?>" href="<?php echo base_url();?>admin/frames/delete">Xóa</a>
-                </td>
-            </tr>
             <?php
-                }
-            ?>
+            foreach ($lstFrame as $frame) {
+                ?>
+                <tr>
+                    <td class="center"><input value="<?php echo $frame->id; ?>" type="checkbox"></td>
+                    <td><?php echo $frame->name; ?></td>
+                    <td><?php echo $frame->description; ?></td>
+                    <td>
+                        <a href="<?php echo $frame->link; ?>"><?php echo $frame->link; ?></a>
+                    </td>    
+                    <td>
+                        <?php
+                        $cat = $this->Category_model->get($frame->category_id);
+                        if (count($cat) > 0) {
+                            echo $cat[0]->name;
+                        }
+                        ?>                    
+                    </td>
+                    <td class="center">
+                        <a class="edit" href="<?php echo base_url(); ?>admin/frames/edit/<?php echo $frame->id; ?>">Sửa</a> &nbsp; 
+                        <a class="delete" id="<?php echo $frame->id; ?>" href="<?php echo base_url(); ?>admin/frames/delete">Xóa</a>
+                    </td>
+                </tr>
+    <?php
+}
+?>
         </tbody>
     </table>    
-    <?php echo $list_link;?>
+<?php echo $list_link; ?>
 </div><!--content-->

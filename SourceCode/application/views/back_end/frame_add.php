@@ -74,7 +74,7 @@
                 <div class="seo-packages widgetcontent">                    
                     <p>
                         <label></label>
-                        <span>Các thông số theo định dạng XXX-X<sup>1</sup>X<sup>1</sup>X<sup>1</sup>-X<sup>2</sup>X<sup>2</sup>X<sup>2</sup></span>
+                        <span>Các thông số theo định dạng XXX<b> ; </b>X<sup>1</sup>X<sup>1</sup>X<sup>1</sup><b> ; </b>X<sup>2</sup>X<sup>2</sup>X<sup>2</sup></span>
                     </p>
                     <br>
                     <p>                        

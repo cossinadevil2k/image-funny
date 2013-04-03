@@ -128,6 +128,11 @@ class Category_model extends CI_Model {
     public function delete($id = 0) {
         $this->db->where('id', $id);
         $this->db->delete('tbl_category');
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
     }
 
     /**
@@ -151,6 +156,11 @@ class Category_model extends CI_Model {
             mkdir($path, 0777, true);
             umask($oldUmask);
             chmod($path, 0777);
+        }
+        if ($this->db->affected_rows() > 0) {
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
 

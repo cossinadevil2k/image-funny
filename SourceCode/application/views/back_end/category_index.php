@@ -30,12 +30,12 @@
             <br>
             <p>
                 <label>Loại khung:</label>                
-                <p style="margin-left: 60px;">
-                    <input type="radio" name="rdoType" checked="checked" value="0"> Khung thường <br>
-                    <input type="radio" name="rdoType" value="1"> Facebook Cover <br>
-                    <input type="radio" name="rdoType"  value="2"> Khung điền chữ <br>
-                    <input type="radio" name="rdoType" value="3"> Hiệu ứng
-                </p>
+            <p style="margin-left: 60px;">
+                <input type="radio" name="rdoType" checked="checked" value="0"> Khung thường <br>
+                <input type="radio" name="rdoType" value="1"> Facebook Cover <br>
+                <input type="radio" name="rdoType"  value="2"> Khung điền chữ <br>
+                <input type="radio" name="rdoType" value="3"> Hiệu ứng
+            </p>
             </p>
             <br>
             <p class="stdformbutton">
@@ -95,5 +95,14 @@
 
         </table>
         <?php echo $list_link; ?>
+        <?php
+        //print_r($this->session->flashdata('result'));
+        if ($this->session->flashdata('result') == 'success') {
+            ?>
+            <div class="notification msgsuccess">
+                <a class="close"></a>
+                <p>Cập nhật thành công!</p>
+            </div>
+        <?php } ?>
     </div>                                  
 </div><!--content-->                

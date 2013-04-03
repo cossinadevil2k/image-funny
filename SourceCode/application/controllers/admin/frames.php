@@ -1,6 +1,8 @@
 <?php
+
 require_once('./PHPImageWorkshop/ImageWorkshop.php');
 require '/../UploadHandler.php';
+
 /**
  * @author HungPV <phamvanhung0818@gmail.com>
  * @version 1.0.0
@@ -21,12 +23,12 @@ class Frames extends CI_Controller {
      * 
      */
     function index($keyword = '~', $row = 0) {
-        $data['key_word'] = urldecode($keyword);        
+        $data['key_word'] = urldecode($keyword);
         if ($this->input->post('txtKeyWord')) {
-            
+
             $data['key_word'] = $this->input->post('txtKeyWord');
         }
-        
+
         //paging
         include('paging.php');
         $config['per_page'] = 10;
@@ -47,8 +49,8 @@ class Frames extends CI_Controller {
         } else {
             $lstFrame = $this->Frame_model->get(0, '', $config['per_page'], $row);
         }
-        
-        
+
+
         $data['lstFrame'] = $lstFrame;
         $data['view'] = 'back_end/frame_index';
         $this->load->view('back_end/template_noright', $data);
@@ -66,11 +68,11 @@ class Frames extends CI_Controller {
             $link = $this->input->post('txtLink');
             $pattern = $this->input->post('txtPattern');
             $cat_id = $this->input->post('ddlCat');
-            
-            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath("./".$link);
+
+            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath("./" . $link);
             $frame_width = $image->getWidth();
-            $frame_height = $image->getHeight();            
-            
+            $frame_height = $image->getHeight();
+
             $x = $this->input->post("txtX");
             $y = $this->input->post("txtY");
             $xc = $this->input->post("txtXC");
@@ -78,21 +80,19 @@ class Frames extends CI_Controller {
             $width = $this->input->post("txtWidth");
             $height = $this->input->post("txtHeight");
             $degree = $this->input->post("txtDegree");
-            
-            $x_input = explode('-', $x);
-            $y_input = explode('-', $y);
-            $xc_input = explode('-', $xc);
-            $yc_input = explode('-', $yc);
-            $width_input = explode('-', $width);
-            $height_input = explode('-', $height);
-            $degree_input = explode('-', $degree);
-            
-            $this->Frame_model->add($name, $desc, $link, $cat_id,$x_input,$y_input,
-                    $width_input,$height_input,$degree_input,$frame_width,
-                    $frame_height,$pattern,$xc_input,$yc_input);
-            redirect('admin/frames');            
+
+            $x_input = explode(';', $x);
+            $y_input = explode(';', $y);
+            $xc_input = explode(';', $xc);
+            $yc_input = explode(';', $yc);
+            $width_input = explode(';', $width);
+            $height_input = explode(';', $height);
+            $degree_input = explode(';', $degree);
+
+            $this->Frame_model->add($name, $desc, $link, $cat_id, $x_input, $y_input, $width_input, $height_input, $degree_input, $frame_width, $frame_height, $pattern, $xc_input, $yc_input);
+            redirect('admin/frames');
         }
-        
+
         $data['lstCategory'] = $this->Category_model->get();
         $data['view'] = 'back_end/frame_add';
         $this->load->view('back_end/template_noright', $data);
@@ -106,10 +106,16 @@ class Frames extends CI_Controller {
         $frame = $this->Frame_model->get($id);
         $frame_image = $frame[0]->link;
         $pattern_image = $frame[0]->pattern;
-        $result = $this->Frame_model->delete($id);
+        //$result = $this->Frame_model->delete($id);
         $this->Frame_detail_model->delete($id);
         unlink($frame_image);
         unlink($pattern_image);
+        if ($this->Frame_model->delete($id)) {
+            echo "success";
+        } else {
+            echo "not success";
+        }
+
     }
 
     /**
@@ -124,11 +130,11 @@ class Frames extends CI_Controller {
             $link = $this->input->post('txtLink');
             $pattern = $this->input->post('txtPattern');
             $cat_id = $this->input->post('ddlCat');
-            
-            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath("./".$link);
+
+            $image = \PHPImageWorkshop\ImageWorkshop::initFromPath("./" . $link);
             $frame_width = $image->getWidth();
-            $frame_height = $image->getHeight();            
-            
+            $frame_height = $image->getHeight();
+
             $x = $this->input->post("txtX");
             $y = $this->input->post("txtY");
             $xc = $this->input->post("txtXC");
@@ -136,22 +142,25 @@ class Frames extends CI_Controller {
             $width = $this->input->post("txtWidth");
             $height = $this->input->post("txtHeight");
             $degree = $this->input->post("txtDegree");
-            
-            $x_input = explode('-', $x);
-            $y_input = explode('-', $y);
-            $xc_input = explode('-', $xc);
-            $yc_input = explode('-', $yc);
-            $width_input = explode('-', $width);
-            $height_input = explode('-', $height);
-            $degree_input = explode('-', $degree);
 
-            $this->Frame_model->edit($id,$name, $desc, $link, $cat_id,$x_input,$y_input,
-                    $width_input,$height_input,$degree_input,$frame_width,
-                    $frame_height,$pattern,$xc_input,$yc_input);
+            $x_input = explode(';', $x);
+            $y_input = explode(';', $y);
+            $xc_input = explode(';', $xc);
+            $yc_input = explode(';', $yc);
+            $width_input = explode(';', $width);
+            $height_input = explode(';', $height);
+            $degree_input = explode(';', $degree);
+
+            if($this->Frame_model->edit($id, $name, $desc, $link, $cat_id, $x_input, $y_input, $width_input, $height_input, $degree_input, $frame_width, $frame_height, $pattern, $xc_input, $yc_input))
+            {
+                $this->session->set_flashdata('result', 'success');
+                redirect('admin/frames');
+               // $this->session->keep_flashdata('result');
+            }
+
             
-            redirect('admin/frames');
         }
-        
+
         $data['frame_details'] = $this->Frame_detail_model->get($id);
         $frame = $this->Frame_model->get($id);
         if (count($frame) > 0) {
@@ -163,10 +172,10 @@ class Frames extends CI_Controller {
         $data['view'] = 'back_end/frame_edit';
         $this->load->view('back_end/template_noright', $data);
     }
-    
+
     public function upload() {
         $category_path = $this->input->post('categoryPath');
-        $upload_dir = '/resources/'.$category_path."/";
+        $upload_dir = '/resources/' . $category_path . "/";
         $upload_handler = new UploadHandler(null, true, $upload_dir);
     }
 
