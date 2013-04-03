@@ -16,8 +16,7 @@ $(document).ready(function(){
         horizontalScroll:true,
         autoHideScrollbar: false,
         advanced:{
-            updateOnContentResize: true,
-            autoExpandHorizontalScroll: true
+            updateOnContentResize: true
         },
         callbacks:{
             onTotalScroll: function(){

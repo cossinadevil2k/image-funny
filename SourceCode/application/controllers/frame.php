@@ -39,8 +39,12 @@ class Frame extends CI_Controller {
 
         if ($frame_id != 0) {
             $selected_frame = $this->frame_model->get($frame_id);
-            $arr['selected_frame'] = $selected_frame[0];
-            $arr['category_enable'] = $selected_frame[0]->category_id;
+            if (!empty($selected_frame)){
+                $arr['selected_frame'] = $selected_frame[0];
+                $arr['category_enable'] = $selected_frame[0]->category_id;
+            }else{
+                redirect('index');
+            }            
         } else {
             if (!empty($frame_list)) {
                 $selected_frame = $frame_list[0];

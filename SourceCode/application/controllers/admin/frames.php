@@ -103,7 +103,13 @@ class Frames extends CI_Controller {
      */
     function delete() {
         $id = $this->input->post('param');
-        $this->Frame_model->delete($id);
+        $frame = $this->Frame_model->get($id);
+        $frame_image = $frame[0]->link;
+        $pattern_image = $frame[0]->pattern;
+        $result = $this->Frame_model->delete($id);
+        $this->Frame_detail_model->delete($id);
+        unlink($frame_image);
+        unlink($pattern_image);
     }
 
     /**
@@ -115,8 +121,6 @@ class Frames extends CI_Controller {
             $id = $this->input->post('id');
             $name = $this->input->post('txtName');
             $desc = $this->input->post('txtDescription');
-//            $link = $this->input->post('hdffeatured_image');
-//            $pattern = $this->input->post('hdffeatured_image_patern');
             $link = $this->input->post('txtLink');
             $pattern = $this->input->post('txtPattern');
             $cat_id = $this->input->post('ddlCat');
