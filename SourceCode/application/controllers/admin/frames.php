@@ -23,6 +23,10 @@ class Frames extends CI_Controller {
      * 
      */
     function index($keyword = '~', $row = 0) {
+        if($this->session->userdata('login')!=1)
+        {
+            redirect('admin/category/login');
+        }
         $data['key_word'] = urldecode($keyword);
         if ($this->input->post('txtKeyWord')) {
 
@@ -60,6 +64,10 @@ class Frames extends CI_Controller {
      * Add Frame action
      */
     function add() {
+        if($this->session->userdata('login')!=1)
+        {
+            redirect('admin/category/login');
+        }
         if ($this->input->post('txtName')) {
             $name = $this->input->post('txtName');
             $desc = $this->input->post('txtDescription');
@@ -102,6 +110,10 @@ class Frames extends CI_Controller {
      * delete a frame by id
      */
     function delete() {
+        if($this->session->userdata('login')!=1)
+        {
+            redirect('admin/category/login');
+        }
         $id = $this->input->post('param');
         $frame = $this->Frame_model->get($id);
         $frame_image = $frame[0]->link;
@@ -123,6 +135,10 @@ class Frames extends CI_Controller {
      * @param int $id
      */
     function edit($id = 0) {
+        if($this->session->userdata('login')!=1)
+        {
+            redirect('admin/category/login');
+        }
         if ($this->input->post('txtName')) {
             $id = $this->input->post('id');
             $name = $this->input->post('txtName');

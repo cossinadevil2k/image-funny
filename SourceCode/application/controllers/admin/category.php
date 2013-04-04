@@ -11,9 +11,34 @@ class Category extends CI_Controller {
         // load session library
         $this->load->library('pagination');
         $this->load->model('Category_model');
+        $this->load->library('session');
+    }
+
+    function login() {
+        if ($this->input->post('username')) {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+
+            if (($username == $this->config->item('username') && ($password == $this->config->item('pass')))) {
+
+                $userdata = array(
+                    'username' => $username,
+                    'login' => TRUE,
+                );
+                $this->session->set_userdata($userdata);
+                redirect('admin/category');
+            } else {
+                $this->session->set_flashdata('logined','false');
+            }
+        }
+        $this->load->view('back_end/login');
     }
 
     function index($row = 0) {
+        if($this->session->userdata('login')!=1)
+        {
+            redirect('admin/category/login');
+        }
         if ($this->input->post('txtname')) {
             $name = $this->input->post('txtname');
             $desc = $this->input->post('txtdescription');
@@ -40,6 +65,10 @@ class Category extends CI_Controller {
     }
 
     function delete() {
+        if($this->session->userdata('login')!=1)
+        {
+            redirect('admin/category/login');
+        }
         $id = $this->input->post('param');
         $this->Category_model->delete($id);
         if ($this->db->affected_rows() > 0) {
@@ -50,6 +79,10 @@ class Category extends CI_Controller {
     }
 
     function edit($id = 0, $row = 0) {
+        if($this->session->userdata('login')!=1)
+        {
+            redirect('admin/category/login');
+        }
         if ($this->input->post('txtname')) {
             $id = $this->input->post('id');
             $name = $this->input->post('txtname');
