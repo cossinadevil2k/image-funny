@@ -49,7 +49,7 @@ $(document).ready(function() {
 	
         //Set intial styles using jQuery.  Have to represent all styles that
         //can be manipulated 
-	$("#"+newBlockId+"B").attr("style","left:" + imagePos.left + "px;top:" + imagePos.top + "px;width:100px;height:50px;position:absolute;background-color:#000000;border:1px dotted white");
+	$("#"+newBlockId+"B").attr("style","left:" + imagePos.left+ $("#selected_frame").width()/2 + "px;top:" + imagePos.top + $("#selected_frame").height()/2 + "px;width:100px;height:50px;position:absolute;background-color:#000000;border:1px dotted white");
         $("#"+newBlockId+"B").attr("degree",0);	
         $("#" + newBlockId).attr("style","z-index:" + $("#blockCount").val() + ";");
         $("#" + newBlockId).addClass("colorBlock");
@@ -115,10 +115,11 @@ $(document).ready(function() {
         
         //Show delete button
         $("#buttonDelete").removeClass("noShow");
-	
+	var left = imagePos.left+$("#selected_frame").width()/2;
+        var top = imagePos.top+$("#selected_frame").height()/2;
         //Set intial styles using jQuery.  Have to represent all styles that
         //can be manipulated 
-        $("#"+newBlockId+"B").attr("style","left:" + imagePos.left + "px;top:" + imagePos.top + "px;position:absolute;");
+        $("#"+newBlockId+"B").attr("style","left:" + left + "px;top:" + top + "px;position:absolute;");
         $("#"+newBlockId+"B").attr("degree",0);
         $("#" + newBlockId).attr("style","color:#ffffff;background-color:transparent;border:1px dotted white;font-style:normal;font-weight:normal;font-family:im_arial;font-size:16px;text-decoration:none;z-index:" + $("#blockCount").val() + ";");
         $("#" + newBlockId).addClass("textBlock");
