@@ -97,6 +97,28 @@ class Frame_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+    
+    
+    /**
+     * 
+     * @param type $category_id
+     * @param type $limit
+     * @param type $offset
+     * @return type
+     */
+    function get_by_category_array($category_id, $limit = -1, $offset = 0) {
+        $this->db->select('id, name, description, link, category_id, pattern, width, height');
+        $this->db->from('tbl_frame');
+
+        $this->db->where('category_id', $category_id);
+        if ($limit > 0) {
+            $this->db->limit($limit, $offset);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    
 
     /**
      * Get pattern by category

@@ -62,6 +62,24 @@ class Frame extends CI_Controller {
         $arr['fb_app_id'] = $this->config->item('FACEBOOK_APP_ID');
         $this->load->view('frame', $arr);
     }
+    
+    public function get_more_frame(){
+        $category_id = $this->input->post('categoryID');
+        $offset = $this->input->post('offset');
+        $frame_arr = $this->frame_model->get_by_category_array($category_id, $this->config->item('pattern_number'), $offset);
+        
+        if (count($frame_arr) == 0){
+            echo json_encode(array('status' => 'NO_DATA'));
+        }else{
+            $offset += count($frame_arr);
+            foreach ($frame_arr as &$frame) {
+                $frame_detail = $this->frame_detail_model->get($frame['id']);
+                $frame['details'] = $frame_detail;
+            }
+            echo json_encode(array('status' => 'SUCCESS', 'offset' => $offset, 'frame_list' => $frame_arr));
+        }
+        die();
+    }
 
     public function create_frame() {
         $frame_id = $this->input->post('frame_id');
