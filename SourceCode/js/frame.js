@@ -16,7 +16,8 @@ $(document).ready(function(){
         horizontalScroll:true,
         autoHideScrollbar: false,
         advanced:{
-            updateOnContentResize: true
+            updateOnContentResize: true,
+            autoExpandHorizontalScroll: true      
         },
         callbacks:{
             onTotalScroll: function(){
@@ -25,7 +26,7 @@ $(document).ready(function(){
                 offset = container.children().length;
                 $.ajax({
                     type: 'post',
-                    url: '/home/get_more_frame',
+                    url: '/frame/get_more_frame',
                     dataType: 'json',
                     data:{
                         'categoryID': id,
@@ -36,7 +37,11 @@ $(document).ready(function(){
                             frames = data.frame_list;
                             var html;
                             for (i = 0; i < frames.length; i++){
-                                html = '<div id="PatternImage'+frames[i].id+'" class="PatternImage" link="'+frames[i].link+'" frame_id="'+frames[i].id+'"><img src="/'+frames[i].pattern+'" width="100%"/></div>';                                
+                                html = '<div id="PatternImage'+frames[i]['id']+'" class="PatternImage" link="'+frames[i]['link']+'" frame_id="'+frames[i]['id']+'"><img src="/'+frames[i]['pattern']+'" width="100%" image_w="'+frames[i]['width']+'" image_h="'+frames[i]['height']+'"/>';
+                                for (j = 0; j < frames[i].details.length; j++){
+                                    html += '<input type="hidden" id="frame'+frames[i].details[j].id+'" x="'+frames[i].details[j].xc+'" y="'+frames[i].details[j].yc+'" aspect="'+frames[i].details[j].width/frames[i].details[j].height+'"/>'; 
+                                }
+                                html += '</div>';
                                 container.append(html);
                             }                            
                         }
