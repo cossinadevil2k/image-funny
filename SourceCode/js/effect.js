@@ -210,7 +210,11 @@ $(document).ready(function(){
     });
     
     $("#uploadE").live('click',function(){
+        $.blockUI({
+            message: '<h1>Vui lòng chờ ...</h1>'
+        });
         $("#fileupload").trigger('click');
+        $.unblockUI();
     }); 
     
     $("#download").live('click', function(){
