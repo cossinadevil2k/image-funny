@@ -104,5 +104,13 @@
                 <p>Cập nhật thành công!</p>
             </div>
         <?php } ?>
+        <div class="notification msgsuccess deletemess" style="display: none;">
+            <a class="close"></a>
+            <p>Xóa thành công!</p>
+        </div>
+        <div class="notification msgerror deleterror" style="display: none;">
+            <a class="close"></a>
+            <p>Xóa thất bại!</p>
+        </div>
     </div>                                  
 </div><!--content-->                

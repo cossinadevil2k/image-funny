@@ -73,22 +73,36 @@ jQuery(document).ready(function(){
                     method:p_method,
                     param:id
                 },function(data) {
+                    
                     if(data!='success')
                     {
                         flag = false;
                     }
                     else
-                    {
-                        jQuery(this).parents('tr').fadeOut(function(){
-                            jQuery(this).remove();							//remove row when animation is finished
-                        });
-                    }
-                });                    
-            }
+                    {                        
+                        
+                    }                    
+                }); 
+                jQuery(this).parents('tr').fadeOut(function(){
+                    jQuery(this).remove();							//remove row when animation is finished
+                });
+            }            
+            
         });
-        
+        if(flag)
+        {
+            jQuery('.deletemess').attr('style','display:block');   
+            jQuery('.deleterror').attr('style','display:none');            
+        }
+        else
+        {
+            jQuery('.deletemess').attr('style','display:none');
+            jQuery('.deleterror').attr('style','display:block');
+        }
 		
-        if(!sel) alert('No data selected');							//alert to no data selected
+        if(!sel) alert('No data selected');
+        //alert to no data selected
+        return false;
     });
 	
 	
@@ -108,19 +122,21 @@ jQuery(document).ready(function(){
                     flag = false;                    
                 } 
             });
-			
+            if(flag)
+            {
+                jQuery('.deletemess').attr('style','display:block');   
+                jQuery('.deleterror').attr('style','display:none');
+                jQuery(this).parents('tr').fadeOut(function(){ 
+                    jQuery(this).remove();
+                });
+            }
+            else
+            {
+                jQuery('.deletemess').attr('style','display:none');
+                jQuery('.deleterror').attr('style','display:block');
+            }	
         }
-        if(flag)
-        {
-            alert('Xóa thành công!');
-            jQuery(this).parents('tr').fadeOut(function(){ 
-                jQuery(this).remove();
-            });
-        }
-        else
-        {
-            alert('Xóa thất bại!');   
-        }
+        
         return false;
     });
         

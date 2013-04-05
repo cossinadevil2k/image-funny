@@ -7,12 +7,12 @@
     <div class="edit-left">
         <form action="<?php echo base_url(); ?>admin/category/edit" method="post" 
               accept-charset="utf-8" id="formID" class="stdform">   
-            <input type="hidden" name="id" value="<?php echo $category->id;?>"/>
-                
+            <input type="hidden" name="id" value="<?php echo $category->id; ?>"/>
+
             <p><label>Tên danh mục:</label></p>
             <p>
                 <span class="field">
-                    <input name="txtname" value="<?php echo $category->name;?>" id="txtname" 
+                    <input name="txtname" value="<?php echo $category->name; ?>" id="txtname" 
                            class="longinput validate[required]" type="text">
                 </span>
             </p>
@@ -30,17 +30,17 @@
                 </span>
             </p>
             <br>   -->  
-            
+
             <br>
             <p>
                 <label>Loại khung:</label>
-                
-                <p style="margin-left: 60px;">
-                    <input type="radio" name="rdoType" <?php if($category->frame_type==0) echo 'checked="checked"' ?> value="0"> Khung thường <br>
-                    <input type="radio" name="rdoType" <?php if($category->frame_type==1) echo 'checked="checked"'?> value="1"> Facebook Cover <br>
-                    <input type="radio" name="rdoType" <?php if($category->frame_type==2) echo 'checked="checked"'?> value="2"> Khung điền chữ <br>
-                    <input type="radio" name="rdoType" <?php if($category->frame_type==3) echo 'checked="checked"'?> value="3"> Hiệu ứng
-                </p>
+
+            <p style="margin-left: 60px;">
+                <input type="radio" name="rdoType" <?php if ($category->frame_type == 0) echo 'checked="checked"' ?> value="0"> Khung thường <br>
+                <input type="radio" name="rdoType" <?php if ($category->frame_type == 1) echo 'checked="checked"' ?> value="1"> Facebook Cover <br>
+                <input type="radio" name="rdoType" <?php if ($category->frame_type == 2) echo 'checked="checked"' ?> value="2"> Khung điền chữ <br>
+                <input type="radio" name="rdoType" <?php if ($category->frame_type == 3) echo 'checked="checked"' ?> value="3"> Hiệu ứng
+            </p>
             </p>
             <br>
             <p class="stdformbutton">
@@ -100,5 +100,13 @@
 
         </table>
         <?php echo $list_link; ?>
+        <div class="notification msgsuccess deletemess" style="display: none;">
+            <a class="close"></a>
+            <p>Xóa thành công!</p>
+        </div>
+        <div class="notification msgerror deleterror" style="display: none;">
+            <a class="close"></a>
+            <p>Xóa thất bại!</p>
+        </div>
     </div>                                  
 </div><!--content-->                

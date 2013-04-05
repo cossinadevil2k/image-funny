@@ -5,17 +5,16 @@
 
 <div class="content">
     <h1 id="ajaxtitle"></h1>   
-    <?php 
-        //print_r($this->session->flashdata('result'));
-        if($this->session->flashdata('result')=='success')
-        {
-    ?>
-    <div class="notification msgsuccess">
-        <a class="close"></a>
-        <p>Cập nhật thành công!</p>
-    </div>
-    <?php }?>
-    
+    <?php
+    //print_r($this->session->flashdata('result'));
+    if ($this->session->flashdata('result') == 'success') {
+        ?>
+        <div class="notification msgsuccess">
+            <a class="close"></a>
+            <p>Cập nhật thành công!</p>
+        </div>
+    <?php } ?>
+
     <div class="contenttitle radiusbottom0">
         <h2 class="table"><span>Danh sách khung ảnh</span></h2>
     </div><!--contenttitle-->
@@ -81,10 +80,18 @@
                         <a class="delete" id="<?php echo $frame->id; ?>" href="<?php echo base_url(); ?>admin/frames/delete">Xóa</a>
                     </td>
                 </tr>
-    <?php
-}
-?>
+                <?php
+            }
+            ?>
         </tbody>
     </table>    
-<?php echo $list_link; ?>
+    <?php echo $list_link; ?>
+    <div class="notification msgsuccess deletemess" style="display: none;">
+        <a class="close"></a>
+        <p>Xóa thành công!</p>
+    </div>
+    <div class="notification msgerror deleterror" style="display: none;">
+        <a class="close"></a>
+        <p>Xóa thất bại!</p>
+    </div>
 </div><!--content-->
