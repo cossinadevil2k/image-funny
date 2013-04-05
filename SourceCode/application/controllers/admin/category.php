@@ -9,9 +9,9 @@ class Category extends CI_Controller {
     function __construct() {
         parent::__construct();
         // load session library
-		$this->load->library('session');
+        $this->load->library('session');
         $this->load->library('pagination');
-        $this->load->model('Category_model');        
+        $this->load->model('Category_model');
     }
 
     function login() {
@@ -27,15 +27,14 @@ class Category extends CI_Controller {
                 $this->session->set_userdata($userdata);
                 redirect('admin/category');
             } else {
-                $this->session->set_flashdata('logined','false');
+                $this->session->set_flashdata('logined', 'false');
             }
         }
         $this->load->view('back_end/login');
     }
 
     function index($row = 0) {
-        if($this->session->userdata('login')!=1)
-        {
+        if ($this->session->userdata('login') != 1) {
             redirect('admin/category/login');
         }
         if ($this->input->post('txtname')) {
@@ -64,8 +63,7 @@ class Category extends CI_Controller {
     }
 
     function delete() {
-        if($this->session->userdata('login')!=1)
-        {
+        if ($this->session->userdata('login') != 1) {
             redirect('admin/category/login');
         }
         $id = $this->input->post('param');
@@ -76,20 +74,14 @@ class Category extends CI_Controller {
 
             $this->session->set_flashdata('result', 'success');
             redirect('admin/category');
-
         } else {
 
             echo 'not success';
-
-            $this->session->set_flashdata('result', 'fail');
-            redirect('admin/category');
-
         }
     }
 
     function edit($id = 0, $row = 0) {
-        if($this->session->userdata('login')!=1)
-        {
+        if ($this->session->userdata('login') != 1) {
             redirect('admin/category/login');
         }
         if ($this->input->post('txtname')) {
