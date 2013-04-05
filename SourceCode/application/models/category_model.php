@@ -146,17 +146,17 @@ class Category_model extends CI_Model {
         $arr = array(
             'name' => $name,
             'description' => $description,
-            'frame_type' => $frame_type,
-            'path' => $path
+            'frame_type' => $frame_type
+//            'path' => $path
         );
         $this->db->update('tbl_category', $arr);
-        $path = './resources/frames/' . $path;
-        if (!is_dir($path)) {
-            $oldUmask = umask(0);
-            mkdir($path, 0777, true);
-            umask($oldUmask);
-            chmod($path, 0777);
-        }
+//        $path = './resources/frames/' . $path;
+//        if (!is_dir($path)) {
+//            $oldUmask = umask(0);
+//            mkdir($path, 0777, true);
+//            umask($oldUmask);
+//            chmod($path, 0777);
+//        }
         if ($this->db->affected_rows() > 0) {
             return TRUE;
         } else {

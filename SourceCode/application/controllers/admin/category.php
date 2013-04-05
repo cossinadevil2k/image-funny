@@ -71,7 +71,8 @@ class Category extends CI_Controller {
         $id = $this->input->post('param');
         $this->Category_model->delete($id);
         if ($this->db->affected_rows() > 0) {
-            return TRUE;
+            $this->session->set_flashdata('result', 'success');
+            redirect('admin/category');
         } else {
             return FALSE;
         }
