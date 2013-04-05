@@ -47,9 +47,13 @@
                                 <div class="Gallery">
                                     <?php if (!empty($category['frame_list'])):?>
                                         <?php foreach ($category['frame_list'] as $frame):?>
-                                                    <?php if ($category['frame_type'] != 3): //Normal Category?>
+                                                    <?php if (($category['frame_type'] != 3) &&  ($category['frame_type'] != 1)): //Normal Category?>
                                                         <div class="PatternImage">
                                                             <a href="<?php echo base_url('tao-khung/'.$category['id'].'/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%" height="100%"/></a>
+                                                        </div>
+                                                        <?php elseif ($category['frame_type'] == 1): //Facebook Category?>
+                                                        <div class="PatternImage">
+                                                            <a href="<?php echo base_url('tao-khung/facebook-cover/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%" height="100%"/></a>
                                                         </div>
                                                         <?php else: //InstaEffect Category?>
                                                         <div class="PatternImage" style="width: 120px; height: 120px">
@@ -68,7 +72,7 @@
 
             </div>
             <div class="Footer">
-
+                <?php $this->load->view('footer');?>
             </div>
         </div>        
     </body>

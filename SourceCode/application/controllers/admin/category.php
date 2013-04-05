@@ -9,9 +9,9 @@ class Category extends CI_Controller {
     function __construct() {
         parent::__construct();
         // load session library
+		$this->load->library('session');
         $this->load->library('pagination');
-        $this->load->model('Category_model');
-        $this->load->library('session');
+        $this->load->model('Category_model');        
     }
 
     function login() {
@@ -20,7 +20,6 @@ class Category extends CI_Controller {
             $password = $this->input->post('password');
 
             if (($username == $this->config->item('username') && ($password == $this->config->item('pass')))) {
-
                 $userdata = array(
                     'username' => $username,
                     'login' => TRUE,

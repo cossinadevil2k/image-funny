@@ -431,14 +431,18 @@ $(document).ready(function() {
             $("#textData").val(dataLine);            
         });
                 
-        var url =base_url+"/tao-khung/createwatermark";                
+        var url =base_url+"/tao-khung/create_watermark";                
         var detail = $("#textData").val();
         var imagePath = $("#selected_frame").attr('src');
         imagePath = imagePath.replace(base_url, "");
+        $.blockUI({
+            message: '<h1>Vui lòng chờ ...</h1>'
+        }); 
         $.post(url, {            
             detail:detail,
             imagePath:imagePath
         }, function(data){
+            $.unblockUI();
             $('.textBlock').parent().remove();
             $('.colorBlock').parent().remove();
             $("#selected_frame").attr('src',data.toString());

@@ -59,12 +59,12 @@
                     <div class="Left LeftE" id="uploadE">
                         <div class="BtnUpload">Tải ảnh lên</div>
                         <div id="preview">
-                            <img id="effect_image" image_path=""  width="100%" height="100%">
+                            <img id="effect_image" image_path="" src="<?php echo base_url() ?>images/common/no_image.png"  width="100%" height="100%">
                         </div>
                     </div>
                     <div class="Center Effect">
                         <?php if (isset($selected_frame)):?>
-                        <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="450px" height="450px"/>
+                        <img id="selected_frame" frame_id="0" src="<?php echo base_url() ?>images/common/no_image.png" width="450px" height="450px"/>
                         <?php endif;?>
                     </div>
                     <div class="Right RightE">
@@ -83,7 +83,7 @@
                             <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
                                 echo " Selected";
                                 }?>" style="width: 120px; height: 120px">
-                                <img class="effect_selected" effect="<?php echo $frame->name;?>" src="<?php echo base_url().$frame->pattern;?>" width="100%">
+                                <img class="effect_selected Enable" effect="<?php echo $frame->name;?>" src="<?php echo base_url().$frame->pattern;?>" width="100%">
                                 <?php foreach ($frame_detail_list as $frame_details):?>
                                     <?php foreach ($frame_details as $frame_detail):?>
                                         <?php if ($frame_detail->frame_id == $frame->id):?>
@@ -111,10 +111,12 @@
                     </div>
                 </div>
             </div>       
-            <input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
+            <input id="fileupload" type="file" name="files[]" accept="image/*" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
+            
+        </div>     
             <div class="Footer">
-
+                <?php $this->load->view('footer');?>
             </div>
-        </div>        
+        </div>
     </body>
 </html>

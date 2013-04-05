@@ -89,7 +89,7 @@
                         <?php endif; ?>
 
                         <?php if ($is_text_frame == 1) { ?>
-                            <?php include 'chooseWatermark.php'; ?>
+                            <?php include 'choose_watermark.php'; ?>
                         <?php } ?>
                     </div>
                     <div class="Right">
@@ -141,10 +141,10 @@
                 <input type="hidden" id="w"/>
                 <input type="hidden" id="h"/>
             </div>
+            <div class="Footer">
+                <?php $this->load->view('footer');?>
+            </div>   
         </div>
-        <input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
-        <div class="Footer">
-
-        </div>     
+        <input id="fileupload" type="file" name="files[]" accept="image/*" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
     </body>
 </html>

@@ -58,16 +58,15 @@ $(document).ready(function(){
         $('#PatternImage'+selected_id).removeClass("Selected");
         $(this).addClass("Selected");
         selected_id = frame_id;
-        $("#selected_frame").attr('src', base_url + $('#PatternImage'+frame_id).attr('link'));
-        $("#selected_frame").attr('frame_id', selected_id);
+//        $("#selected_frame").attr('src', base_url + $('#PatternImage'+frame_id).attr('link'));
+        $("#selected_frame").attr('frame_id', selected_id);      
     });
     
     $("#selectBtn").live('click', function(){
-        $.fancybox.close();        
+        $.fancybox.close();
         $.blockUI({
             message: '<h1>Vui lòng chờ ...</h1>'
-        });
-
+        }); 
         x = $('#x').val() * original_height / $('#target').height();
         y = $('#y').val() * original_width / $('#target').width();
         crop_width = $('#w').val() * original_height / $('#target').height();
@@ -85,59 +84,22 @@ $(document).ready(function(){
                 $.unblockUI();                
                 $("#effect_image").attr('src', data.thumb_path);
                 $("#effect_image").attr('image_path', data.image_path);
-                $(".addButton").remove();
-            //alert(data.thumb_path);
-            /*$.ajax({
-                    type: "post",
-                    url : base_url + 'frame/create_effect',
-                    dataType: "json",
-                    data: {
-                        'image': data.thumb_path                        
-                    },
-                    success: function(data){
-                        $.unblockUI();                
-                        $("#effect_image").attr('src', data.image_path);
-                        $(".addButton").remove();
-                        //alert(data.image_path);
-                        
-                    }
-                });*/
+                createEffect($("#PatternImage" + selected_id+ " img"));
             }
         });
     });
     
     $('.effect_selected').click(function(){
-        var image = $("#effect_image").attr('image_path');
-        if (image==""){
-            alert('Vui lòng tải ảnh lên trước khi chọn hiệu ứng.');
-        }else{
-            $.blockUI({
-                message: '<h1>Vui lòng chờ ...</h1>'
-            });
-            var effect = $(this).attr('effect');
-
-            $.ajax({
-                type: "post",
-                url : base_url + 'frame/create_effect',
-                dataType: "json",
-                data: {
-                    'image': image,
-                    'effect':effect
-                },
-                success: function(data){
-                    $.unblockUI();                
-                    $("#selected_frame").attr('src', data.image_path);
-                    //$(".addButton").remove();
-                //alert(data.image_path);
-
-                }
-            });
-        }
-        
+        createEffect($(this));
     });
     
     $('#fileupload').fileupload({
         dataType: 'json',
+        start: function(){
+          $.blockUI({
+                message: '<h1>Vui lòng chờ ...</h1>'
+            });  
+        },
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 if ((file.error != 'undefined') && (file.error == 'File is too big')){
@@ -173,7 +135,7 @@ $(document).ready(function(){
                                 $('#target').width(new_width);
 
                                 $("#target").attr('src', base_url+'resources/users/'+ file.name);
-
+                                $.unblockUI();
                                 $.fancybox({
                                     'padding':0,
                                     'closeBtn' : true,
@@ -228,5 +190,31 @@ $(document).ready(function(){
         $('#y').val(c.y);
         $('#w').val(c.w);
         $('#h').val(c.h);
+    }
+    
+    function createEffect(obj){
+        image = $("#effect_image").attr('image_path');
+        if (image==""){
+            alert('Vui lòng tải ảnh lên trước khi chọn hiệu ứng.');
+        }else{
+            $.blockUI({
+                message: '<h1>Vui lòng chờ ...</h1>'
+            });
+            var effect = $(obj).attr('effect');
+
+            $.ajax({
+                type: "post",
+                url : base_url + 'frame/create_effect',
+                dataType: "json",
+                data: {
+                    'image': image,
+                    'effect':effect
+                },
+                success: function(data){
+                    $.unblockUI();                
+                    $("#selected_frame").attr('src', data.image_path);
+                }
+            });
+        }
     }
 });

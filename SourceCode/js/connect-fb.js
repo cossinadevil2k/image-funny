@@ -59,7 +59,7 @@ window.fbAsyncInit = function() {
                     }
                 });
             } else {
-                alert('cancelled');
+                
             }
         },{scope:'read_stream,publish_stream,offline_access'});
         return false;

@@ -72,11 +72,10 @@ $(document).ready(function(){
     });
     
     $("#selectBtn").live('click', function(){
-        $.fancybox.close();        
+        $.fancybox.close();
         $.blockUI({
             message: '<h1>Vui lòng chờ ...</h1>'
-        });
-
+        }); 
         x = $('#x').val() * original_height / $('#target').height();
         y = $('#y').val() * original_width / $('#target').width();
         crop_width = $('#w').val() * original_height / $('#target').height();
@@ -107,6 +106,11 @@ $(document).ready(function(){
     
      $('#fileupload').fileupload({
         dataType: 'json',
+        start: function(){
+          $.blockUI({
+                message: '<h1>Vui lòng chờ ...</h1>'
+            });  
+        },
         done: function (e, data) {
             $.each(data.result.files, function (index, file) {
                 if ((file.error != 'undefined') && (file.error == 'File is too big')){
@@ -142,7 +146,7 @@ $(document).ready(function(){
                                 $('#target').width(new_width);
 
                                 $("#target").attr('src', base_url+'resources/users/'+ file.name);
-
+                                $.unblockUI();
                                 $.fancybox({
                                     'padding':0,
                                     'closeBtn' : true,

@@ -106,9 +106,9 @@
                     </div>
                 </div>
             </div>            
-            <input id="fileupload" type="file" name="files[]" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
+            <input id="fileupload" type="file" name="files[]" accept="image/*" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
             <div class="Footer">
-
+                <?php $this->load->view('footer');?>
             </div>
         </div>        
     </body>

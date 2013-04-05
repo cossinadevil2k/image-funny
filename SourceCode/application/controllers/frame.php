@@ -211,7 +211,7 @@ class Frame extends CI_Controller {
         $upload_handler = new UploadHandler();
     }
 
-    function createWaterMark() {
+    function create_watermark() {
         $detail = $this->input->post('detail');
         $imagePath = $this->input->post('imagePath');
         $details = explode("^", $detail);
