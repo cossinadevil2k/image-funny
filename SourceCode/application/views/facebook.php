@@ -54,57 +54,63 @@
                 </div>                
             </div>
             <div class="MainContent">
-                <div class="Line"></div>                
-                <div class="FrameContent">
-                    <div class="LeftF"></div>
-                    <div class="Center Facebook">
-                        <?php if (isset($selected_frame)):?>
-                        <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
-                        <?php endif;?>
-                    </div>
-                    <div class="Right RightF">
-                        <ul style="list-style-type: none">
-                            <li>
-                                <div id="download"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
-                            </li>
-                            <li>
-                                <div id="facebook"><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="choosePhoto">
-                        <div id="Pattern" cat_id ="<?php echo $selected_frame->category_id;?>">
-                            <?php foreach ($frame_list as $frame):?>
-                            <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
-                                echo " Selected";
-                            }?>">
-                                <img src="<?php echo base_url().$frame->pattern;?>" width="100%" image_w="<?php echo $frame->width ?>" image_h="<?php echo $frame->height ?>">
-                                <?php foreach ($frame_detail_list as $frame_details):?>
-                                    <?php foreach ($frame_details as $frame_detail):?>
-                                        <?php if ($frame_detail->frame_id == $frame->id):?>
-                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->xc ?>" y="<?php echo $frame_detail->yc ?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
-                                        <?php endif;?>
+                <div class="Line"></div>
+                <?php if(!empty($frame_list)):?>
+                    <div class="FrameContent">
+                        <div class="LeftF"></div>
+                        <div class="Center Facebook">
+                            <?php if (isset($selected_frame)):?>
+                            <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
+                            <?php endif;?>
+                        </div>
+                        <div class="Right RightF">
+                            <ul style="list-style-type: none">
+                                <li>
+                                    <div id="download"><img src="<?php echo base_url()?>images/frame/download.png" width="100%"/></div>
+                                </li>
+                                <li>
+                                    <div id="facebook"><img src="<?php echo base_url()?>images/frame/facebook.png" width="100%"/></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="choosePhoto">
+                            <div id="Pattern" cat_id ="<?php echo $selected_frame->category_id;?>">
+                                <?php foreach ($frame_list as $frame):?>
+                                <div frame_id ="<?php echo $frame->id?>" link="<?php echo $frame->link;?>" id="PatternImage<?php echo $frame->id?>" class="PatternImageF PatternImage<?php if ($frame->id == $selected_frame->id) {
+                                    echo " Selected";
+                                }?>">
+                                    <img src="<?php echo base_url().$frame->pattern;?>" width="100%" image_w="<?php echo $frame->width ?>" image_h="<?php echo $frame->height ?>">
+                                    <?php foreach ($frame_detail_list as $frame_details):?>
+                                        <?php foreach ($frame_details as $frame_detail):?>
+                                            <?php if ($frame_detail->frame_id == $frame->id):?>
+                                                <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->xc ?>" y="<?php echo $frame_detail->yc ?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
+                                            <?php endif;?>
+                                        <?php endforeach;?>
                                     <?php endforeach;?>
-                                <?php endforeach;?>
+                                </div>
+                                <?php endforeach;?>                       
                             </div>
-                            <?php endforeach;?>                       
+                        </div>
+                        <div id="Next" class="NaviF">
+                            <img src="<?php echo base_url()?>images/frame/next.png"/>
+                        </div>
+                        <div id="Previous" class="NaviF">
+                            <img src="<?php echo base_url()?>images/frame/previous.png"/>
+                        </div>
+                        <div id="cropDiv" style="display: none; max-width: 610px; max-height: 400px;">
+                            <img src="" width="100%" id="target"/>
+                            <input type="hidden" id="x"/>
+                            <input type="hidden" id="y"/>
+                            <input type="hidden" id="w"/>
+                            <input type="hidden" id="h"/>
+                            <div id="selectBtn" class="fancybox-buttons" href="#">Chọn</div>
                         </div>
                     </div>
-                    <div id="Next" class="NaviF">
-                        <img src="<?php echo base_url()?>images/frame/next.png"/>
+                <?php else:?>
+                    <div class="FrameContent">
+                        <span style="font-size: 24px;">Chưa có dữ liệu. Vui lòng quay lại sau.</span>
                     </div>
-                    <div id="Previous" class="NaviF">
-                        <img src="<?php echo base_url()?>images/frame/previous.png"/>
-                    </div>
-                    <div id="cropDiv" style="display: none; max-width: 610px; max-height: 400px;">
-                        <img src="" width="100%" id="target"/>
-                        <input type="hidden" id="x"/>
-                        <input type="hidden" id="y"/>
-                        <input type="hidden" id="w"/>
-                        <input type="hidden" id="h"/>
-                        <div id="selectBtn" class="fancybox-buttons" href="#">Chọn</div>
-                    </div>
-                </div>
+                <?php endif;?>
             </div>            
             <input id="fileupload" type="file" name="files[]" accept="image/*" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
             <div class="Footer">

@@ -37,35 +37,39 @@
             <div class="MainContent" style="height: 150%;">
                 <div class="Line"></div>
                 <div class="HomeContent">
-                    <?php foreach ($category_arr as $category):?>
-                        <div class="Category" cat_id ="<?php echo $category['id'];?>" offset="<?php echo isset($category['offset'])? $category['offset'] :  0?>">
-                            <div class="CategoryTitle">
-                                <img src="<?php echo base_url() ?>images/home/category_title.png"/>
-                                <label><?php echo $category['name']; ?></label>
-                            </div>
-                            <div class="Pattern ">
-                                <div class="Gallery">
-                                    <?php if (!empty($category['frame_list'])):?>
-                                        <?php foreach ($category['frame_list'] as $frame):?>
-                                                    <?php if (($category['frame_type'] != 3) &&  ($category['frame_type'] != 1)): //Normal Category?>
-                                                        <div class="PatternImage">
-                                                            <a href="<?php echo base_url('tao-khung/'.$category['id'].'/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%" height="100%"/></a>
-                                                        </div>
-                                                        <?php elseif ($category['frame_type'] == 1): //Facebook Category?>
-                                                        <div class="PatternImage">
-                                                            <a href="<?php echo base_url('tao-khung/facebook-cover/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%" height="100%"/></a>
-                                                        </div>
-                                                        <?php else: //InstaEffect Category?>
-                                                        <div class="PatternImage" style="width: 120px; height: 120px">
-                                                            <a href="<?php echo base_url('tao-khung/hieu-ung/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
-                                                        </div>
-                                                    <?php endif;?>
-                                        <?php endforeach;?>
-                                    <?php endif;?>
+                    <?php if (!empty($category_arr)):?>
+                        <?php foreach ($category_arr as $category):?>
+                            <div class="Category" cat_id ="<?php echo $category['id'];?>" offset="<?php echo isset($category['offset'])? $category['offset'] :  0?>">
+                                <div class="CategoryTitle">
+                                    <img src="<?php echo base_url() ?>images/home/category_title.png"/>
+                                    <label><?php echo $category['name']; ?></label>
                                 </div>
-                            </div>                  
-                        </div>
-                    <?php endforeach;?>     
+                                <div class="Pattern ">
+                                    <div class="Gallery">
+                                        <?php if (!empty($category['frame_list'])):?>
+                                            <?php foreach ($category['frame_list'] as $frame):?>
+                                                        <?php if (($category['frame_type'] != 3) &&  ($category['frame_type'] != 1)): //Normal Category?>
+                                                            <div class="PatternImage">
+                                                                <a href="<?php echo base_url('tao-khung/'.$category['id'].'/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%" height="100%"/></a>
+                                                            </div>
+                                                            <?php elseif ($category['frame_type'] == 1): //Facebook Category?>
+                                                            <div class="PatternImage">
+                                                                <a href="<?php echo base_url('tao-khung/facebook-cover/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%" height="100%"/></a>
+                                                            </div>
+                                                            <?php else: //InstaEffect Category?>
+                                                            <div class="PatternImage" style="width: 120px; height: 120px">
+                                                                <a href="<?php echo base_url('tao-khung/hieu-ung/'.$frame->id)?>"><img src="<?php echo base_url().$frame->pattern ?>" width="100%"/></a>
+                                                            </div>
+                                                        <?php endif;?>
+                                            <?php endforeach;?>
+                                        <?php endif;?>
+                                    </div>
+                                </div>                  
+                            </div>
+                        <?php endforeach;?>
+                    <?php else:?>
+                    <span style="font-size: 24px;">Chưa có dữ liệu. Vui lòng quay lại sau.</span>
+                    <?php endif;?>
                 </div>
             </div>
             <div class="RightContent">

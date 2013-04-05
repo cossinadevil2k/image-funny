@@ -55,6 +55,7 @@
             </div>
             <div class="MainContent">
                 <div class="Line"></div>
+                <?php if (!empty($frame_list)):?>
                 <div class="FrameContent">
                     <div class="Left LeftE" id="uploadE">
                         <div class="BtnUpload">Tải ảnh lên</div>
@@ -107,10 +108,14 @@
                         <input type="hidden" id="y"/>
                         <input type="hidden" id="w"/>
                         <input type="hidden" id="h"/>
-                        <div id="selectBtn" class="fancybox-buttons" href="#">Chọn</dv>
+                        <div id="selectBtn" class="fancybox-buttons" href="#">Chọn</div>
                     </div>
+                </div>       
+                <?php else:?>
+                <div class="FrameContent">
+                    <span style="font-size: 24px;">Chưa có dữ liệu. Vui lòng quay lại sau.</span>
                 </div>
-            </div>       
+                <?php endif;?>
             <input id="fileupload" type="file" name="files[]" accept="image/*" data-url="<?php echo base_url()?>/tao-khung/upload" multiple style="display: none;">
             
         </div>     

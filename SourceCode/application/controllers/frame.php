@@ -181,10 +181,13 @@ class Frame extends CI_Controller {
             $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
         }
 
-        foreach ($frame_list as $frame) {
-            $arr_frame_detail = $this->frame_detail_model->get($frame->id);
-            $frame_detail[] = $arr_frame_detail;
-        }
+        if (!empty($frame_list)){
+            foreach ($frame_list as $frame) {
+                $arr_frame_detail = $this->frame_detail_model->get($frame->id);
+                $frame_detail[] = $arr_frame_detail;
+            } 
+            $arr['frame_list'] = $frame_list;
+        }        
 
         if ($frame_id != 0) {
             $selected_frame = $this->frame_model->get($frame_id);
@@ -197,7 +200,6 @@ class Frame extends CI_Controller {
             }
         }
 
-        $arr['frame_list'] = $frame_list;
         if (isset($frame_detail)) {
             $arr['frame_detail_list'] = $frame_detail;
         }
@@ -261,9 +263,12 @@ class Frame extends CI_Controller {
             $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
         }
 
-        foreach ($frame_list as $frame) {
-            $arr_frame_detail = $this->frame_detail_model->get($frame->id);
-            $frame_detail[] = $arr_frame_detail;
+        if (!empty($frame_list)){
+            foreach ($frame_list as $frame) {
+                $arr_frame_detail = $this->frame_detail_model->get($frame->id);
+                $frame_detail[] = $arr_frame_detail;
+            }
+            $arr['frame_list'] = $frame_list;
         }
 
         if ($frame_id != 0) {
@@ -276,8 +281,7 @@ class Frame extends CI_Controller {
                 $arr['selected_frame'] = $selected_frame;
             }
         }
-
-        $arr['frame_list'] = $frame_list;
+        
         if (isset($frame_detail)) {
             $arr['frame_detail_list'] = $frame_detail;        }
             

@@ -13,12 +13,15 @@ class Home extends CI_Controller{
     } 
     
     public function index(){
-        $category_arr = $this->category_model->get_all_category();        
-        foreach ($category_arr as &$category){
-            $frame_arr = $this->frame_model->get_by_category($category['id'], $this->config->item('pattern_number'), 0);
-            $category['frame_list'] = $frame_arr;
-            $category['offset'] = count($frame_arr);
+        $category_arr = $this->category_model->get_all_category();   
+        if ($category_arr){
+            foreach ($category_arr as &$category){
+                $frame_arr = $this->frame_model->get_by_category($category['id'], $this->config->item('pattern_number'), 0);
+                $category['frame_list'] = $frame_arr;
+                $category['offset'] = count($frame_arr);
+            }
         }
+        
         $arr['category_arr'] = $category_arr;
         $this->load->view('home', $arr);
     }
