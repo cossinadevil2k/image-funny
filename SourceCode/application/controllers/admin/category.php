@@ -74,7 +74,8 @@ class Category extends CI_Controller {
             $this->session->set_flashdata('result', 'success');
             redirect('admin/category');
         } else {
-            return FALSE;
+            $this->session->set_flashdata('result', 'fail');
+            redirect('admin/category');
         }
     }
 
