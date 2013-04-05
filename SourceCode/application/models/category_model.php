@@ -141,7 +141,7 @@ class Category_model extends CI_Model {
      * @param string $name
      * @param string $description
      */
-    public function edit($id, $name, $description, $frame_type, $path) {
+    public function edit($id, $name, $description, $frame_type) {
         $this->db->where('id', $id);
         $arr = array(
             'name' => $name,

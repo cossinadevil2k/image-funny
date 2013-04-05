@@ -89,9 +89,9 @@ class Category extends CI_Controller {
             $name = $this->input->post('txtname');
             $desc = $this->input->post('txtdescription');
             $frame_type = $this->input->post('rdoType');
-            $path = trim($name);
-            $path = str_replace(" ", "", $path);
-            if ($this->Category_model->edit($id, $name, $desc, $frame_type, trim($path))) {
+            //$path = trim($name);
+            //$path = str_replace(" ", "", $path);
+            if ($this->Category_model->edit($id, $name, $desc, $frame_type)) {
                 $this->session->set_flashdata('result', 'success');
                 redirect('admin/category');
             }
