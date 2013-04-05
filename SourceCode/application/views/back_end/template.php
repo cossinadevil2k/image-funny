@@ -3,7 +3,7 @@
 <html xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Order - Online | Quản Trị</title>
+<title>TaoAnh.net | Quản Trị</title>
 <link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/style.css" type="text/css" />
 <!--[if IE 9]>
     <link rel="stylesheet" media="screen" href="css/ie9.css"/>
@@ -20,8 +20,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.flot.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery.flot.resize.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/plugins/jquery-ui-1.8.16.custom.min.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo base_url();?>ckeditor/ckeditor.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo base_url();?>ckfinder/ckfinder.js"></script>
 <script src="<?php echo base_url();?>content-admin/js/jquery.popupWindow.js"></script> 
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/general_1.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/dashboard.js"></script>

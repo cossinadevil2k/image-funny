@@ -60,8 +60,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/tables.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/dashboard.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>content-admin/js/custom/dashboard.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo base_url();?>/ckeditor/ckeditor.js"></script>
-<script language="javascript" type="text/javascript" src="<?php echo base_url();?>/ckfinder/ckfinder.js"></script>
 <!--[if lt IE 9]>
 	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 <![endif]-->
