@@ -236,17 +236,12 @@ class ImageLib {
 
             $data = new DateTime();
             $imageLib = new ImageLib();
-
-            //Add logo
-            $logo = ImageWorkshop::initFromPath($imageLib->logoPath);
-            $document->addLayer($i + 2, $logo, 5, 5, 'RB');
-
-            $filename = $data->getTimestamp() . '.png';
-
+            
             //Add logo
             $logoLayer = ImageWorkshop::initFromPath($imageLib->logoPath);
             $document->addLayer(3, $logoLayer, 0, 0, 'RB');
-
+            
+            $filename = $data->getTimestamp() . '.png';
             $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
 
             $session_id = $imageLib->CI->session->userdata('session_id');
