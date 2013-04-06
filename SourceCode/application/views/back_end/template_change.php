@@ -3,7 +3,7 @@
 <html xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Order - Online | Change Password</title>
+<title>TaoAnh.Net | Change Password</title>
 <link rel="stylesheet" href="<?php echo base_url();?>content-admin/css/style.css" type="text/css" />
 <link href="<?php echo base_url();?>content-admin/css/datepicker-style.css" type="text/css" media="all" rel="stylesheet">
 <!--[if IE 9]>

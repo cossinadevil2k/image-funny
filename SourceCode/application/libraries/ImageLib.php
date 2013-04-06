@@ -27,7 +27,7 @@ class ImageLib {
     var $createFolders = true;
     var $backgroundColor = 'transparent'; // transparent, only for PNG (otherwise it will be white if set null)
     var $imageQuality = 100;
-    var $logoPath = './images/common/waterMarkTaoAnh.png';
+    var $logoPath = './images/common/water_mark.png';
 
     //Instagram Effects
     public function Instagram_Common($imagePath, $effect) {
