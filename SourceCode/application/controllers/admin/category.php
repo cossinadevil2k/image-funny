@@ -41,8 +41,9 @@ class Category extends CI_Controller {
             $name = $this->input->post('txtname');
             $desc = $this->input->post('txtdescription');
             $frame_type = $this->input->post('rdoType');
-            $path = trim($name);
-            $path = str_replace(" ", "", $path);
+//            $path = trim($name);            
+//            $path = str_replace(" ", "", $path);
+            $path = random_string('alnum', '8');
 
             $this->Category_model->add($name, $desc, $frame_type, trim($path));
             redirect('admin/category');

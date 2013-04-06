@@ -18,6 +18,7 @@
             var base_url = '<?php echo base_url(); ?>';
             var selected_id = '<?php if (isset($selected_frame)) echo $selected_frame->id ?>';
             var fb_app_id = '<?php echo $fb_app_id?>';
+            var is_text_frame = '<?php echo $is_text_frame?>';
         </script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.ui.widget.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>js/jquery.iframe-transport.js"></script>

@@ -10,7 +10,9 @@ $(document).ready(function(){
     var imageFile;
     var frame_count = 0;        //Count number of a frame
     var imageString = "";       //Store information about image
-    insertAddButtonImage($(".PatternImage.Selected"));  
+    if (is_text_frame != '1'){
+        insertAddButtonImage($(".PatternImage.Selected"));
+    }      
 
     $("#Pattern").mCustomScrollbar({
         horizontalScroll:true,

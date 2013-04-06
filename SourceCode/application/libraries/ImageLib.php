@@ -239,7 +239,7 @@ class ImageLib {
             
             //Add logo
             $logoLayer = ImageWorkshop::initFromPath($imageLib->logoPath);
-            $document->addLayer(3, $logoLayer, 0, 0, 'RB');
+            $document->addLayer($i + 2, $logoLayer, 0, 0, 'RB');
             
             $filename = $data->getTimestamp() . '.png';
             $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
@@ -324,8 +324,13 @@ class ImageLib {
             }
         }
 
-        $data = new DateTime();
         $imageLib = new ImageLib();
+        //Add logo
+        $logoLayer = ImageWorkshop::initFromPath($imageLib->logoPath);
+        $document->addLayer(2, $logoLayer, 0, 0, 'RB');
+        
+        $data = new DateTime();
+        
         $filename = $data->getTimestamp() . '.png';
         $document->save($imageLib->dirPath, $filename, $imageLib->createFolders, $imageLib->backgroundColor, $imageLib->imageQuality);
 
