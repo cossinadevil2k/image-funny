@@ -366,6 +366,7 @@ $config['image_name'] = "taoanh_net";
 //Config Facebook
 $config['FACEBOOK_APP_ID'] = '483257198396912';
 $config['FACEBOOK_APP_SECRET'] = '902277d5f609daeb54d865d6f485bfa8';
+$config['MESSAGE'] = 'TAOANH.NET';
 
 //Login
 $config['username'] = "admin";

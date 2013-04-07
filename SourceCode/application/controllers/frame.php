@@ -151,7 +151,7 @@ class Frame extends CI_Controller {
 
     public function post_to_facebook() {
         $image_path = $this->input->post('imagePath');
-        $temp = explode("http://local.image.vn/", $image_path);
+        $temp = explode(base_url(), $image_path);
         $real_path = $temp[1];
 
         $config = array();
@@ -163,7 +163,7 @@ class Frame extends CI_Controller {
         $user = $facebook->getUser();
         if ($user) {
             $facebook->setFileUploadSupport(true);
-            $args = array('message' => 'TaoAnh.Net');
+            $args = array('message' => $this->config->item('MESSAGE'));
             $args['image'] = '@' . realpath($real_path);
             $data = $facebook->api('/me/photos', 'POST', $args);
             if (!empty($data)){
