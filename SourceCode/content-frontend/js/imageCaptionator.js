@@ -121,7 +121,7 @@ $(document).ready(function() {
         //can be manipulated 
         $("#"+newBlockId+"B").attr("style","left:" + left + "px;top:" + top + "px;position:absolute;");
         $("#"+newBlockId+"B").attr("degree",0);
-        $("#" + newBlockId).attr("style","color:#ffffff;background-color:transparent;border:1px dotted white;font-style:normal;font-weight:normal;font-family:im_arial;font-size:16px;text-decoration:none;z-index:" + $("#blockCount").val() + ";");
+        $("#" + newBlockId).attr("style","color:#000000;background-color:transparent;border:1px dotted white;font-style:normal;font-weight:normal;font-family:im_arial;font-size:30px;text-decoration:none;z-index:" + $("#blockCount").val() + ";");
         $("#" + newBlockId).addClass("textBlock");
 		
 		

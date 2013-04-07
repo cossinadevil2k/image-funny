@@ -22,7 +22,7 @@
         <label for="fontSize" id="lblFontSize">Size:</label>
         <input type="text" name="fontSize" id="fontSize" size="2" value="">
         <label for="fontColor" id="lblFontSize">Màu:</label>
-        <input type="text" class="minicolor" name="fontColor" id="fontColor"  value="#ffffff">
+        <input type="text" class="minicolor" name="fontColor" id="fontColor"  value="#000000">
         <p>            
             <input type="range" id="degree" name="degree" min="-180" max="180" value="0"/>
         </p>
