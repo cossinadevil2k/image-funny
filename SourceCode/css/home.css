@@ -13,7 +13,7 @@
     margin-top: 30px;
 }
 .CategoryTitle{
-    width: 80px;
+    width: 90px;
     position: absolute;
 }
 .CategoryTitle img{
@@ -23,7 +23,7 @@
 }
 .CategoryTitle label{
     position: relative;
-    top: -73px;
+    top: -79px;
     color: white;
     font-size: 17px;
     float: left;
