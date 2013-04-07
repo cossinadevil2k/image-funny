@@ -162,7 +162,7 @@ $(document).ready(function(){
                             }
                             else
                             {
-                                $("#selected_image").attr('src', base_url+'resources/users/'+ file.name);
+//                                $("#selected_image").attr('src', base_url+'resources/users/'+ file.name);
                             }
                         }
                     });
