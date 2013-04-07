@@ -259,7 +259,17 @@ class Frame extends CI_Controller {
         }
         usort($arr, array("Watermark", "compare_block_deep"));
         $result = ImageLib::AddWaterMark($imagePath, $arr);
-        echo json_encode($result);
+        if ($result === "") {
+            echo json_encode(array('status' => 'error'));
+        } else {
+            $temp = explode(base_url(), $result);
+            $real_path = $temp[1];
+            $imgbinary = fread(fopen($real_path, "r"), filesize($real_path));
+            $filetype = "png";
+            $image = 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
+            echo json_encode(array('status' => 'success', 'image_path' => $result, 'data' => $image));
+        }
+        die();
     }
 
     public function effect($frame_id = 0) {

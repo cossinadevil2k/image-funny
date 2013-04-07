@@ -433,7 +433,7 @@ $(document).ready(function() {
                 
         var url =base_url+"/tao-khung/create_watermark";                
         var detail = $("#textData").val();
-        var imagePath = $("#selected_frame").attr('src');
+        var imagePath = $("#selected_frame").attr('path');
         imagePath = imagePath.replace(base_url, "");
         $.blockUI({
             message: '<h1>Vui lòng chờ ...</h1>'
@@ -442,10 +442,15 @@ $(document).ready(function() {
             detail:detail,
             imagePath:imagePath
         }, function(data){
+            if (data.status == 'success'){
+                $('.textBlock').parent().remove();
+                $('.colorBlock').parent().remove();
+                $("#selected_frame").attr('src',data.data);
+                $("#selected_frame").attr('path',data.image_path);
+            }else{
+                alert('Có lỗi. Vui lòng thử lại sau.');
+            }            
             $.unblockUI();
-            $('.textBlock').parent().remove();
-            $('.colorBlock').parent().remove();
-            $("#selected_frame").attr('src',data.toString());
         }, 'json');
         return false;
                 

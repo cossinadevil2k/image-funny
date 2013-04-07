@@ -74,7 +74,9 @@ $(document).ready(function(){
         $("#selected_frame").attr('src', base_url + $('#PatternImage'+frame_id).attr('link'));
         $("#selected_frame").attr('frame_id', selected_id);
         $(".addButton").remove();
-        insertAddButtonImage(this);
+        if (is_text_frame != '1'){
+            insertAddButtonImage(this);
+        }        
     });
     
     $("#selectBtn").live('click', function(){
