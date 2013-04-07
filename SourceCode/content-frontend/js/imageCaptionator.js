@@ -131,7 +131,7 @@ $(document).ready(function() {
         //Reset form values for new block
         $("#str").val("Edit text");
         $("#font").val("Arial");
-        $("#fontSize").val("16");
+        $("#fontSize").val("30");
         $("#style").val("plain");
         $("#dec").val("none",true);
         $("#depth").val($("#blockCount").val());
