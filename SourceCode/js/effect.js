@@ -180,7 +180,7 @@ $(document).ready(function(){
     }); 
     
     $("#download").live('click', function(){
-        temp = $("#selected_frame").attr('src')
+        temp = $("#selected_frame").attr('path')
         path = temp.split(base_url);
         window.location = base_url + 'tao-khung/download?image='+path[1]+'' ;
     });
@@ -211,7 +211,8 @@ $(document).ready(function(){
                     'effect':effect
                 },
                 success: function(data){                                  
-                    $("#selected_frame").attr('src', data.image_path);
+                    $("#selected_frame").attr('src', data.data);
+                    $("#selected_frame").attr('path', data.image_path);
                     $.unblockUI();  
                 }
             });

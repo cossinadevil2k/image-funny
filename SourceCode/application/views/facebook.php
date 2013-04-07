@@ -60,7 +60,7 @@
                         <div class="LeftF"></div>
                         <div class="Center Facebook">
                             <?php if (isset($selected_frame)):?>
-                            <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
+                            <img id="selected_frame" frame_id="<?php echo $selected_frame->id?>" src="<?php echo base_url().$selected_frame->link;?>" path="<?php echo base_url().$selected_frame->link;?>" width="850px" height="315px"/>
                             <?php endif;?>
                         </div>
                         <div class="Right RightF">

@@ -108,7 +108,12 @@ class Frame extends CI_Controller {
         if ($result === "") {
             echo json_encode(array('status' => 'error'));
         } else {
-            echo json_encode(array('status' => 'success', 'image_path' => $result));
+            $temp = explode(base_url(), $result);
+            $real_path = $temp[1];
+            $imgbinary = fread(fopen($real_path, "r"), filesize($real_path));
+            $filetype = "png";
+            $image = 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
+            echo json_encode(array('status' => 'success', 'image_path' => $result, 'data' => $image));
         }
         die();
     }
@@ -326,7 +331,12 @@ class Frame extends CI_Controller {
         $image = $this->input->post('image');
         $imageLib = new ImageLib();
         $effect = $imageLib->{'Instagram_'.$effectSelected}($image);
-        echo json_encode(array('image_path'=>$effect)) ;
+        $temp = explode(base_url(), $effect);
+        $real_path = $temp[1];
+        $imgbinary = fread(fopen($real_path, "r"), filesize($real_path));
+        $filetype = "png";
+        $image = 'data:image/' . $filetype . ';base64,' . base64_encode($imgbinary);
+        echo json_encode(array('image_path'=>$effect, 'data' => $image)) ;
     }
 
 }

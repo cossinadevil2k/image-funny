@@ -41,7 +41,7 @@ window.fbAsyncInit = function() {
                     type:'post',
                     url: '/frame/post_to_facebook',
                     data:{
-                        'imagePath' : $("#selected_frame").attr('src')
+                        'imagePath' : $("#selected_frame").attr('path')
                     },
                     dataType: 'json',
                     beforeSend: function(){

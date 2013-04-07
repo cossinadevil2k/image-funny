@@ -87,7 +87,7 @@
                         </div>
                         <div class="Center" id="workspaceBlock">
                             <?php if (isset($selected_frame)): ?>                        
-                                <img id="selected_frame" frame_id="<?php echo $selected_frame->id ?>" src="<?php echo base_url() . $selected_frame->link; ?>" width="720px" height="500px" />
+                                <img id="selected_frame" frame_id="<?php echo $selected_frame->id ?>" src="<?php echo base_url() . $selected_frame->link; ?>" path="<?php echo base_url() . $selected_frame->link; ?>" width="720px" height="500px" />
                             <?php endif; ?>
 
                             <?php if ($is_text_frame == 1) { ?>

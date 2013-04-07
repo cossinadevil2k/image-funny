@@ -60,7 +60,7 @@
                     <div class="Left LeftE" id="uploadE">
                         <div class="BtnUpload">Tải ảnh lên</div>
                         <div id="preview">
-                            <img id="effect_image" image_path="" src="<?php echo base_url() ?>images/common/no_image.png"  width="100%" height="100%">
+                            <img id="effect_image" image_path="" src="<?php echo base_url() ?>images/common/no_image.png"  path="<?php echo base_url() ?>images/common/no_image.png" width="100%" height="100%">
                         </div>
                     </div>
                     <div class="Center Effect">
@@ -88,7 +88,7 @@
                                 <?php foreach ($frame_detail_list as $frame_details):?>
                                     <?php foreach ($frame_details as $frame_detail):?>
                                         <?php if ($frame_detail->frame_id == $frame->id):?>
-                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>" aspect="<?php echo $frame_detail->width / $frame_detail->height ?>"/>
+                                            <input type="hidden" id="frame<?php echo $frame_detail->id?>" x="<?php echo $frame_detail->x?>" y="<?php echo $frame_detail->y?>" aspect="<?php if($frame_detail->height != 0) echo $frame_detail->width / $frame_detail->height; else echo 1.0; ?>"/>
                                         <?php endif;?>
                                     <?php endforeach;?>
                                 <?php endforeach;?>
