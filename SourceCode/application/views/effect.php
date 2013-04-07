@@ -60,12 +60,12 @@
                     <div class="Left LeftE" id="uploadE">
                         <div class="BtnUpload">Tải ảnh lên</div>
                         <div id="preview">
-                            <img id="effect_image" image_path="" src="<?php echo base_url() ?>images/common/no_image.png"  path="<?php echo base_url() ?>images/common/no_image.png" width="100%" height="100%">
+                            <img id="effect_image" image_path="" src="<?php echo base_url() ?>images/common/no_image.png" height="100%">
                         </div>
                     </div>
                     <div class="Center Effect">
                         <?php if (isset($selected_frame)):?>
-                        <img id="selected_frame" frame_id="0" src="<?php echo base_url() ?>images/common/no_image.png" width="450px" height="450px"/>
+                        <img id="selected_frame" frame_id="0" src="<?php echo base_url() ?>images/common/no_image.png" path="<?php echo base_url() ?>images/common/no_image.png" width="450px" height="450px"/>
                         <?php endif;?>
                     </div>
                     <div class="Right RightE">
