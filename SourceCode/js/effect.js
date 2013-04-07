@@ -210,9 +210,9 @@ $(document).ready(function(){
                     'image': image,
                     'effect':effect
                 },
-                success: function(data){
-                    $.unblockUI();                
+                success: function(data){                                  
                     $("#selected_frame").attr('src', data.image_path);
+                    $.unblockUI();  
                 }
             });
         }

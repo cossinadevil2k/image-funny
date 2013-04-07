@@ -96,10 +96,10 @@ $(document).ready(function(){
                     'frame_id': selected_id,
                     'imageString': imageString
                 },
-                success: function(data){
-                    $.unblockUI();
+                success: function(data){                    
                     $("#selected_frame").attr('src', data.image_path);
                     $(".addButton").remove();
+                    $.unblockUI();
                 }
             });
         }else{
