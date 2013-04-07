@@ -29,7 +29,7 @@ class Frame extends CI_Controller {
         } else {
             $frame_list = $this->frame_model->get_by_category($category_arr[0]['id'], 10, 0);
             $arr['category_enable'] = $category_arr[0]['id'];
-            $is_text_frame = FALSE;
+            $is_text_frame = $this->category_model->is_text_frame($category_arr[0]['id']);
         }
 
         foreach ($frame_list as $frame) {
