@@ -1,0 +1,1 @@
+A website allows edit, insert an existing image to a frame
